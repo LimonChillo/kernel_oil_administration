@@ -1,4 +1,3 @@
-<?php  include "functions.php"; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +13,8 @@
 
 
 <?php
-	include "config.php";
-	$dbh = new PDO($DSN, $DB_USER, $DB_PASS);
-
+	include "database/functions.php";
+	
     $pagetitle = "KernOil";
     
 ?>
