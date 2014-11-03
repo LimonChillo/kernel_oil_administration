@@ -1,14 +1,5 @@
-<!--
-MultiMediaTechnology
-Multi Media Projekt 1
-David Kranewitter
-
-Beschreibung dieser Datei:
-Baut die Verbindung zur Datenbank auf
--->
-
 <?php
-include "config.php";
+include "database/config.php";
 
 if( ! $DB_NAME ) die('please create config.php, define $DB_NAME, $DB_USER, $DB_PASS there');
 
