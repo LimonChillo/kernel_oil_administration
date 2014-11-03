@@ -8,7 +8,7 @@ Baut die Verbindung zur Datenbank auf
 -->
 
 <?php
-include "config.php";
+ include "database/config.php";
 
 if( ! $DB_NAME ) die('please create config.php, define $DB_NAME, $DB_USER, $DB_PASS there');
 
@@ -20,4 +20,5 @@ try {
 } catch (Exception $e) {
     die("Problem connecting to database $DB_NAME as $DB_USER: " . $e->getMessage() );
 }
+
 ?>
