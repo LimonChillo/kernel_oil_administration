@@ -1,7 +1,5 @@
 <?php
 	include "head.php";
-	include "testDatabase.php";
-
 
 ?>
 
