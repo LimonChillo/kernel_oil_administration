@@ -1,3 +1,5 @@
+
+# Customers
 insert into customer values('1','Kevin','Schmid','Miller & Rhoads','Kalhamer Strasse 82','8990','GALLHOF','Austria');
 insert into customer values('2','Eric','Frueh','Standard Food','Ditscheinergasse 81','4611','HUNDSHAM','Austria');
 insert into customer values('3','Luca','Berg','King Carol','Schallmooser Hauptstrasse 36','8844','SCHÖDERBERG','Austria');
