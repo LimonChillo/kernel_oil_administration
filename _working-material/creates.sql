@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 03. Nov 2014 um 16:52
+-- Erstellungszeit: 07. Nov 2014 um 17:19
 -- Server Version: 5.6.16
 -- PHP-Version: 5.5.9
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `oildb`
 --
-CREATE DATABASE IF NOT EXISTS `oildb` DEFAULT CHARACTER SET latin1 COLLATE latin1_general_ci;
-USE `oildb`;
 
 -- --------------------------------------------------------
 
@@ -62,9 +60,11 @@ CREATE TABLE IF NOT EXISTS `bottling` (
   `pressingFK` int(255) NOT NULL,
   `bottleFK` int(255) NOT NULL,
   `amount` int(255) NOT NULL,
+  `strain_fk` int(255) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `bottleFK` (`bottleFK`),
-  KEY `pressingFK` (`pressingFK`)
+  KEY `pressingFK` (`pressingFK`),
+  KEY `strain_fk` (`strain_fk`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -172,6 +172,21 @@ CREATE TABLE IF NOT EXISTS `strain` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `ID` int(255) NOT NULL,
+  `username` varchar(64) COLLATE latin1_general_ci NOT NULL,
+  `password` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `email` varchar(64) COLLATE latin1_general_ci NOT NULL,
+  `is_admin` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
 --
 -- Constraints der exportierten Tabellen
 --
@@ -187,8 +202,9 @@ ALTER TABLE `barrel`
 -- Constraints der Tabelle `bottling`
 --
 ALTER TABLE `bottling`
-  ADD CONSTRAINT `bottling_ibfk_3` FOREIGN KEY (`pressingFK`) REFERENCES `pressing` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `bottling_ibfk_2` FOREIGN KEY (`bottleFK`) REFERENCES `bottle` (`ID`);
+  ADD CONSTRAINT `bottling_ibfk_4` FOREIGN KEY (`strain_fk`) REFERENCES `strain` (`ID`),
+  ADD CONSTRAINT `bottling_ibfk_2` FOREIGN KEY (`bottleFK`) REFERENCES `bottle` (`ID`),
+  ADD CONSTRAINT `bottling_ibfk_3` FOREIGN KEY (`pressingFK`) REFERENCES `pressing` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints der Tabelle `label`
@@ -201,8 +217,8 @@ ALTER TABLE `label`
 -- Constraints der Tabelle `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_3` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`),
-  ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`bottleFK`) REFERENCES `bottle` (`ID`);
+  ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`bottleFK`) REFERENCES `bottle` (`ID`),
+  ADD CONSTRAINT `product_ibfk_3` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`);
 
 --
 -- Constraints der Tabelle `shipment`
