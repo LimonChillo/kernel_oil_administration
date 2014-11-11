@@ -2,9 +2,6 @@
 
 $dbh = connectToDB();
 
-
-
-
 function connectToDB()
 {
 
@@ -57,7 +54,7 @@ function insertStrain($strain)
   return null;
 }
 
-function addLabels($amount, $strain, $bottle)
+function stockLabels($amount, $strain, $bottle)
 {
 
   $dbh = connectToDB();
@@ -66,6 +63,13 @@ function addLabels($amount, $strain, $bottle)
 
 }
 
+function stockBottles($amount, $strain, $bottle)
+{
+
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("UPDATE label SET amount = ? WHERE strainFK = ? AND bottleFK = ?");
+  $sth->execute(array($amount, $strain, $bottle));
+}
 
 function getBottles()
 {
@@ -81,7 +85,52 @@ function deleteAllData()
   //exept Strains
   $dbh = connectToDB();
   $dbh->exec("DELETE FROM barrel");
+  $dbh->exec("DELETE FROM bottle");
   //$dbh->exec("DELETE FROM pressing");
 
+}
+
+function insertBottle($name)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("INSERT INTO bottle (ID, name) VALUES (NULL, ?)");
+  $sth->execute(array($name));
+}
+
+function dataGenerator()
+{
+  deleteAllData();
+  $dbh = connectToDB();
+
+
+  insertBottle("100ml");
+  insertBottle("250ml");
+  $sth = $dbh->prepare("SELECT * FROM strain");
+  $sth->execute();
+
+  $strains = $sth->fetchAll();
+
+  foreach ($strains as $strain) {
+    $amountBarrels = rand(5,10);
+    for ($counter = 0; $counter < $amountBarrels; $counter++) {
+      $literPerBarrel = rand(10,100);
+      $literPerBarrel = ($literPerBarrel > 50) ? $literPerBarrel = 50 : $literPerBarrel ;
+      $sth = $dbh->prepare(
+      "INSERT INTO barrel
+      (strainFK, fillLevel)
+        VALUES
+      (?, ?)");
+
+      $sth->execute(array($strain->ID, $literPerBarrel));
+    }
+    //stockBottles($amount, $strain, $bottle);
+    //stock labels
+
+
+  }
+    foreach (getBottles() as $bottle) {
+      echo $bottle->ID." ";
+      stockLabels((string)rand(10,100), $strain->ID, $bottle->ID);
+    }
 }
 ?>
