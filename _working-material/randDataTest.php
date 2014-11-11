@@ -1,7 +1,7 @@
 <?php
 
   include "../head.php";
-    //if ($_SERVER['REQUEST_METHOD'] == 'POST') :
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') :
 
       dataGenerator();
 
@@ -12,14 +12,24 @@
       $bottles = $sth->fetchAll();
 
 
-      if (sizeOf($bottles) != 3) :
+      if (sizeOf($bottles) != 2)
         $errorCodes[0] = "Amount of bottle types is faultiy";
-      endif;
 
       foreach ($bottles as $bottle) {
-        if ($bottle->amount == 0)
+        if ($bottle->amount != 200)
           $errorCodes[1] = "Amount of stored bottles is faultiy";
       }
+
+      $sth = $dbh->prepare("Select * FROM barrel");
+      $sth->execute();
+      $barrels = $sth->fetchAll();
+
+      $sth = $dbh->prepare("Select * FROM strain");
+      $sth->execute();
+      $amountStrains = $sth->fetchAll();
+
+      if(sizeOf($barrels)/sizeOf($amountStrains) != 15)
+        $errorCodes[1] = "Amount of stored barrels is faultiy";
 
 ?>
 
@@ -53,6 +63,6 @@
 
 
 <?php
-
+    endif;
     include "../footer.php";
 ?>
