@@ -75,4 +75,13 @@ function getBottles()
 
   return $sth->fetchAll();
 }
+
+function deleteAllData()
+{
+  //exept Strains
+  $dbh = connectToDB();
+  $dbh->exec("DELETE FROM barrel");
+  //$dbh->exec("DELETE FROM pressing");
+
+}
 ?>

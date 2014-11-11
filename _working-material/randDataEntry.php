@@ -1,7 +1,7 @@
 <?php
 
   include "../head.php";
-  $amountNewLabels = 20;
+  $amountNewLabels = 20; ///Fehlerquelle
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

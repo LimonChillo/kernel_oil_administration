@@ -1,15 +1,36 @@
 <?php
 
+  include "../head.php";
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		$firstMale =   array("Peter", "Paul", "Martin", "Heinz", "Franz", "Lukas", "Simon", "Dominik", "Bernhard", "Alexander",
-		 "Louis", "Florian", "Fabian", "Markus", "David", "Jakob", "Konstantin", "Thomas", "Julian", "Sebastian", "Marcel",
-		 ""Raffael", "Mario",
-		 "Luise", "Lisa", "Petra", "Franziska", "Veronika", "Lena",  "Martha", "Isabella", "Sophie",  "Anna", "Linda", "Martha",
-		 "Berta", "Stephanie", "Ina", "Cornelia", "Susanne", "Christina", "Christine", "Barbara", "Michaela", "Bianca", "Carina");
-		$surnames = array("Huber", "Walch", "Leitner", "Rohrmoser", "Zwettler", "Maier", "Hoffmann", "Grübl", "Rest", "Jacimovic", "Müller", "Niedermüller", "Haidinger", "Haider", "Strasser", "Antos", "Höfinger", "Höfner", "Klappert", "Wieser", "Pöschl", "Untersteiner", "Steiner", "Berer", "Hörbinger", "Sommer", "Schmidt", "Zahn", "Haas", "Armstorfer", "Kiska", "Mühlleitner", "Dengg", "Pföss", "Sattler", "Hintersonnleitner", "Rehrl", "Treiber", "Schlager", "Schultheis","Baku", "Sögner", "Goiginger", "Sturm", "Nußbaumer","Pronj","Freinbichler","Kranewitter","Steger","Poschacher");
 
-		$date = date('Y-m-d H:i:s');
+		deleteAllData();
+		$dbh = connectToDB();
 
+  	$sth = $dbh->prepare("SELECT * FROM strain");
+  	$sth->execute();
+
+   	$strains = $sth->fetchAll();
+
+   	foreach ($strains as $strain) {
+   		$amountBarrels = rand(5,10);
+   		for ($counter = 0; $counter < $amountBarrels; $counter++) {
+   			$literPerBarrel = rand(10,100);
+   			$literPerBarrel = ($literPerBarrel > 50) ? $literPerBarrel = 50 : $literPerBarrel ;
+   			$sth = $dbh->prepare(
+			  "INSERT INTO barrel
+				(strainFK, fillLevel)
+				  VALUES
+				(?, ?)");
+
+   			$sth->execute(array($strain->ID, $literPerBarrel));
+   		}
+   		foreach (getBottles() as $bottle) {
+   			addLabels((string)rand(10,100), $strain->ID, $bottle);
+			}
+   	}
+
+	}
+	/*
 		$dbh->exec("DELETE FROM user WHERE email LIKE  '%test.at'"); //keine beeinflussbare Variable
 
 		$sth = $dbh->prepare(
@@ -110,27 +131,26 @@
 			$id++;
 		}
 	}
+
+	*/
+
 ?>
-	<div class = "wrap">
-		<section class="profileTop">
-			<div class="userName"><h1>Create Users</h1></div>
-			<article class="left">
-				<h2>RandomuserGenerator</h2>
-				<form action="createusers.php" method="post" >
-					<label for="amount" >Amount:</label>
-					<input type="text" name="amount"><br>
-					<input type="submit" value=" create users ">
-				</form>
-			</article>
-			<article class="right">
-			<h2>RandomuserDeleter</h2>
-			<form action="deleterandomusers.php" method="post" >
-				<input style="float:left;" type="submit" value=" delete all ">
-			</form>
-		</article>
-		</section>
-	</div>
+
+<div class="container">
+
+  <h1>Datensatzgenerator</h1>
+  <h2>Generator</h2>
+
+
+  <div>
+    <form action="randDataGen.php" method="POST">
+       <input type="submit" value= " Abschicken">
+    </form>
+  </div>
+
+</div>
+
 
 <?php
-	include 'footer.php'
+    include "../footer.php";
 ?>
