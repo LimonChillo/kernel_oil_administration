@@ -20,16 +20,25 @@
           $errorCodes[1] = "Amount of stored bottles is faultiy";
       }
 
-      $sth = $dbh->prepare("Select * FROM barrel");
-      $sth->execute();
-      $barrels = $sth->fetchAll();
-
       $sth = $dbh->prepare("Select * FROM strain");
       $sth->execute();
       $amountStrains = $sth->fetchAll();
 
+      $sth = $dbh->prepare("Select * FROM label");
+      $sth->execute();
+      $amountLabels = $sth->fetchAll();
+
+      if ($amountLabels =! (sizeOf(getBottles())+sizeOf($amountStrains)*sizeOf(getBottles())))
+        $errorCodes[1] = "Amount of different labels is faultiy";
+
+
+      $sth = $dbh->prepare("Select * FROM barrel");
+      $sth->execute();
+      $barrels = $sth->fetchAll();
+
+
       if(sizeOf($barrels)/sizeOf($amountStrains) != 15)
-        $errorCodes[1] = "Amount of stored barrels is faultiy";
+        $errorCodes[2] = "Amount of stored barrels is faultiy";
 
 ?>
 

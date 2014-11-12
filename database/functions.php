@@ -44,23 +44,27 @@ function insertStrain($strain)
 
     $lastInsertedStrain = getStrainByName($strain)->ID;
 
-    foreach (getBottles() as $bottle) {
-      $sth = $dbh->prepare("INSERT INTO label (bottleFK, strainFK) VALUES (?,  ?)");
-      $sth->execute(array($bottle->ID, $lastInsertedStrain));
-    }
 
     return $lastInsertedStrain;
   }
   return null;
 }
+/*
+function insertLabelToStrain($strain){
 
+  foreach (getBottles() as $bottle) {
+    $sth = $dbh->prepare("INSERT INTO label (bottleFK, strainFK) VALUES (?,  ?)");
+    $sth->execute(array($bottle->ID));
+  }
+}*/
 function stockLabels($amount, $strain, $bottle)
 {
 
   $dbh = connectToDB();
   $sth = $dbh->prepare("UPDATE label SET amount = ? WHERE strainFK = ? AND bottleFK = ?");
   $sth->execute(array($amount, $strain, $bottle));
-
+  //echo "strain: ".$strain." bottle: ".$bottle;
+  //echo gettype($strain);
 }
 
 function stockBottles($amount, $name)
@@ -106,6 +110,13 @@ function insertBottle($name)
 
 }
 
+function insertLabel($labelname, $bottleID, $strainID)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("INSERT INTO label (ID, name, bottleFK, strainFK) VALUES (NULL, ?, ?, ?)");
+  $sth->execute(array($labelname, $bottleID, $strainID));
+}
+
 function dataGenerator()
 {
   deleteAllData();
@@ -136,9 +147,13 @@ function dataGenerator()
     $amount = 200;
 
     //stock labels
+    foreach (getBottles() as $bottle) {
+      $name = $bottle->name." ".$strain->name;
+      insertLabel($name, $bottle->ID, $strain->ID);
+      stockLabels("200", $strain->ID, $bottle->ID);
+    }
   }
     foreach (getBottles() as $bottle) {
-      stockLabels((string)rand(10,100), $strain->ID, $bottle->ID);
       stockBottles($amount, $bottle->name);
     }
 }
