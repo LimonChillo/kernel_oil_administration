@@ -47,11 +47,21 @@
       if (sizeOf($pressings) != sizeOf($strains))
         array_push($errorCodes, "Amount of pressings is faulty");
 
+      $amountCorn = 0;
+      $amountPressings = 0;
 
-      /*foreach ($strains as $strain) {
-        $barrels = getBarrelsByStrain($strain->ID);
+      foreach ($strains as $strain){
+        $amountCorn += getAmountCornByStrain($strain);
+      }
+      foreach ($pressings as $pressing) {
+        $amountPressings += $pressing->amount;
+      }
 
-      }*/
+      if ($amountCorn != $amountPressings)
+        array_push($errorCodes, "Amount of Oil after pressings is faulty");
+      echo "amountCorn: ".$amountCorn;
+      echo "amountOil: ".$amountPressings;
+
 
 
 
