@@ -8,7 +8,9 @@
     
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="js/functions.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
