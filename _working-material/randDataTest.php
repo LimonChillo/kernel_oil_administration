@@ -7,39 +7,55 @@
 
       $errorCodes = array();
 
+      //bottles
       $sth = $dbh->prepare("Select * FROM bottle");
       $sth->execute();
       $bottles = $sth->fetchAll();
 
+      //strains
+      $sth = $dbh->prepare("Select * FROM strain");
+      $sth->execute();
+      $strains = $sth->fetchAll();
+
+      //labels
+      $sth = $dbh->prepare("Select * FROM label");
+      $sth->execute();
+      $labels = $sth->fetchAll();
+
+      $barrels = getAllBarrels();
+      $pressings = getAllPressings();
+
 
       if (sizeOf($bottles) != 2)
-        $errorCodes[0] = "Amount of bottle types is faultiy";
+        $errorCodes[0] = "Amount of bottle types is faulty";
 
       foreach ($bottles as $bottle) {
         if ($bottle->amount != 200)
-          $errorCodes[1] = "Amount of stored bottles is faultiy";
+          array_push($errorCodes, "Amount of stored bottles is faulty");
       }
 
-      $sth = $dbh->prepare("Select * FROM strain");
-      $sth->execute();
-      $amountStrains = $sth->fetchAll();
-
-      $sth = $dbh->prepare("Select * FROM label");
-      $sth->execute();
-      $amountLabels = $sth->fetchAll();
-
-      if ($amountLabels =! (sizeOf(getBottles())+sizeOf($amountStrains)*sizeOf(getBottles())))
-        $errorCodes[1] = "Amount of different labels is faultiy";
 
 
-      $sth = $dbh->prepare("Select * FROM barrel");
-      $sth->execute();
-      $barrels = $sth->fetchAll();
+      if ($labels =! (sizeOf(getBottles())+sizeOf($strains)*sizeOf(getBottles())))
+        array_push($errorCodes, "Amount of different labels is faulty");
+
+      if(sizeOf($barrels)/sizeOf($strains) != 15)
+        array_push($errorCodes, "Amount of stored barrels is faulty");
 
 
-      if(sizeOf($barrels)/sizeOf($amountStrains) != 15)
-        $errorCodes[2] = "Amount of stored barrels is faultiy";
 
+      if (sizeOf($pressings) != sizeOf($strains))
+        array_push($errorCodes, "Amount of pressings is faulty");
+
+
+      /*foreach ($strains as $strain) {
+        $barrels = getBarrelsByStrain($strain->ID);
+
+      }*/
+
+
+
+  endif;
 ?>
 
 <div class="container">
@@ -56,14 +72,15 @@
   </div>
 <?php
     if(isset($errorCodes)) :
-      for ($i=0; $i < sizeOf($errorCodes); $i++) {
-        # code...
-      }
+      if (sizeOf($errorCodes) == 0)
+          echo "no errors";
+      else
       foreach ($errorCodes as $error) {
         if ($error) :
             echo "<p>".$error."</p>";
           endif;
         }
+
     endif;
 ?>
 
@@ -72,6 +89,6 @@
 
 
 <?php
-    endif;
+
     include "../footer.php";
 ?>
