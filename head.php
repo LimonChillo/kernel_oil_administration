@@ -26,7 +26,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Fässer</a></li>
+            <li><a href="#">Übersicht</a></li>
+            <li><a href="#">Fässer</a></li>
             <li><a href="#about">Pressung</a></li>
             <li><a href="#contact">Produkte</a></li>
           </ul>

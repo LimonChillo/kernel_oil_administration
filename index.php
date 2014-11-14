@@ -1,17 +1,15 @@
-<?php
-	include "head.php";
-
-?>
-
-
+<?php include "head.php";?>
 <div class="container">
-
-             <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-
+	<h1>Kernölverwaltung</h1>
+	<p class="lead"><br>Hier sollten alle relevaten Informationen zu den aktuellen Lagerstände und Produktionsmengen stehen</p>
+	<p class="lead"><a href="#" class="btn btn-default">Fässer hinzufügen</a>
+	<a href="#" class="btn btn-default">Pressung hinzufügen</a>
+	<a href="#" class="btn btn-default">neue Bestellung hinzufügen</a>
+	</p>
+	<div class="row">
+		<div class="col-md-4"><h3>Fässer</h3></div>
+		<div class="col-md-4"><h3>Pressung</h3></div>
+		<div class="col-md-4"><h3>Produkte</h3></div>
+	</div>
 </div>
-
-
-<?php
-    include "footer.php";
-?>
+<?php include "footer.php";?>
