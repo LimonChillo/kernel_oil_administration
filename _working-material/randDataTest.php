@@ -2,7 +2,7 @@
 
   include "../head.php";
     if ($_SERVER['REQUEST_METHOD'] == 'POST') :
-
+      include "randDataGen.php";
       dataGenerator();
 
       $errorCodes = array();
@@ -59,8 +59,8 @@
 
       if ($amountCorn != $amountPressings)
         array_push($errorCodes, "Amount of Oil after pressings is faulty");
-      echo "amountCorn: ".$amountCorn;
-      echo "amountOil: ".$amountPressings;
+      //echo "amountCorn: ".$amountCorn;
+      //echo "amountOil: ".$amountPressings;
 
 
 
