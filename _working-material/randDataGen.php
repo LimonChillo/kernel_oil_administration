@@ -4,7 +4,7 @@ function dataGenerator()
 {
   deleteAllData();
   $dbh = connectToDB();
-
+  $date = date("Y.m.d");
 
   insertBottle("100ml");
   insertBottle("250ml");
@@ -18,13 +18,7 @@ function dataGenerator()
     for ($counter = 0; $counter < $amountBarrels; $counter++) {
       $literPerBarrel = rand(20,100);
       $literPerBarrel = ($literPerBarrel > 50) ? $literPerBarrel = 50 : $literPerBarrel ;
-      $sth = $dbh->prepare(
-      "INSERT INTO barrel
-      (strainFK, fillLevel)
-        VALUES
-      (?, ?)");
-
-      $sth->execute(array($strain->ID, $literPerBarrel));
+      insertBarrel($strain, $literPerBarrel, $date);
     }
 
     $amount = 200;
@@ -40,7 +34,7 @@ function dataGenerator()
       stockBottles($amount, $bottle->name);
     }
 
-    $date = date("Y.m.d");
+
 
     foreach ($strains as $strain) {
       $barrels = getBarrelsByStrain($strain->ID);

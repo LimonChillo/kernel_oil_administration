@@ -47,4 +47,13 @@ function insertLabel($labelname, $bottleID, $strainID)
   $sth->execute(array($labelname, $bottleID, $strainID));
 }
 
+function insertBarrel($strain, $literPerBarrel, $date) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare(
+        "INSERT INTO barrel
+        (strainFK, fillLevel, date)
+          VALUES
+        (?, ?, ?)");
+        $sth->execute(array($strain->ID, $literPerBarrel, $date));
+}
 ?>
