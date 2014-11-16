@@ -1,18 +1,17 @@
 <?php
 
-function insertStrain($strain)
+function insertStrain($name)
 {
   $dbh = connectToDB();
 
-  $strainExists = getStrainByName($strain);
+  $strainExists = getStrainByName($name);
 
   if ($strainExists == null)
   {
     $sth = $dbh->prepare("INSERT INTO strain (name) VALUES (?)");
-    $sth->execute(array($strain));
+    $sth->execute(array($name));
 
-    $lastInsertedStrain = getStrainByName($strain)->ID;
-
+    $lastInsertedStrain = getStrainByName($name)->ID;
 
     return $lastInsertedStrain;
   }

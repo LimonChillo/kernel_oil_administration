@@ -64,11 +64,9 @@ function dataGenerator()
 
     for ($i=0; $i < 10; $i++) {
       //firstname
-      $rand = rand(0, sizeOf($firstnames)-1);
-      $firstname = $firstnames[$rand]->firstname;
+      $firstname = $firstnames[rand(0, sizeOf($firstnames)-1)]->firstname;
       // lastname
-      $rand = rand(0, sizeOf($lastnames)-1);
-      $lastname = $lastnames[$rand]->lastname;
+      $lastname = $lastnames[rand(0, sizeOf($lastnames)-1)]->lastname;
       // road
       $roadVar = ["Gasse", "Straße", "Platz", "Weg", "Allee"];
       $road = $firstnames[rand(0, sizeOf($firstnames)-1)]->firstname."-".
@@ -87,6 +85,17 @@ function dataGenerator()
 
       insertCustomer($firstname, $lastname, NULL, $road, $zip, $city, $country);
       // echo $firstname." ".$lastname."<br \>".$road."<br \>".$zip." ".$city."<br \>".$country."<br \><br \>";
+    }
+####################
+//generate users
+    for ($i=0; $i < 2; $i++) {
+      $firstname = $firstnames[rand(0, sizeOf($firstnames)-1)]->firstname;
+      $lastname = $lastnames[rand(0, sizeOf($lastnames)-1)]->lastname;
+      $username = strtolower($firstname[0]).ucfirst($lastname);
+      $password = "abc";
+      $email = $firstname."@".$lastname.".at";
+      $is_admin = 0;
+      insertUser($username, $password, $email, $is_admin);
     }
 
 

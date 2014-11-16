@@ -97,4 +97,12 @@ function getCustomers () {
 
   return $sth->fetchAll();
 }
+
+function getUsers () {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM user");
+  $sth->execute();
+
+  return $sth->fetchAll();
+}
 ?>
