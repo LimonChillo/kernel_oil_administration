@@ -21,14 +21,8 @@ function connectToDB()
   return $dbh;
 }
 
-function deleteAllData()
-{
-  //exept Strains
-  $dbh = connectToDB();
-  $dbh->exec("DELETE FROM barrel");
-  $dbh->exec("DELETE FROM bottle");
-  $dbh->exec("DELETE FROM label");
-  $dbh->exec("DELETE FROM pressing");
+function bottling($pressing, $bottle, $strain, $literOil, $date) {
+  insertBottling($pressing, $bottle, $strain, $amount, $date);
+  // destockBottle($bottle, $);
 }
-
 ?>

@@ -1,4 +1,11 @@
 <?php
+function getStrains () {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM strain");
+  $sth->execute();
+
+  return $sth->fetchAll();
+}
 
 function getStrainByName($name)
 {
@@ -15,6 +22,24 @@ function getBottles()
 {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM bottle");
+  $sth->execute();
+
+  return $sth->fetchAll();
+}
+
+function getBottleByMl($ml)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM bottle WHERE ml = ?");
+  $sth->execute(array($ml));
+
+  return $sth->fetchAll();
+}
+
+function getBottlesOrderedByMlDESC()
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM bottle ORDER BY ml DESC");
   $sth->execute();
 
   return $sth->fetchAll();
@@ -63,5 +88,13 @@ function getAmountCornByStrain($strain){
           $amount += $barrel->fillLevel;
         }
   return $amount;
+}
+
+function getCustomers () {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM customer");
+  $sth->execute();
+
+  return $sth->fetchAll();
 }
 ?>

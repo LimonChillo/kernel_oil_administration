@@ -82,10 +82,10 @@
   <div>
     <form action="randDataEntry.php" method="POST">
       <label for="firstname">Vorname: </label>
-      <input type="text" name="firstname" autofocus>
+      <input type="text" name="firstname">
 
       <label for="lastname">Nachname: </label>
-      <input type="text" name="lastname">
+      <input type="text" name="lastname" autofocus>
 
       <label for="strain">Sorte: </label>
       <input type="text" name="strain">

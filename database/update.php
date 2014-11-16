@@ -10,6 +10,7 @@ function updatePressingOfBarrel($barrels, $pressing) {
 
 function stockBottles($amount, $name)
 {
+  //$ml = preg_replace("/[^0-9,.]/", "", $name);
 
   $dbh = connectToDB();
   //$bottle = getBottleByName($name);

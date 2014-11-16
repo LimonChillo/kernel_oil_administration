@@ -19,11 +19,12 @@ function insertStrain($strain)
   return null;
 }
 
-function insertBottle($name)
+function insertBottle($ml)
 {
+  $name = $ml.'ml';
   $dbh = connectToDB();
-  $sth = $dbh->prepare("INSERT INTO bottle (ID, name) VALUES (NULL, ?)");
-  $sth->execute(array($name));
+  $sth = $dbh->prepare("INSERT INTO bottle (ID, name, ml) VALUES (NULL, ?, ?)");
+  $sth->execute(array($name, $ml));
 
   $bottle = $dbh->lastInsertId();
   $labelname = 'Rückettikett '.$name;
@@ -55,5 +56,35 @@ function insertBarrel($strain, $literPerBarrel, $date) {
           VALUES
         (?, ?, ?)");
         $sth->execute(array($strain->ID, $literPerBarrel, $date));
+}
+
+function insertBottling($pressing, $bottle, $strain, $amount, $date) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare(
+        "INSERT INTO bottling
+        (pressingFK, bottleFK, amount, strainFK, date)
+          VALUES
+        (?, ?, ?)");
+        $sth->execute(array($pressing->ID, $bottle->ID, $strain->ID, $amount, $date));
+}
+
+function insertCustomer($firstname, $lastname, $company, $road, $zip, $city, $country) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare(
+        "INSERT INTO customer
+        (firstname, lastname, company, road, zip, city, country)
+          VALUES
+        (?, ?, ?, ?, ?, ?, ?)");
+        $sth->execute(array($firstname, $lastname, $company, $road, $zip, $city, $country));
+}
+
+function insertUser($username, $password, $email, $is_admin) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare(
+        "INSERT INTO user
+        (username, password, email, is_admin)
+          VALUES
+        (?, ?, ?, ?)");
+        $sth->execute(array($username, $password, $email, $is_admin));
 }
 ?>

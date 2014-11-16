@@ -29,25 +29,25 @@
 
 
         if (sizeOf($bottles) != 2)
-          $errorCodes[0] = "Amount of bottle types is faulty";
+          $errorCodes[0] = "Error: Amount of bottle types";
 
         foreach ($bottles as $bottle) {
           if ($bottle->amount != 200)
-            array_push($errorCodes, "Amount of stored bottles is faulty");
+            array_push($errorCodes, "Error: Amount of stored bottles");
         }
 
 
 
         if ($labels =! (sizeOf(getBottles())+sizeOf($strains)*sizeOf(getBottles())))
-          array_push($errorCodes, "Amount of different labels is faulty");
+          array_push($errorCodes, "Error: Amount of different labels");
 
         if(sizeOf($barrels)/sizeOf($strains) != 15)
-          array_push($errorCodes, "Amount of stored barrels is faulty");
+          array_push($errorCodes, "Error: Amount of stored barrels");
 
 
 
         if (sizeOf($pressings) != sizeOf($strains))
-          array_push($errorCodes, "Amount of pressings is faulty");
+          array_push($errorCodes, "Error: Amount of pressings");
 
         $amountCorn = 0;
         $amountPressings = 0;
@@ -60,9 +60,14 @@
         }
 
         if ($amountCorn != $amountPressings)
-          array_push($errorCodes, "Amount of Oil after pressings is faulty");
+          array_push($errorCodes, "Error: Amount of Oil after pressings");
         //echo "amountCorn: ".$amountCorn;
         //echo "amountOil: ".$amountPressings;
+
+#############
+//Customers
+        if (sizeOf(getCustomers()) != 10)
+          array_push($errorCodes, "Error: Amount of customers");
       }
       else
       {
