@@ -105,4 +105,12 @@ function getUsers () {
 
   return $sth->fetchAll();
 }
+
+function getBottlings () {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM bottling");
+  $sth->execute();
+
+  return $sth->fetchAll();
+}
 ?>
