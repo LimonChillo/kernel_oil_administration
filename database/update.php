@@ -25,4 +25,11 @@ function stockLabels($amount, $strain, $bottle)
   $sth->execute(array($amount, $strain, $bottle));
 }
 
+function bottlePressing($pressing, $bool)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("UPDATE pressing SET bottled = ? WHERE ID = ?");
+  $sth->execute(array($bool, $pressing));
+}
+
 ?>
