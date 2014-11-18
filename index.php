@@ -3,7 +3,6 @@
 	<h1>Kernölverwaltung</h1>
 	<p class="lead"><br>Hier sollten alle relevaten Informationen zu den aktuellen Lagerstände und Produktionsmengen stehen</p>
 	<p class="lead"><a href="getBarrels.php" class="btn btn-default">Fässer hinzufügen</a>
-	<a href="addPressing.php" class="btn btn-default">Pressung hinzufügen</a>
 	<a href="#" class="btn btn-default">neue Bestellung hinzufügen</a>
 	<a href="addCustomers.php" class="btn btn-default">neuen Kunden hinzufügen</a>
 	</p>
