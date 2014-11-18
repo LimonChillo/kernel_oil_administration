@@ -41,7 +41,7 @@ function printAllBarrelsAsTable(){
     echo "<tr>";
     echo "<td><input type='checkbox'></td>";
     echo "<td>".$barrel->ID."</td>";
-    echo "<td>".getStrainNameById($barrel->strainFK)."</td>";
+    echo "<td>".getStrainNameById($barrel->strainFK)->name."</td>";
     echo "<td>".$barrel->fillLevel."</td>";
     echo "<td>".$barrel->date."</td>";
     echo "</tr>";
