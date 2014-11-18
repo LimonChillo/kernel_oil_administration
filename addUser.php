@@ -1,7 +1,7 @@
 <?php include "head.php";?>
 <div class="container">
   <h1>User hinzufügen</h1>
-  <form class="form-horizontal" role="form" action="result.php">
+  <form class="form-horizontal" role="form" method="POST" action="result.php">
 
     <div class="form-group">
       <div class="col-sm-4">

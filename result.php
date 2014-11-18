@@ -1,10 +1,10 @@
 <?php
-include "database/functions.php"; 
+include "database/functions.php";
 
 if(isset($_POST['insertStrain']))
 {
   $name = strip_tags($_POST['name']);
-    
+
   if (sizeOf(getStrainByName($name)) > 0)
   {
     header("Location:addStrain.php?msg=0");
@@ -12,7 +12,7 @@ if(isset($_POST['insertStrain']))
 
   insertStrain($name);
   header("Location:addStrain.php?msg=1");
-  
+
 }
 
 if(isset($_POST['insertBottle']))
@@ -20,7 +20,7 @@ if(isset($_POST['insertBottle']))
   $ml = strip_tags($_POST['ml']);
   if (sizeOf(getBottleByMl($ml)) > 0)
   {
-    header("Location:addBottle.php?error=0"); 
+    header("Location:addBottle.php?error=0");
   }
 
   insertBottle($ml);
@@ -81,10 +81,10 @@ if(isset($_POST['insertUser']))
 
   if (sizeOf(getUserByName($username)) > 0)
   {
-    header("Location:addUser.php?error=0"); 
+    header("Location:addUser.php?error=0");
   }
 
-  insertUser($username, $passwort, $email, $is_admin);
+  insertUser($username, $password, $email, $is_admin);
   header("Location:addUser.php?msg=1");
 }
 
@@ -100,7 +100,7 @@ if(isset($_POST['stockBottles']))
 if(isset($_POST['stockLabels']))
 {
   $amount = strip_tags($_POST['amount']);
-  $bottle = strip_tags($_POST['bottle']);  
+  $bottle = strip_tags($_POST['bottle']);
   $strain = strip_tags($_POST['strain']);
 
   stockLabels($amount,$bottle,$strain);
@@ -129,6 +129,6 @@ if(isset($_POST['test']))
   }
 }
 
-echo $tags[]; 
+echo $tags[];
 */
 ?>

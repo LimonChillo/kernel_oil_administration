@@ -1,7 +1,7 @@
 <?php include "head.php";?>
 <div class="container">
   <h1>Sorte hinzufügen</h1>
-  <form class="form-horizontal" method="post" role="form" action="result.php">
+  <form class="form-horizontal" method="POST" role="form" action="result.php">
 
     <div class="form-group">
       <div class="col-sm-4">
