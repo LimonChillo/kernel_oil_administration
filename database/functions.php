@@ -27,7 +27,7 @@ include "configs.php";
 }
 
 function printAllStrainOptions() {
-  $allStrains = getStrains();
+  $allStrains = getAllStrains();
   foreach ($allStrains as $strain)
   {
     echo "<option value='".$cat->id."'> ".$strain->name."</option>";
@@ -45,7 +45,7 @@ function printAllBarrelsAsTable(){
     echo "<td>".$barrel->fillLevel."</td>";
     echo "</tr>";
   }
-  
+
 }
 
 ?>
