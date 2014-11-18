@@ -125,6 +125,13 @@ function getAllBottlings () {
   return $sth->fetchAll();
 }
 
+// ----------- Gets für die überprüfung
 
 
+function getUserByName ($username) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM user WHERE username = ?");
+  $sth->execute($username);
+  return $sth->fetchAll();
+}
 ?>
