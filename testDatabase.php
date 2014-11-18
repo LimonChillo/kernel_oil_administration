@@ -12,3 +12,17 @@ foreach($data as $d)
   echo $d -> name;
 }
 ?>
+
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<form id="formi" name="formi" method="GET" action="database/buildVariables.php">
+		<input id="test" name="test" type="text"></input>
+		<input type="submit" value="schicken">
+	</form>
+
+</body>
+</html>
