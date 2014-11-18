@@ -1,4 +1,8 @@
 <?php session_start(); ?>
+
+<?php
+      include "database/functions.php";
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -36,7 +40,4 @@
           </div><!--/.nav-collapse -->
         </div>
       </nav>
-      <?php
-        include "database/functions.php";
-        $pagetitle = "KernOil";
-      ?>
+     
