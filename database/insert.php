@@ -26,9 +26,7 @@ function insertBottle($ml)
   $sth->execute(array($name, $ml, "0"));
 
   $bottle = $dbh->lastInsertId();
-  $labelname = 'Rückettikett '.$name;
-  $sth = $dbh->prepare("INSERT INTO label (ID, name, bottleFK, strainFK) VALUES (NULL, ?, ?, NULL)");
-  $sth->execute(array($labelname, $bottle));
+  insertLabel('Rückettikett', $bottle, NULL);
 }
 
 function insertPressing($date, $amount, $barrels){
