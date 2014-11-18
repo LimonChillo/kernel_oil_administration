@@ -12,6 +12,7 @@ function connectToDB()
 include "configs.php";
   //$root = realpath($_SERVER["DOCUMENT_ROOT"]);
   // include "$root/kernoil/database/config.php";
+  include "configs.php";
 
   if( ! $DB_NAME ) die('please create config.php, define $DB_NAME, $DB_USER, $DB_PASS there');
   try {
@@ -23,6 +24,28 @@ include "configs.php";
       die("Problem connecting to database $DB_NAME as $DB_USER: " . $e->getMessage() );
   }
   return $dbh;
+}
+
+function printAllStrainOptions() {
+  $allStrains = getStrains();
+  foreach ($allStrains as $strain)
+  {
+    echo "<option value='".$cat->id."'> ".$strain->name."</option>";
+  }
+}
+
+function printAllBarrelsAsTable(){
+  $allBarrels = getAllBarrels();
+  foreach ($allBarrels as $barrel)
+  {
+    echo "<tr>";
+    echo "<td><input type='checkbox'></td>";
+    echo "<td>".$barrel->id."</td>";
+    echo "<td>".getStrainNameById($barrel->strainFK)."</td>";
+    echo "<td>".$barrel->fillLevel."</td>";
+    echo "</tr>";
+  }
+  
 }
 
 ?>
