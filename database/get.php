@@ -114,11 +114,11 @@ function getBottlings () {
   return $sth->fetchAll();
 }
 
-function printAllStrainOptions() {
+function getAllStrainOptions() {
   $allStrains = getStrains();
   foreach ($allStrains as $strain)
   {
-    echo "<option value='".$cat->id."'> ".$strain->category."</option>";
+    echo "<option value='".$cat->id."'> ".$strain->name."</option>";
   }
 }
 

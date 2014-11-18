@@ -26,4 +26,26 @@ include "configs.php";
   return $dbh;
 }
 
+function printAllStrainOptions() {
+  $allStrains = getStrains();
+  foreach ($allStrains as $strain)
+  {
+    echo "<option value='".$cat->id."'> ".$strain->name."</option>";
+  }
+}
+
+function printAllBarrelsAsTable(){
+  $allBarrels = getAllBarrels();
+  foreach ($allBarrels as $barrel)
+  {
+    echo "<tr>";
+    echo "<td><input type='checkbox'></td>";
+    echo "<td>".$barrel->id."</td>";
+    echo "<td>".getStrainNameById($barrel->strainFK)."</td>";
+    echo "<td>".$barrel->fillLevel."</td>";
+    echo "</tr>";
+
+  }
+}
+
 ?>
