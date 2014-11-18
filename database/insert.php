@@ -87,6 +87,15 @@ function insertUser($username, $password, $email, $is_admin) {
         $sth->execute(array($username, $password, $email, $is_admin));
 }
 
-
+function insertProduct($strainID, $bottleID, $amount)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare(
+        "INSERT INTO product
+        (strainFK, bottleFK, amount)
+          VALUES
+        (?, ?, ?)");
+        $sth->execute(array($strainID, $bottleID, $amount));
+}
 
 ?>

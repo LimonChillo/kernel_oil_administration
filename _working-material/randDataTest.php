@@ -40,7 +40,7 @@
 
 
 
-        if ($labels =! (sizeOf(getBottles())+sizeOf($strains)*sizeOf(getBottles())))
+        if ($labels =! (sizeOf(getAllBottles())+sizeOf($strains)*sizeOf(getAllBottles())))
           array_push($errorCodes, "Error: Amount of different labels");
 
         if(sizeOf($barrels)/sizeOf($strains) != 15)
@@ -68,7 +68,7 @@
 
 #############
 //Customers
-        if (sizeOf(getCustomers()) != 10)
+        if (sizeOf(getAllCustomers()) != 10)
           array_push($errorCodes, "Error: Amount of customers");
       }
 #############
