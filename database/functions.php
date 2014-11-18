@@ -47,5 +47,15 @@ function printAllBarrelsAsTable(){
   }
 
 }
+function printMessage()
+{
+  if(isset($_GET['msg']))
+  {
+    if($_GET['msg'] == 1)
+      echo "<div class='alert alert-success' role='alert'>Eintrag war erfolgreich !</div>";
+    if($_GET['msg'] == 0)
+      echo "<div class='alert alert-danger' role='alert'>Eintrag war nicht erfolgreich !</div>";
+  }
+}
 
 ?>
