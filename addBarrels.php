@@ -1,7 +1,7 @@
 <?php include "head.php";?>
 <div class="container">
 	<h1>Fässer hinzufügen</h1>
-	<form class="form-horizontal" role="form">
+	<form class="form-horizontal" role="form" method="post">
 		<div class="form-group">
 			<div class="col-sm-4">
 				<select class="form-control" name="strainFK">
