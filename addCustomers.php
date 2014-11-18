@@ -1,6 +1,6 @@
 <?php include "head.php";?>
 <div class="container">
-  <h1>Kunden hinzufügen</h1>
+  <h1>Kunden*innen hinzufügen</h1>
   <form class="form-horizontal" role="form" method="POST" action="result.php">
 
     <div class="form-group">
