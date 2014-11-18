@@ -1,9 +1,11 @@
 <?php
+session_start();
+
 include "get.php";
 include "insert.php";
 include "update.php";
 
-session_start();
+
 
 $dbh = connectToDB();
 
