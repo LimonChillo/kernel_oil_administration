@@ -56,7 +56,7 @@ function dataGenerator()
         $amountPressingPerBottle += $amountGiven - $amountPerBottle;//add remaining oil to amount for next bottle
         insertBottling($pressing, $bottle, $amountPerBottle, $date);//insert
       }
-      echo $amountPressing." "; //how much oil is remaining (must but less than fits into smallest stocked bottle)
+      // echo $amountPressing." "; //how much oil is remaining (must but less than fits into smallest stocked bottle)
       bottlePressing($pressing->ID, true);
     }
 //toDo enough bottles? unstock bottles, unstock labels,test if remaining oil is more than 100ml

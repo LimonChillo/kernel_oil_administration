@@ -1,11 +1,12 @@
 <?php
 
   include "../head.php";
-  //include_once "randDataGen.php";
+  include_once "randDataGen.php";
     if ($_SERVER['REQUEST_METHOD'] == 'POST') :
-      if (! isset($_POST['delete']))
+      if (isset($_POST['action']) && $_POST['action'] == 'generate')
       {
-        include "randDataGen.php";
+        // include "randDataGen.php";
+        $dbh = connectToDB();
         dataGenerator();
 
         $errorCodes = array();
@@ -70,9 +71,27 @@
         if (sizeOf(getCustomers()) != 10)
           array_push($errorCodes, "Error: Amount of customers");
       }
-      else
+#############
+// Delete all data
+      else if(isset($_POST['action']) && $_POST['action'] == 'delete')
       {
-        deleteAllData();
+        $deleteCode = array();
+        try{
+          deleteAllData();
+        }catch (Exception $e) {
+          array_push($deleteCode, "Error, deleting data failed");
+        }
+      }
+#############
+// Test functions
+      else if(isset($_POST['action']) && $_POST['action'] == 'functions')
+      {
+        $deleteCode = array();
+        try{
+          deleteAllData();
+        }catch (Exception $e) {
+          array_push($deleteCode, "Error, deleting data failed");
+        }
       }
   endif;
 ?>
@@ -86,7 +105,8 @@
 
   <div>
     <form action="randDataTest.php" method="POST">
-       <input type="submit" value= " Abschicken">
+      <input type="hidden" name="action" value="generate">
+      <input type="submit" value= " Daten generieren ">
     </form>
   </div>
 <?php
@@ -104,12 +124,34 @@
 ?>
   <div>
       <form action="randDataTest.php" method="POST">
-          <input type="hidden" name="delete" value="delete">
+          <input type="hidden" name="action" value="delete">
           <input type="submit" value= " Alles Löschen ">
       </form>
     </div>
 
   </div>
+<?php
+  if(isset($deleteCode)) :
+      if (sizeOf($deleteCode) == 0)
+          echo "All data deleted - no errors";
+      else
+      foreach ($deleteCode as $error) {
+        if ($error) :
+            echo "<p>".$error."</p>";
+          endif;
+        }
+
+    endif;
+?>
+  <div>
+      <form action="randDataTest.php" method="POST">
+          <input type="hidden" name="action" value="functions">
+          <input type="submit" value= " Funktionen testen " disabled>
+      </form>
+    </div>
+
+  </div>
+
 
 
 <?php

@@ -2,13 +2,14 @@
 include "get.php";
 include "insert.php";
 include "update.php";
-$dbh = connectToDB();
+
 
 function connectToDB()
 {
+  include "configs.php";
+  //$root = realpath($_SERVER["DOCUMENT_ROOT"]);
+  // include "$root/kernoil/database/config.php";
 
-  $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-  include "$root/kernoil/database/config.php";
   if( ! $DB_NAME ) die('please create config.php, define $DB_NAME, $DB_USER, $DB_PASS there');
   try {
       $dbh = new PDO($DSN, $DB_USER, $DB_PASS);
