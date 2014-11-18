@@ -5,6 +5,7 @@
 	if(isset($_POST["choosenBarrels"]))
 	{
 		$_SESSION['choosenBarrels'] = $_POST["choosenBarrels"];
+		echo "Params!";
 	}
 	?>
 	<form class="form-horizontal" role="form">
