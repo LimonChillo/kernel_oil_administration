@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>KernOil</title>
-    <link rel="stylesheet" href="css/main.css">
-    
+
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="js/functions.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
