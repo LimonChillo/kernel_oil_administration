@@ -1,7 +1,7 @@
 <?php include "head.php";?>
 <div class="container">
   <h1>Kunden hinzufügen</h1>
-  <form class="form-horizontal" role="form" action="fetch.php">
+  <form class="form-horizontal" role="form" action="result.php">
 
     <div class="form-group">
       <div class="col-sm-4">
@@ -38,14 +38,11 @@
         <input type="text" class="form-control" name="country" placeholder="Staat" required>
       </div>
     </div>
-
     <div class="form-group">
       <div class="col-sm-4">
         <button type="submit" name="addCustomer" class="btn btn-default">Hinzufügen</button>
       </div>
     </div>
-
-
   </form>
 
 </div>
