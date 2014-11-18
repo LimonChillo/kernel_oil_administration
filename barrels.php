@@ -12,7 +12,7 @@
   			<th>Füllstand</th>
   			<th>Datum</th>
   		</tr>
-  		<?php  printAllBarrelsAsTable(); ?>
+  		<?php printAllBarrelsAsTable(); ?>
 	</table>
 	</div>
 </div>
