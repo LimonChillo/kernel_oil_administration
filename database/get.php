@@ -1,5 +1,5 @@
 <?php
-function getStrains () {
+function getAllStrains () {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM strain");
   $sth->execute();
@@ -18,7 +18,7 @@ function getStrainByName($name)
   return $result;
 }
 
-function getBottles()
+function getAllBottles()
 {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM bottle");
@@ -90,7 +90,7 @@ function getAmountCornByStrain($strain){
   return $amount;
 }
 
-function getCustomers () {
+function getAllCustomers () {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM customer");
   $sth->execute();
@@ -98,7 +98,7 @@ function getCustomers () {
   return $sth->fetchAll();
 }
 
-function getUsers () {
+function getAllUsers () {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM user");
   $sth->execute();
@@ -106,11 +106,14 @@ function getUsers () {
   return $sth->fetchAll();
 }
 
-function getBottlings () {
+function getAllBottlings () {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM bottling");
   $sth->execute();
 
   return $sth->fetchAll();
 }
+
+
+
 ?>
