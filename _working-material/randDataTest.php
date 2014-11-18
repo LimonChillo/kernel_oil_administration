@@ -1,70 +1,98 @@
 <?php
 
   include "../head.php";
+  include_once "randDataGen.php";
     if ($_SERVER['REQUEST_METHOD'] == 'POST') :
+      if (isset($_POST['action']) && $_POST['action'] == 'generate')
+      {
+        // include "randDataGen.php";
+        $dbh = connectToDB();
+        dataGenerator();
 
-      dataGenerator();
+        $errorCodes = array();
 
-      $errorCodes = array();
+        //bottles
+        $sth = $dbh->prepare("Select * FROM bottle");
+        $sth->execute();
+        $bottles = $sth->fetchAll();
 
-      //bottles
-      $sth = $dbh->prepare("Select * FROM bottle");
-      $sth->execute();
-      $bottles = $sth->fetchAll();
+        //strains
+        $sth = $dbh->prepare("Select * FROM strain");
+        $sth->execute();
+        $strains = $sth->fetchAll();
 
-      //strains
-      $sth = $dbh->prepare("Select * FROM strain");
-      $sth->execute();
-      $strains = $sth->fetchAll();
+        //labels
+        $sth = $dbh->prepare("Select * FROM label");
+        $sth->execute();
+        $labels = $sth->fetchAll();
 
-      //labels
-      $sth = $dbh->prepare("Select * FROM label");
-      $sth->execute();
-      $labels = $sth->fetchAll();
-
-      $barrels = getAllBarrels();
-      $pressings = getAllPressings();
+        $barrels = getAllBarrels();
+        $pressings = getAllPressings();
 
 
-      if (sizeOf($bottles) != 2)
-        $errorCodes[0] = "Amount of bottle types is faulty";
+        if (sizeOf($bottles) != 2)
+          $errorCodes[0] = "Error: Amount of bottle types";
 
-      foreach ($bottles as $bottle) {
-        if ($bottle->amount != 200)
-          array_push($errorCodes, "Amount of stored bottles is faulty");
+        foreach ($bottles as $bottle) {
+          if ($bottle->amount != 200)
+            array_push($errorCodes, "Error: Amount of stored bottles");
+        }
+
+
+
+        if ($labels =! (sizeOf(getBottles())+sizeOf($strains)*sizeOf(getBottles())))
+          array_push($errorCodes, "Error: Amount of different labels");
+
+        if(sizeOf($barrels)/sizeOf($strains) != 15)
+          array_push($errorCodes, "Error: Amount of stored barrels");
+
+
+
+        if (sizeOf($pressings) != sizeOf($strains))
+          array_push($errorCodes, "Error: Amount of pressings");
+
+        $amountCorn = 0;
+        $amountPressings = 0;
+
+        foreach ($strains as $strain){
+          $amountCorn += getAmountCornByStrain($strain);
+        }
+        foreach ($pressings as $pressing) {
+          $amountPressings += $pressing->amount;
+        }
+
+        if ($amountCorn != $amountPressings)
+          array_push($errorCodes, "Error: Amount of Oil after pressings");
+        //echo "amountCorn: ".$amountCorn;
+        //echo "amountOil: ".$amountPressings;
+
+#############
+//Customers
+        if (sizeOf(getCustomers()) != 10)
+          array_push($errorCodes, "Error: Amount of customers");
       }
-
-
-
-      if ($labels =! (sizeOf(getBottles())+sizeOf($strains)*sizeOf(getBottles())))
-        array_push($errorCodes, "Amount of different labels is faulty");
-
-      if(sizeOf($barrels)/sizeOf($strains) != 15)
-        array_push($errorCodes, "Amount of stored barrels is faulty");
-
-
-
-      if (sizeOf($pressings) != sizeOf($strains))
-        array_push($errorCodes, "Amount of pressings is faulty");
-
-      $amountCorn = 0;
-      $amountPressings = 0;
-
-      foreach ($strains as $strain){
-        $amountCorn += getAmountCornByStrain($strain);
+#############
+// Delete all data
+      else if(isset($_POST['action']) && $_POST['action'] == 'delete')
+      {
+        $deleteCode = array();
+        try{
+          deleteAllData();
+        }catch (Exception $e) {
+          array_push($deleteCode, "Error, deleting data failed");
+        }
       }
-      foreach ($pressings as $pressing) {
-        $amountPressings += $pressing->amount;
+#############
+// Test functions
+      else if(isset($_POST['action']) && $_POST['action'] == 'functions')
+      {
+        $deleteCode = array();
+        try{
+          deleteAllData();
+        }catch (Exception $e) {
+          array_push($deleteCode, "Error, deleting data failed");
+        }
       }
-
-      if ($amountCorn != $amountPressings)
-        array_push($errorCodes, "Amount of Oil after pressings is faulty");
-      echo "amountCorn: ".$amountCorn;
-      echo "amountOil: ".$amountPressings;
-
-
-
-
   endif;
 ?>
 
@@ -77,7 +105,8 @@
 
   <div>
     <form action="randDataTest.php" method="POST">
-       <input type="submit" value= " Abschicken">
+      <input type="hidden" name="action" value="generate">
+      <input type="submit" value= " Daten generieren ">
     </form>
   </div>
 <?php
@@ -93,9 +122,36 @@
 
     endif;
 ?>
+  <div>
+      <form action="randDataTest.php" method="POST">
+          <input type="hidden" name="action" value="delete">
+          <input type="submit" value= " Alles Löschen ">
+      </form>
+    </div>
 
+  </div>
+<?php
+  if(isset($deleteCode)) :
+      if (sizeOf($deleteCode) == 0)
+          echo "All data deleted - no errors";
+      else
+      foreach ($deleteCode as $error) {
+        if ($error) :
+            echo "<p>".$error."</p>";
+          endif;
+        }
 
-</div>
+    endif;
+?>
+  <div>
+      <form action="randDataTest.php" method="POST">
+          <input type="hidden" name="action" value="functions">
+          <input type="submit" value= " Funktionen testen " disabled>
+      </form>
+    </div>
+
+  </div>
+
 
 
 <?php
