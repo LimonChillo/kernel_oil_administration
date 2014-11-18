@@ -86,4 +86,7 @@ function insertUser($username, $password, $email, $is_admin) {
         (?, ?, ?, ?)");
         $sth->execute(array($username, $password, $email, $is_admin));
 }
+
+
+
 ?>
