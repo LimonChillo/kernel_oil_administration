@@ -5,6 +5,7 @@
 	<p class="lead"><a href="#" class="btn btn-default">Fässer hinzufügen</a>
 	<a href="#" class="btn btn-default">Pressung hinzufügen</a>
 	<a href="#" class="btn btn-default">neue Bestellung hinzufügen</a>
+	<a href="#" class="btn btn-default">neuen Kunden hinzufügen</a>
 	</p>
 	<div class="row">
 		<div class="col-md-4"><h3>Fässer</h3></div>

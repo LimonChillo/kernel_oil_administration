@@ -2,13 +2,10 @@
 
 $dbh = connectToDB();
 
-
-
-
 function connectToDB()
 {
 
-  include "database/config.php";
+  include "config.php";
   if( ! $DB_NAME ) die('please create config.php, define $DB_NAME, $DB_USER, $DB_PASS there');
   try {
       $dbh = new PDO($DSN, $DB_USER, $DB_PASS);

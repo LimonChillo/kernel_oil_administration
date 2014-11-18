@@ -30,6 +30,7 @@
             <li><a href="#">Fässer</a></li>
             <li><a href="#about">Pressung</a></li>
             <li><a href="#contact">Produkte</a></li>
+            <li><a href="#contact">Kunden</a></li>
           </ul>
           </div><!--/.nav-collapse -->
         </div>
