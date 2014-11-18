@@ -6,8 +6,8 @@ function dataGenerator()
   $dbh = connectToDB();
   $date = date("Y.m.d");
 
-  insertBottle("100ml", "20");
-  insertBottle("250ml", "20");
+  insertBottle("100");
+  insertBottle("250");
   $bottles = getAllBottles();
   $strains = getAllStrains();
 

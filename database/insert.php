@@ -22,8 +22,8 @@ function insertBottle($ml)
 {
   $name = $ml.'ml';
   $dbh = connectToDB();
-  $sth = $dbh->prepare("INSERT INTO bottle (ID, name, ml) VALUES (NULL, ?, ?)");
-  $sth->execute(array($name, $ml));
+  $sth = $dbh->prepare("INSERT INTO bottle (ID, name, ml, amount) VALUES (NULL, ?, ?, ?)");
+  $sth->execute(array($name, $ml, "0"));
 
   $bottle = $dbh->lastInsertId();
   $labelname = 'Rückettikett '.$name;
