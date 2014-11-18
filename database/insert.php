@@ -52,7 +52,7 @@ function insertBarrel($strain, $literPerBarrel, $date) {
         (strainFK, fillLevel, date)
           VALUES
         (?, ?, ?)");
-        $sth->execute(array($strain->ID, $literPerBarrel, $date));
+        $sth->execute(array($strain, $literPerBarrel, $date));
 }
 
 function insertBottling($pressing, $bottle, $amount, $date) {

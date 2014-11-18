@@ -43,7 +43,7 @@ if(isset($_POST['insertBarrel']))
   $literPerBarrel = strip_tags($_POST['literPerBarrel']);
   $strain = strip_tags($_POST['strain']);
 
-  insertBarrel($date, $literPerBarrel, $strain);
+  insertBarrel($strain, $literPerBarrel,$date);
   header("Location:addBarrel.php?msg=1");
 }
 
