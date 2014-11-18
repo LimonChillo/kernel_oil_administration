@@ -4,9 +4,7 @@ include "database/functions.php";
 if(isset($_POST['insertStrain']))
 {
   $name = strip_tags($_POST['name']);
-  
-  //echo sizeOf(getStrainByName($name));
-  
+    
   if (sizeOf(getStrainByName($name)) > 0)
   {
     header("Location:addStrain.php?msg=0");
