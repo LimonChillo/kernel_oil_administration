@@ -29,7 +29,7 @@ function printAllStrainOptions() {
   $allStrains = getAllStrains();
   foreach ($allStrains as $strain)
   {
-    echo "<option value='".$cat->id."'> ".$strain->name."</option>";
+    echo "<option value='".$strain->ID."'> ".$strain->name."</option>";
   }
 }
 

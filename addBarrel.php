@@ -1,17 +1,17 @@
 <?php include "head.php";?>
 <div class="container">
 	<h1>Fässer hinzufügen</h1>
-	<form class="form-horizontal" role="form" method="post">
+	<form class="form-horizontal" role="form" method="post" action="result.php">
 		<div class="form-group">
 			<div class="col-sm-4">
-				<select class="form-control" name="strainFK">
+				<select class="form-control" name="strain">
 					<?php printAllStrainOptions();?>
 				</select>
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-4">
-				<input type="text" class="form-control" name="fillLevel" placeholder="Füllstand" required>
+				<input type="text" class="form-control" name="literPerBarrel" placeholder="Füllstand" required>
 			</div>
 		</div>
 		<div class="form-group">
@@ -22,7 +22,7 @@
 		
 		<div class="form-group">
 			<div class="col-sm-4">
-				<button type="submit" class="btn btn-default">Hinzufügen</button>
+				<button type="submit" name="insertBarrel" class="btn btn-default">Hinzufügen</button>
 			</div>
 		</div>
 	</form>
