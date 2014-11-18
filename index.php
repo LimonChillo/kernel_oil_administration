@@ -2,7 +2,7 @@
 <div class="container">
 	<h1>Kernölverwaltung</h1>
 	<p class="lead"><br>Hier sollten alle relevaten Informationen zu den aktuellen Lagerstände und Produktionsmengen stehen</p>
-	<p class="lead"><a href="#" class="btn btn-default">Fässer hinzufügen</a>
+	<p class="lead"><a href="barrols.php" class="btn btn-default">Fässer hinzufügen</a>
 	<a href="#" class="btn btn-default">Pressung hinzufügen</a>
 	<a href="#" class="btn btn-default">neue Bestellung hinzufügen</a>
 	<a href="#" class="btn btn-default">neuen Kunden hinzufügen</a>
@@ -11,6 +11,7 @@
 		<div class="col-md-4"><h3>Fässer</h3></div>
 		<div class="col-md-4"><h3>Pressung</h3></div>
 		<div class="col-md-4"><h3>Produkte</h3></div>
+	</div>
 	</div>
 </div>
 <?php include "footer.php";?>
