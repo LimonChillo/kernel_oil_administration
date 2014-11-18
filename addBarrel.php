@@ -1,6 +1,9 @@
 <?php include "head.php";?>
 <div class="container">
 	<h1>Fässer hinzufügen</h1>
+
+	<?php printMessage(); ?>
+
 	<form class="form-horizontal" role="form" method="post" action="result.php">
 		<div class="form-group">
 			<div class="col-sm-4">
