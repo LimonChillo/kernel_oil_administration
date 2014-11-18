@@ -45,8 +45,8 @@ function printAllBarrelsAsTable(){
     echo "<td>".$barrel->date."</td>";
     echo "</tr>";
   }
-
 }
+
 function printMessage()
 {
   if(isset($_GET['msg']))
@@ -58,4 +58,28 @@ function printMessage()
   }
 }
 
+function printDatarows($table)
+{
+
+  $datarows = getAnyTable($table);
+  $columns = getColumnNames($table);
+
+  echo '<table class="table table-hover">
+          <tr>';
+            //echo get_object_vars($columns[0]);
+            foreach ($columns as $headline) {
+              echo "<th>$headline->Field</th>";
+            }
+            echo "</tr>";
+            foreach ($datarows as $datarow) {
+              echo "<tr>";
+              foreach ($datarow as $data){
+                echo "<td>$data</td>";
+              }
+              echo "</tr>";
+            }
+
+
+            echo "</table>";
+}
 ?>

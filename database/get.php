@@ -1,4 +1,28 @@
 <?php
+function getAnyTable($table)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM $table");
+  $sth->execute();
+
+  return $sth->fetchAll();
+}
+
+function getColumnNames($table)
+{
+  $dbh = connectToDB();
+    $sth = $dbh->prepare("SHOW columns FROM $table");
+  // $sth = $dbh->prepare("
+  //     SELECT `COLUMN_NAME`
+  //       FROM `INFORMATION_SCHEMA`.`COLUMNS`
+  //         WHERE `TABLE_SCHEMA`='kernOil'
+  //           AND `TABLE_NAME`=$table");
+  // WHERE `TABLE_SCHEMA`='yourdatabasename'
+  $sth->execute();
+
+  return $sth->fetchAll();
+}
+
 function getAllStrains () {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM strain");

@@ -3,7 +3,8 @@
   <h1>Kunden*innen</h1>
   <a href="addCustomers.php" class="btn btn-default">Kunden*innen hinzufügen</a>
   </p>
-  <table class="table table-hover">
+  <?php printDatarows("customer"); ?>
+  <!-- <table class="table table-hover">
       <tr>
         <th>#</th>
         <th>Vorname</th>
@@ -15,11 +16,10 @@
         <th>Staat</th>
       </tr>
       <?php printAllCustomersAsDatarows(); ?>
-  </table>
+  </table> -->
   </div>
 </div>
 <?php include "footer.php";
-
 
 function printAllCustomersAsDatarows(){
   $allCustomers = getAllCustomers();
