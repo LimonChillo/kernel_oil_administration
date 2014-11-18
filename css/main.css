@@ -1,8 +1,21 @@
 body {
-  padding-top: 50px;
+  padding-top: 80px;
 }
 .main-content {
-  padding: 40px 15px;
-  text-align: center;
+  text-align: left;
 }
+.container{
+  padding-top: 30px; 
+	max-width: 1000px;
 
+}
+.col-md-4
+{
+	background: #fff;
+    max-width: 300px;
+    border: 1px solid #DDD;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .2);
+    margin: 5px;
+    margin-left: 15px;
+    padding: 5px;
+}

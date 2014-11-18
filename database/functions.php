@@ -2,11 +2,14 @@
 include "get.php";
 include "insert.php";
 include "update.php";
+include "configs.php";
+
+$dbh = connectToDB();
 
 
 function connectToDB()
 {
-  include "configs.php";
+
   //$root = realpath($_SERVER["DOCUMENT_ROOT"]);
   // include "$root/kernoil/database/config.php";
 
@@ -22,8 +25,4 @@ function connectToDB()
   return $dbh;
 }
 
-function bottling($pressing, $bottle, $strain, $literOil, $date) {
-  insertBottling($pressing, $bottle, $strain, $amount, $date);
-  // destockBottle($bottle, $);
-}
 ?>
