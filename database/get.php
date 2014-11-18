@@ -22,9 +22,9 @@ function getStrainNameByID($id)
 {
   $dbh = connectToDB();
 
-  $sth = $dbh->prepare("SELECT strain.name FROM strain WHERE strain.id = ?");
+  $sth = $dbh->prepare("SELECT strain.name FROM strain WHERE strain.ID = ?");
   $sth->execute(array($id));
-  $result = $sth->fetchAll();
+  $result = $sth->fetch();
 
   return $result;
 }
