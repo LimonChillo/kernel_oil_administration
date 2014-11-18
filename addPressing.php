@@ -1,17 +1,10 @@
 <?php include "head.php";?>
 <div class="container">
-	<h1>Fässer hinzufügen</h1>
+	<h1>Pressung hinzufügen</h1>
 	<form class="form-horizontal" role="form">
 		<div class="form-group">
 			<div class="col-sm-4">
-				<select class="form-control" id="inputStrain">
-					<?php printAllStrainOptions();?>
-				</select>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-4">
-				<input type="text" class="form-control" id="inputFilllevel" placeholder="Füllstand">
+				<input type="text" class="form-control" id="inputFilllevel" placeholder="Menge (l)">
 			</div>
 		</div>
 		<div class="form-group">
@@ -19,7 +12,6 @@
 				<input type="date" class="form-control" id="inputDate" placeholder="Datum">
 			</div>
 		</div>
-		
 		<div class="form-group">
 			<div class="col-sm-4">
 				<button type="submit" class="btn btn-default">Hinzufügen</button>
