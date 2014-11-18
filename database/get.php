@@ -114,12 +114,6 @@ function getAllBottlings () {
   return $sth->fetchAll();
 }
 
-function getAllStrainOptions() {
-  $allStrains = getStrains();
-  foreach ($allStrains as $strain)
-  {
-    echo "<option value='".$cat->id."'> ".$strain->name."</option>";
-  }
-}
+
 
 ?>

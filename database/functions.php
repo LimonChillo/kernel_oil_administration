@@ -44,8 +44,8 @@ function printAllBarrelsAsTable(){
     echo "<td>".getStrainNameById($barrel->strainFK)."</td>";
     echo "<td>".$barrel->fillLevel."</td>";
     echo "</tr>";
-
   }
+  
 }
 
 ?>

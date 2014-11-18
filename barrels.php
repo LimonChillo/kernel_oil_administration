@@ -12,20 +12,7 @@
   			<th>Füllstand</th>
   			<th>Datum</th>
   		</tr>
-  		<tr>
-  			<td><input type="checkbox"></td>
-  			<td>001</td>
-  			<td>Beispielsorte1</td>
-  			<td>100%</td>
-  			<td>18.11.14</td>
-  		</tr>
-  		<tr>
-  			<td><input type="checkbox"></td>
-  			<td>002</td>
-  			<td>Beispielsorte2</td>
-  			<td>75%</td>
-  			<td>15.11.14</td>
-  		</tr>
+  		<?php  printAllBarrelsAsTable(); ?>
 	</table>
 	</div>
 </div>
