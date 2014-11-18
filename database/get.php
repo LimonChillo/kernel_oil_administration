@@ -13,7 +13,7 @@ function getStrainByName($name)
 
   $sth = $dbh->prepare("SELECT * FROM strain WHERE strain.name = ?");
   $sth->execute(array($name));
-  $result = $sth->fetchObject();
+  $result = $sth->fetchAll();
 
   return $result;
 }

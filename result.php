@@ -1,55 +1,66 @@
 <?php
+include "database/functions.php"; 
 
-include "head.php"
-
-if(isset($_POST['insertStrain'))
+if(isset($_POST['insertStrain']))
 {
   $name = strip_tags($_POST['name']);
-  if (mysql_num_rows(getStrainByName($name)) > 0)
+  
+  //echo sizeOf(getStrainByName($name));
+  
+  if (sizeOf(getStrainByName($name)) > 0)
   {
-    header("Location:addStrain.php?error=1");
+    header("Location:addStrain.php?msg=0");
   }
 
   insertStrain($name);
-  echo "Erfolgreich eingetragen: " . $name;
+  header("Location:addStrain.php?msg=1");
   
 }
 
-if(isset($_POST['insertBottle'))
+if(isset($_POST['insertBottle']))
 {
   $ml = strip_tags($_POST['ml']);
-  if (mysql_num_rows(getBottleByMl($ml)) > 0)
+  if (sizeOf(getBottleByMl($ml)) > 0)
   {
-    header("Location:addBottle.php?error=1"); 
+    header("Location:addBottle.php?error=0"); 
   }
 
+  insertBottle($ml);
+  header("Location:addStrain.php?msg=1");
 }
 
-if(isset($_POST['insertPressing'))
+if(isset($_POST['insertPressing']))
 {
   $date = strip_tags($_POST['date']);
   $amount = strip_tags($_POST['amount']);
   $barrels = strip_tags($_POST['barrels']);
+
+  insertPressing($date, $amount, $barrels);
+  header("Location:addPressing.php?msg=1");
 }
 
-}
-
-if(isset($_POST['insertBarrel'))
+if(isset($_POST['insertBarrel']))
 {
   $date = strip_tags($_POST['date']);
   $literPerBarrel = strip_tags($_POST['literPerBarrel']);
   $strain = strip_tags($_POST['strain']);
+
+  insertBarrel($strain, $literPerBarrel,$date);
+  header("Location:addBarrel.php?msg=1");
 }
 
-if(isset($_POST['insertBottling'))
+if(isset($_POST['insertBottling']))
 {
   $date = strip_tags($_POST['date']);
   $amount = strip_tags($_POST['amount']);
   $pressing = strip_tags($_POST['pressing']);
   $bottle = strip_tags($_POST['bottle']);
+
+  insertBottling($date, $amount, $pressing, $bottle);
+  header("Location:addBottling.php?msg=1");
 }
 
-if(isset($_POST['insertCustomer'))
+if(isset($_POST['insertCustomer']))
 {
   $firstname = strip_tags($_POST['firstname']);
   $lastname = strip_tags($_POST['lastname']);
@@ -58,43 +69,54 @@ if(isset($_POST['insertCustomer'))
   $zip = strip_tags($_POST['zip']);
   $city = strip_tags($_POST['city']);
   $country = strip_tags($_POST['country']);
+
+  insertCustomer($firstname, $lastname, $company, $road, $zip, $city, $country);
+  header("Location:addCustomer.php?msg=1");
 }
 
-if(isset($_POST['insertUser'))
+if(isset($_POST['insertUser']))
 {
   $username = strip_tags($_POST['username']);
   $password = strip_tags($_POST['password']);
   $email = strip_tags($_POST['email']);
   $is_admin = strip_tags($_POST['is_admin']);
 
-  if (mysql_num_rows(getUserByName($username)) > 0)
+  if (sizeOf(getUserByName($username)) > 0)
   {
-    header("Location:add.php?error=1");
+    header("Location:addUser.php?error=0"); 
   }
+
+  insertUser($username, $passwort, $email, $is_admin);
+  header("Location:addUser.php?msg=1");
 }
 
-if(isset($_POST['stockBottles'))
+if(isset($_POST['stockBottles']))
 {
   $amount = strip_tags($_POST['amount']);
   $name = strip_tags($_POST['name']);
+
+  stockBottles($amount, $name);
+  header("Location:stockBottles.php?msg=1");
 }
 
-if(isset($_POST['stockLabels'))
+if(isset($_POST['stockLabels']))
 {
   $amount = strip_tags($_POST['amount']);
   $bottle = strip_tags($_POST['bottle']);  
   $strain = strip_tags($_POST['strain']);
+
+  stockLabels($amount,$bottle,$strain);
+  header("Location:stockLabels.php?msg=1");
 }
 
-if(isset($_POST['bottlePresssing'))
+if(isset($_POST['bottlePresssing']))
 {
   $pressing = strip_tags($_POST['pressing']);
   $bool = strip_tags($_POST['bool']);
+
+  bottlePresssing($pressing, $bool);
+  header("Location:bottlePressing.php?msg=1");
 }
-
-
-include "footer.php";
-
 
 
 

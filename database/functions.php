@@ -1,11 +1,7 @@
 <?php
-session_start();
-
 include "get.php";
 include "insert.php";
 include "update.php";
-include "fetch.php";
-
 
 $dbh = connectToDB();
 
@@ -33,7 +29,7 @@ function printAllStrainOptions() {
   $allStrains = getAllStrains();
   foreach ($allStrains as $strain)
   {
-    echo "<option value='".$cat->id."'> ".$strain->name."</option>";
+    echo "<option value='".$strain->ID."'> ".$strain->name."</option>";
   }
 }
 
@@ -42,7 +38,7 @@ function printAllBarrelsAsTable(){
   foreach ($allBarrels as $barrel)
   {
     echo "<tr>";
-    echo "<td><input type='checkbox' name='choosenBarrels[]' value='".$barrel->ID."'></td>";
+    echo "<td><input type='checkbox'></td>";
     echo "<td>".$barrel->ID."</td>";
     echo "<td>".getStrainNameById($barrel->strainFK)->name."</td>";
     echo "<td>".$barrel->fillLevel."</td>";
@@ -51,6 +47,5 @@ function printAllBarrelsAsTable(){
   }
 
 }
-
 
 ?>
