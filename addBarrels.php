@@ -11,12 +11,12 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-4">
-				<input type="password" class="form-control" id="inputFilllevel" placeholder="Füllstand">
+				<input type="text" class="form-control" id="inputFilllevel" placeholder="Füllstand">
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-4">
-				<input type="password" class="form-control" id="inputDate" placeholder="Datum">
+				<input type="text" class="form-control" id="inputDate" placeholder="Datum">
 			</div>
 		</div>
 		
