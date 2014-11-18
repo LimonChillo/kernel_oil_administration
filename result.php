@@ -1,14 +1,28 @@
 <?php
 
+include "head.php"
+
 if(isset($_POST['insertStrain'))
 {
   $name = strip_tags($_POST['name']);
+  if (mysql_num_rows(getStrainByName($name)) > 0)
+  {
+    header("Location:addStrain.php?error=1");
+  }
+
+  insertStrain($name);
+  echo "Erfolgreich eingetragen: " . $name;
+  
 }
 
 if(isset($_POST['insertBottle'))
 {
   $ml = strip_tags($_POST['ml']);
-  $name = strip_tags($_POST['name']);
+  if (mysql_num_rows(getBottleByMl($ml)) > 0)
+  {
+    header("Location:addBottle.php?error=1"); 
+  }
+
 }
 
 if(isset($_POST['insertPressing'))
@@ -18,11 +32,6 @@ if(isset($_POST['insertPressing'))
   $barrels = strip_tags($_POST['barrels']);
 }
 
-if(isset($_POST['insertLabel'))
-{
-  $labelname = strip_tags($_POST['labelname']);
-  $bottleID = strip_tags($_POST['bottleID']);
-  $strainID = strip_tags($_POST['strainID']);
 }
 
 if(isset($_POST['insertBarrel'))
@@ -42,26 +51,30 @@ if(isset($_POST['insertBottling'))
 
 if(isset($_POST['insertCustomer'))
 {
-  $ = strip_tags($_POST['firstname']);
-  $ = strip_tags($_POST['lastname']);
-  $ = strip_tags($_POST['company']);
-  $ = strip_tags($_POST['road']);
-  $ = strip_tags($_POST['zip']);
-  $ = strip_tags($_POST['city']);
-  $ = strip_tags($_POST['country']);
+  $firstname = strip_tags($_POST['firstname']);
+  $lastname = strip_tags($_POST['lastname']);
+  $company = strip_tags($_POST['company']);
+  $road = strip_tags($_POST['road']);
+  $zip = strip_tags($_POST['zip']);
+  $city = strip_tags($_POST['city']);
+  $country = strip_tags($_POST['country']);
 }
 
 if(isset($_POST['insertUser'))
 {
-  $ = strip_tags($_POST['username']);
-  $ = strip_tags($_POST['password']);
-  $ = strip_tags($_POST['email']);
-  $ = strip_tags($_POST['is_admin']);
+  $username = strip_tags($_POST['username']);
+  $password = strip_tags($_POST['password']);
+  $email = strip_tags($_POST['email']);
+  $is_admin = strip_tags($_POST['is_admin']);
+
+  if (mysql_num_rows(getUserByName($username)) > 0)
+  {
+    header("Location:add.php?error=1");
+  }
 }
 
 if(isset($_POST['stockBottles'))
 {
-  $ = strip_tags($_POST['']);
   $amount = strip_tags($_POST['amount']);
   $name = strip_tags($_POST['name']);
 }
@@ -80,7 +93,7 @@ if(isset($_POST['bottlePresssing'))
 }
 
 
-
+include "footer.php";
 
 
 
