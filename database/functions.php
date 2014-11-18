@@ -4,7 +4,6 @@ session_start();
 include "get.php";
 include "insert.php";
 include "update.php";
-include "fetch.php";
 
 
 $dbh = connectToDB();
