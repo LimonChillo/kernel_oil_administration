@@ -4,19 +4,19 @@
 	<form class="form-horizontal" role="form">
 		<div class="form-group">
 			<div class="col-sm-4">
-				<select class="form-control" id="inputStrain">
+				<select class="form-control" name="strainFK">
 					<?php printAllStrainOptions();?>
 				</select>
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-4">
-				<input type="text" class="form-control" id="inputFilllevel" placeholder="Füllstand">
+				<input type="text" class="form-control" name="fillLevel" placeholder="Füllstand" required>
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-4">
-				<input type="date" class="form-control" id="inputDate" placeholder="Datum">
+				<input type="date" class="form-control" name="date" placeholder="Datum" required>
 			</div>
 		</div>
 		

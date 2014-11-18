@@ -4,12 +4,12 @@
 	<form class="form-horizontal" role="form">
 		<div class="form-group">
 			<div class="col-sm-4">
-				<input type="text" class="form-control" id="inputFilllevel" placeholder="Menge (l)">
+				<input type="text" class="form-control" name="amount" placeholder="Menge (l)" required>
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-4">
-				<input type="date" class="form-control" id="inputDate" placeholder="Datum">
+				<input type="date" class="form-control" id="date" placeholder="Datum" required>
 			</div>
 		</div>
 		<div class="form-group">
