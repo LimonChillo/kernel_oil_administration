@@ -23,15 +23,15 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Kernölverwaltung</a>
+          <a class="navbar-brand" href="index.php">Kernölverwaltung</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Übersicht</a></li>
-            <li><a href="barrels.php">Fässer</a></li>
-            <li><a href="#about">Pressung</a></li>
-            <li><a href="#contact">Produkte</a></li>
-            <li><a href="#contact">Kunden</a></li>
+            <li><a href="getBarrels.php">Fässer</a></li>
+            <li><a href="">Pressung</a></li>
+            <li><a href="">Produkte</a></li>
+            <li><a href="getCustomers.php">Kunden</a></li>
           </ul>
           </div><!--/.nav-collapse -->
         </div>
