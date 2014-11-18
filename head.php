@@ -26,8 +26,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#">Übersicht</a></li>
-            <li><a href="#">Fässer</a></li>
+            <li><a href="index.php">Übersicht</a></li>
+            <li><a href="barrels.php">Fässer</a></li>
             <li><a href="#about">Pressung</a></li>
             <li><a href="#contact">Produkte</a></li>
             <li><a href="#contact">Kunden</a></li>

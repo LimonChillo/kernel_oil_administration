@@ -6,10 +6,10 @@ function dataGenerator()
   $dbh = connectToDB();
   $date = date("Y.m.d");
 
-  insertBottle("100ml");
-  insertBottle("250ml");
-  $bottles = getBottles();
-  $strains = getStrains();
+  insertBottle("100");
+  insertBottle("250");
+  $bottles = getAllBottles();
+  $strains = getAllStrains();
 
   foreach ($strains as $strain) {
     $amountBarrels = 15;
@@ -55,11 +55,15 @@ function dataGenerator()
         $amountPressing -= $amountPerBottle;//substract filled amount from amount of starting point
         $amountPressingPerBottle += $amountGiven - $amountPerBottle;//add remaining oil to amount for next bottle
         insertBottling($pressing, $bottle, $amountPerBottle, $date);//insert
+        $amount = $amountPerBottle / $bottle->ml;
+        insertProduct($strain->ID, $bottle->ID, $amount);
       }
       // echo $amountPressing." "; //how much oil is remaining (must but less than fits into smallest stocked bottle)
       bottlePressing($pressing->ID, true);
     }
 //toDo enough bottles? unstock bottles, unstock labels,test if remaining oil is more than 100ml
+
+
 
 ####################
 //generate customers

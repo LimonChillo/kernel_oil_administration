@@ -22,13 +22,11 @@ function insertBottle($ml)
 {
   $name = $ml.'ml';
   $dbh = connectToDB();
-  $sth = $dbh->prepare("INSERT INTO bottle (ID, name, ml) VALUES (NULL, ?, ?)");
-  $sth->execute(array($name, $ml));
+  $sth = $dbh->prepare("INSERT INTO bottle (ID, name, ml, amount) VALUES (NULL, ?, ?, ?)");
+  $sth->execute(array($name, $ml, "0"));
 
   $bottle = $dbh->lastInsertId();
-  $labelname = 'Rückettikett '.$name;
-  $sth = $dbh->prepare("INSERT INTO label (ID, name, bottleFK, strainFK) VALUES (NULL, ?, ?, NULL)");
-  $sth->execute(array($labelname, $bottle));
+  insertLabel('Rückettikett', $bottle, NULL);
 }
 
 function insertPressing($date, $amount, $barrels){
@@ -87,6 +85,15 @@ function insertUser($username, $password, $email, $is_admin) {
         $sth->execute(array($username, $password, $email, $is_admin));
 }
 
-
+function insertProduct($strainID, $bottleID, $amount)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare(
+        "INSERT INTO product
+        (strainFK, bottleFK, amount)
+          VALUES
+        (?, ?, ?)");
+        $sth->execute(array($strainID, $bottleID, $amount));
+}
 
 ?>

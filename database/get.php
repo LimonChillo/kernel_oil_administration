@@ -18,6 +18,17 @@ function getStrainByName($name)
   return $result;
 }
 
+function getStrainNameByID($id)
+{
+  $dbh = connectToDB();
+
+  $sth = $dbh->prepare("SELECT strain.name FROM strain WHERE strain.ID = ?");
+  $sth->execute(array($id));
+  $result = $sth->fetch();
+
+  return $result;
+}
+
 function getAllBottles()
 {
   $dbh = connectToDB();
