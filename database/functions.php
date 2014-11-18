@@ -39,7 +39,7 @@ function printAllBarrelsAsTable(){
   foreach ($allBarrels as $barrel)
   {
     echo "<tr>";
-    echo "<td><input type='checkbox'></td>";
+    echo "<td><input type='checkbox' name='choosenBarrels[]' value='".$barrel->ID."'></td>";
     echo "<td>".$barrel->ID."</td>";
     echo "<td>".getStrainNameById($barrel->strainFK)->name."</td>";
     echo "<td>".$barrel->fillLevel."</td>";

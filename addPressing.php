@@ -1,6 +1,12 @@
 <?php include "head.php";?>
 <div class="container">
 	<h1>Pressung hinzufügen</h1>
+	<?php 
+	if(isset($_POST["choosenBarrels"]))
+	{
+		$_SESSION['choosenBarrels'] = $_POST["choosenBarrels"];
+	}
+	?>
 	<form class="form-horizontal" role="form">
 		<div class="form-group">
 			<div class="col-sm-4">
