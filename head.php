@@ -14,6 +14,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/form.js"></script>
+    <script src="js/functions.js"></script>
 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -41,4 +42,3 @@
           </div><!--/.nav-collapse -->
         </div>
       </nav>
-     

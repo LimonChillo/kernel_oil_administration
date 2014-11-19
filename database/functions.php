@@ -2,7 +2,7 @@
 include "get.php";
 include "insert.php";
 include "update.php";
-
+require_once 'HTML/Table.php';
 $dbh = connectToDB();
 
 
@@ -64,22 +64,55 @@ function printDatarows($table)
   $datarows = getAnyTable($table);
   $columns = getColumnNames($table);
 
-  echo '<table class="table table-hover">
-          <tr>';
-            //echo get_object_vars($columns[0]);
-            foreach ($columns as $headline) {
-              echo "<th>$headline->Field</th>";
-            }
-            echo "</tr>";
-            foreach ($datarows as $datarow) {
-              echo "<tr>";
-              foreach ($datarow as $data){
-                echo "<td>$data</td>";
-              }
-              echo "</tr>";
-            }
+  $attrs = array('width' => '600', 'class' => 'table table-hover');
+  $table = new HTML_Table($attrs);
+  $table->setAutoGrow(true);
+  $table->setAutoFill(' ');
 
+  $cell = 0;
+  $row = 0;
+  foreach ($columns as $headline) {
+    $table->setHeaderContents(0, $cell, ucfirst(translate($headline->Field)));
+    $cell++;
+  }
+  $hrAttrs = array('bgcolor' => 'silver');
+  $table->setRowAttributes(0, $hrAttrs, true);
+  $table->setColAttributes(0, $hrAttrs);
 
-            echo "</table>";
+  foreach ($datarows as $datarow) {
+    $row++;
+    $cell = 0;
+
+    foreach ($datarow as $data){
+      $table->setCellContents($row, $cell, $data);
+      $cell++;
+    }
+  }
+  echo $table->toHtml();
 }
+
+function translate($string) {
+
+  $result = file_get_contents("https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20141119T000605Z.fde3b1af18a04e6f.9a81311905bca1e287e765513a10c8fe5a23c4a3&lang=en-de&text=$string");
+  $json = json_decode($result, true);
+// echo $json['networkConnections'];
+  return $json["text"][0];
+}
+
+//   $from = "en";
+//   $to = "de";
+//   $text = "hello world";
+//   $s = document.createElement("script");
+//   $s.src = "http://api.microsofttranslator.com/V2/Ajax.svc/Translate" +
+//             "?appId=" + settings.appID +
+//             "&from=" + encodeURIComponent(from) +
+//             "&to=" + encodeURIComponent(to) +
+//             "&text=" + encodeURIComponent(text) +
+//             "&oncomplete=mycallback";
+//   document.body.appendChild($s);
+// }
+
+// function mycallback($response) {
+//   alert($response);
+// }
 ?>
