@@ -3,7 +3,7 @@ function deleteBottleByID ($id) {
   $dbh = connectToDB();
   $sth = $dbh->prepare("DELETE FROM bottle WHERE ID = ?");
   $sth->execute(array($id));
-  if( $sth->fetchAll() != null)
+  if( sizeOf(getBottleByID($id)) == null)
     return true;
   return false;
 }
@@ -16,4 +16,6 @@ function deleteCustomerByID($id) {
     return true;
   return false;
 }
+
+
 ?>

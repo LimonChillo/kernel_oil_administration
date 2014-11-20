@@ -8,15 +8,14 @@ function updatePressingOfBarrel($barrels, $pressing) {
   }
 }
 
-function stockBottles($amount, $name)
+function stockBottle($id, $amount)
 {
   $dbh = connectToDB();
-  //$bottle = getBottleByName($name);
-  $sth = $dbh->prepare("UPDATE bottle SET amount = ? WHERE name = ?");
-  $sth->execute(array($amount, $name));
+  $sth = $dbh->prepare("UPDATE bottle SET amount = ? WHERE ID = ?");
+  $sth->execute(array($amount, $id));
 }
 
-function stockLabels($amount, $strain, $bottle)
+function stockLabel($amount, $strain, $bottle)
 {
   $dbh = connectToDB();
   $sth = $dbh->prepare("UPDATE label SET amount = ? WHERE strainFK = ? AND bottleFK = ?");
@@ -39,6 +38,17 @@ function updateCustomer($id, $firstname, $lastname, $company, $road, $zip, $city
                 ID = ?
                   ");
         $sth->execute(array($firstname, $lastname, $company, $road, $zip, $city, $country, $id));
+}
+
+function updateBottle($id, $ml) {
+  $dbh = connectToDB();
+  $name = $ml."ml";
+  $sth = $dbh->prepare(
+        "UPDATE bottle SET ml = ?, name = ?
+              WHERE
+                ID = ?
+                  ");
+        $sth->execute(array($ml, $name, $id));
 }
 
 ?>

@@ -3,7 +3,7 @@
   <h1>Kunden*innen</h1>
   <a href="addCustomer.php" class="btn btn-default">Kunden*innen hinzufügen</a>
   </p>
-  <?php printDatarows("customer"); ?>
+  <?php printDatarows("customer", false, "ID"); ?>
 
   </div>
 </div>

@@ -1,8 +1,12 @@
 <?php
-function getAnyTable($table)
+function getAnyTable($table, $orderBy)
 {
+  if($orderBy != null)
+    $query = "SELECT * FROM $table ORDER BY $orderBy";
+  else
+    $query = "SELECT * FROM $table";
   $dbh = connectToDB();
-  $sth = $dbh->prepare("SELECT * FROM $table");
+  $sth = $dbh->prepare($query);
   $sth->execute();
 
   return $sth->fetchAll();
@@ -12,12 +16,6 @@ function getColumnNames($table)
 {
   $dbh = connectToDB();
     $sth = $dbh->prepare("SHOW columns FROM $table");
-  // $sth = $dbh->prepare("
-  //     SELECT `COLUMN_NAME`
-  //       FROM `INFORMATION_SCHEMA`.`COLUMNS`
-  //         WHERE `TABLE_SCHEMA`='kernOil'
-  //           AND `TABLE_NAME`=$table");
-  // WHERE `TABLE_SCHEMA`='yourdatabasename'
   $sth->execute();
 
   return $sth->fetchAll();
@@ -69,6 +67,17 @@ function getBottleByMl($ml)
   $sth->execute(array($ml));
 
   return $sth->fetchAll();
+}
+
+function getBottleByID($id)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM bottle WHERE ID = ?");
+  $sth->execute(array($id));
+  $bottle = $sth->fetchObject();
+  if($bottle == null)
+    return null;
+  return $bottle;
 }
 
 function getBottlesOrderedByMlDESC()

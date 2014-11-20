@@ -56,10 +56,10 @@ function printMessage()
   }
 }
 
-function printDatarows($tab)
+function printDatarows($tab, $stockable, $orderBy)
 {
 
-  $datarows = getAnyTable($tab);
+  $datarows = getAnyTable($tab, $orderBy);
   $columns = getColumnNames($tab);
 
   $attrs = array('class' => 'table table-hover '.$tab.'List');
@@ -86,7 +86,13 @@ function printDatarows($tab)
       $table->setCellContents($row, $cell, $data);
       $cell++;
     }
-    $options = "<a href='add$tab.php?id=$datarow->ID'>bearbeiten</a>";
+    $options = "<a href='add$tab.php?id=$datarow->ID'>bearbeiten </a>";
+
+    if($stockable == true)
+    {
+      $options .= "   <a href='stock$tab.php?id=$datarow->ID'> einlagern</a>";
+    }
+
     $table->setCellContents($row, $cell, $options);
   }
   echo $table->toHtml();

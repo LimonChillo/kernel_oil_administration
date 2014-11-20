@@ -18,13 +18,56 @@ if(isset($_POST['insertStrain']))
 if(isset($_POST['insertBottle']))
 {
   $ml = strip_tags($_POST['ml']);
-  if (sizeOf(getBottleByMl($ml)) > 0)
+  if (sizeOf(getBottleByMl($ml)) != null)
   {
     header("Location:addBottle.php?error=0");
   }
 
   insertBottle($ml);
-  header("Location:addStrain.php?msg=1");
+  header("Location:getBottles.php?msg=1");
+}
+
+if(isset($_POST['updateBottle']))
+{
+  $ml = strip_tags($_POST['ml']);
+  if(sizeOf(getBottleByID($_POST['updateBottle'])) != 0)
+    {
+      updateBottle($_POST['updateBottle'], $ml);
+      header("Location:getBottles.php?msg=1");
+    }
+  else
+  {
+    header("Location:getBottles.php?msg=0");
+  }
+}
+
+if(isset($_POST['deleteBottle']))
+{
+  if(sizeOf(getBottleByID($_POST['deleteBottle'])) != 0)
+    {
+      deleteBottleByID($_POST['deleteBottle']);
+      header("Location:getBottles.php?msg=1");
+    }
+  else
+  {
+    header("Location:getBottles.php?msg=0");
+  }
+}
+
+if(isset($_POST['stockBottle']))
+{
+  $bottle = getBottleByID($_POST['stockBottle']);
+  $amount = $bottle->amount + $_POST['amount'];
+  if(sizeOf($bottle) != 0)
+    {
+
+      stockBottle($bottle->ID, $amount);
+      header("Location:getBottles.php?msg=1");
+    }
+  else
+  {
+    header("Location:getBottles.php?msg=0");
+  }
 }
 
 if(isset($_POST['insertPressing']))
