@@ -15,6 +15,7 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/form.js"></script>
     <script src="js/functions.js"></script>
+    <script src="js/jquery-1.7.min.js"></script>
 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">

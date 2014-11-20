@@ -4,39 +4,26 @@
   <a href="addCustomers.php" class="btn btn-default">Kunden*innen hinzufügen</a>
   </p>
   <?php printDatarows("customer"); ?>
-  <!-- <table class="table table-hover">
-      <tr>
-        <th>#</th>
-        <th>Vorname</th>
-        <th>Nachname</th>
-        <th>Firma</th>
-        <th>Straße</th>
-        <th>PLZ</th>
-        <th>Ort</th>
-        <th>Staat</th>
-      </tr>
-      <?php printAllCustomersAsDatarows(); ?>
-  </table> -->
+
   </div>
 </div>
-<?php include "footer.php";
+<script>(function () {
 
-function printAllCustomersAsDatarows(){
-  $allCustomers = getAllCustomers();
-  foreach ($allCustomers as $customer)
-  {
-    echo "<tr>";
-    echo "<td>".$customer->ID."</td>";
-    echo "<td>".$customer->firstname."</td>";
-    echo "<td>".$customer->lastname."</td>";
-    echo "<td>".$customer->company."</td>";
-    echo "<td>".$customer->road."</td>";
-    echo "<td>".$customer->zip."</td>";
-    echo "<td>".$customer->city."</td>";
-    echo "<td>".$customer->country."</td>";
-    echo "</tr>";
-  }
+          $('th').each(function() {
+            var self = $(this)
+            $.ajax({
+              type: "POST",
+              url: "translate.php",
+              data: "text=" + this.innerHTML,
+              success: function(html) {
+                  if (html != null) {
+                      self.html(html);
+                  }
+              }
+            });
+          });
+          return false;
+})();
+</script>
 
-}
-
-?>
+<?php include "footer.php";?>
