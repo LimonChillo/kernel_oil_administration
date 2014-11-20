@@ -30,4 +30,15 @@ function bottlePressing($pressing, $bool)
   $sth->execute(array($bool, $pressing));
 }
 
+function updateCustomer($id, $firstname, $lastname, $company, $road, $zip, $city, $country) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare(
+        "UPDATE customer SET firstname = ?, lastname = ?, company = ?, road = ?,
+           zip = ?, city = ?, country = ?
+              WHERE
+                ID = ?
+                  ");
+        $sth->execute(array($firstname, $lastname, $company, $road, $zip, $city, $country, $id));
+}
+
 ?>

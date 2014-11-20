@@ -64,12 +64,47 @@ if(isset($_POST['insertCustomer']))
   $lastname = strip_tags($_POST['lastname']);
   $company = strip_tags($_POST['company']);
   $road = strip_tags($_POST['road']);
-  $zip = strip_tags($_POST['zip']);
+  $zip = strip_tags($_POST['ZIP']);
   $city = strip_tags($_POST['city']);
   $country = strip_tags($_POST['country']);
 
   insertCustomer($firstname, $lastname, $company, $road, $zip, $city, $country);
   header("Location:addCustomer.php?msg=1");
+}
+
+if(isset($_POST['updateCustomer']))
+{
+  $firstname = strip_tags($_POST['firstname']);
+  $lastname = strip_tags($_POST['lastname']);
+  $company = strip_tags($_POST['company']);
+  $road = strip_tags($_POST['road']);
+  $zip = strip_tags($_POST['zip']);
+  $city = strip_tags($_POST['city']);
+  $country = strip_tags($_POST['country']);
+
+if(sizeOf(getCustomerByID($_POST['updateCustomer'])) != 0)
+  {
+    updateCustomer($_POST['updateCustomer'], $firstname, $lastname, $company, $road, $zip, $city, $country);
+    header("Location:getCustomers.php?msg=1");
+  }
+else
+{
+  header("Location:getCustomers.php?msg=0");
+}
+}
+
+if(isset($_POST['deleteCustomer']))
+{
+
+if(sizeOf(getCustomerByID($_POST['deleteCustomer'])) != 0)
+  {
+    deleteCustomerByID($_POST['deleteCustomer']);
+    header("Location:getCustomers.php?msg=2");
+  }
+else
+{
+  header("Location:getCustomers.php?msg=3");
+}
 }
 
 if(isset($_POST['insertUser']))
@@ -87,6 +122,22 @@ if(isset($_POST['insertUser']))
   insertUser($username, $password, $email, $is_admin);
   header("Location:addUser.php?msg=1");
 }
+
+// if(isset($_POST['updateUser']))
+// {
+//   $username = strip_tags($_POST['username']);
+//   $password = strip_tags($_POST['password']);
+//   $email = strip_tags($_POST['email']);
+//   $is_admin = ($_POST['is_admin'] == null) ? "0" : "1" ;
+
+//   if (sizeOf(getUserByName($username)) > 0)
+//   {
+//     header("Location:addUser.php?error=0");
+//   }
+
+//   updateUser($username, $password, $email, $is_admin);
+//   header("Location:addUser.php?msg=1");
+// }
 
 if(isset($_POST['stockBottles']))
 {

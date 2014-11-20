@@ -1,7 +1,7 @@
 <?php include "head.php";?>
 <div class="container">
   <h1>Kunden*innen</h1>
-  <a href="addCustomers.php" class="btn btn-default">Kunden*innen hinzufügen</a>
+  <a href="addCustomer.php" class="btn btn-default">Kunden*innen hinzufügen</a>
   </p>
   <?php printDatarows("customer"); ?>
 

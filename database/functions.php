@@ -2,6 +2,7 @@
 include "get.php";
 include "insert.php";
 include "update.php";
+include "delete.php";
 require_once 'HTML/Table.php';
 $dbh = connectToDB();
 
@@ -55,13 +56,13 @@ function printMessage()
   }
 }
 
-function printDatarows($table)
+function printDatarows($tab)
 {
 
-  $datarows = getAnyTable($table);
-  $columns = getColumnNames($table);
+  $datarows = getAnyTable($tab);
+  $columns = getColumnNames($tab);
 
-  $attrs = array('class' => 'table table-hover '.$table.'List');
+  $attrs = array('class' => 'table table-hover '.$tab.'List');
   $table = new HTML_Table($attrs);
   $table->setAutoGrow(true);
   $table->setAutoFill(' ');
@@ -85,6 +86,8 @@ function printDatarows($table)
       $table->setCellContents($row, $cell, $data);
       $cell++;
     }
+    $options = "<a href='add$tab.php?id=$datarow->ID'>bearbeiten</a>";
+    $table->setCellContents($row, $cell, $options);
   }
   echo $table->toHtml();
 

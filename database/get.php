@@ -133,6 +133,14 @@ function getAllCustomers () {
   return $sth->fetchAll();
 }
 
+function getCustomerByID ($id) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM customer WHERE ID = ?");
+  $sth->execute(array( $id ));
+
+  return $sth->fetchObject();
+}
+
 function getAllUsers () {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM user");
