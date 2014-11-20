@@ -1,9 +1,9 @@
 <?php include "head.php";?>
 <div class="container">
-  <h1>Sorten</h1>
-  <a href="addStrains.php" class="btn btn-default">Sorte hinzufügen</a>
+  <h1>Flaschen</h1>
+  <a href="addBottle.php" class="btn btn-default">Flasche hinzufügen</a>
   </p>
-  <?php printDatarows("strain"); ?>
+  <?php printDatarows("bottle"); ?>
 
   </div>
 </div>

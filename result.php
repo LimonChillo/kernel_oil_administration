@@ -84,7 +84,6 @@ if(isset($_POST['insertUser']))
     header("Location:addUser.php?error=0");
   }
 
-
   insertUser($username, $password, $email, $is_admin);
   header("Location:addUser.php?msg=1");
 }

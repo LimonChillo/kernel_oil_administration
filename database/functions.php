@@ -8,9 +8,6 @@ $dbh = connectToDB();
 
 function connectToDB()
 {
-include "configs.php";
-  //$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-  // include "$root/kernoil/database/config.php";
   include "configs.php";
 
   if( ! $DB_NAME ) die('please create config.php, define $DB_NAME, $DB_USER, $DB_PASS there');
@@ -64,7 +61,7 @@ function printDatarows($table)
   $datarows = getAnyTable($table);
   $columns = getColumnNames($table);
 
-  $attrs = array('width' => '600', 'class' => 'table table-hover');
+  $attrs = array('class' => 'table table-hover '.$table.'List');
   $table = new HTML_Table($attrs);
   $table->setAutoGrow(true);
   $table->setAutoFill(' ');
@@ -90,6 +87,7 @@ function printDatarows($table)
     }
   }
   echo $table->toHtml();
+
 }
 
 ?>
