@@ -113,7 +113,7 @@ function getBarrelsByStrain($strain){
 
 function getAllPressings() {
   $dbh = connectToDB();
-  $sth = $dbh->prepare("SELECT * FROM pressing");
+  $sth = $dbh->prepare("SELECT * FROM pressing WHERE bottled != 0");
   $sth->execute();
 
   return $sth->fetchAll();
@@ -168,6 +168,14 @@ function getAllBottlings () {
   $sth->execute();
 
   return $sth->fetchAll();
+}
+
+function getPressingById ($id) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM pressing WHERE ID = ?");
+  $sth->execute(array( $id ));
+
+  return $sth->fetchObject();
 }
 
 // ----------- Gets für die überprüfung
