@@ -1,13 +1,16 @@
 <?php include "head.php";?>
 <div class="container">
-  <h1>Kunden*innen</h1>
-  <?php printMessage(); ?>
-  <a href="addCustomer.php" class="btn btn-default">Kunden*innen hinzufügen</a>
-  </p>
-  <?php printDatarows("customer", false, "ID"); ?>
-
-  </div>
+	<h1>noch nicht abgefüllte Pressungen</h1>
+	<table class="table table-hover">
+  		<tr>
+  			<th>#</th>
+  			<th>Datum</th>
+  			<th>Menge</th>
+  			<th>Optionen</th>
+  		</tr>
+  		<?php printAllPressingsAsTable(); ?>
+	</table>
+  </form>
+	</div>
 </div>
-<script>(function() { translate() })() </script>
-
 <?php include "footer.php";?>
