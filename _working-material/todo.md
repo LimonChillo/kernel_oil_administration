@@ -1,0 +1,8 @@
+todo
+formularüberprüfung
+messages handeln
+label eintragen
+botteling funktion
+produktansicht
+DASHBOARD
+kunden und lieferungen
