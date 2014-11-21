@@ -62,8 +62,10 @@ function printDatarows($tab, $stockable, $orderBy)
   if($tab == "labels")
   {
     $datarows = getJoinedLabels($orderBy);
-    $columns = array((object) array('Field'=>'ID'), (object) array('Field'=>'name')
-                     , (object) array('Field'=> 'Sorte'), (object) array('Field'=> 'Flasche'));
+    $columns = array((object) array('Field'=>'ID'),
+                      (object) array('Field'=> 'Sorte'),
+                        (object) array('Field'=> 'Flasche'),
+                          (object) array('Field'=> 'Menge'));
   }
   else
   {

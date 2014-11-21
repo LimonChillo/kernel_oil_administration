@@ -11,9 +11,14 @@ function insertStrain($name)
     $sth = $dbh->prepare("INSERT INTO strain (name) VALUES (?)");
     $sth->execute(array($name));
 
-    $lastInsertedStrain = getStrainByName($name)->ID;
+    $strain = $dbh->lastInsertId();
 
-    return $lastInsertedStrain;
+    foreach (getAllBottles() as $bottle)
+    {
+    insertLabel($bottle->name." ".$name, $bottle->ID, $strain);
+    }
+
+    return $strain;
   }
   return null;
 }
@@ -26,7 +31,11 @@ function insertBottle($ml)
   $sth->execute(array($name, $ml, "0"));
 
   $bottle = $dbh->lastInsertId();
-  insertLabel('Rückettikett', $bottle, NULL);
+  insertLabel('Rückettikett', $bottle, "0");
+  foreach (getAllStrains() as $strain)
+  {
+    insertLabel($name." ".$strain->name, $bottle, $strain->ID);
+  }
 }
 
 function insertPressing($date, $amount, $barrels){

@@ -55,6 +55,9 @@ function updateStrain($id, $name) {
   $dbh = connectToDB();
   $sth = $dbh->prepare( "UPDATE strain SET name = ? WHERE ID = ? ");
   $sth->execute(array($name, $id));
+
+
 }
+
 
 ?>

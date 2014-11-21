@@ -38,12 +38,14 @@ if(isset($_POST['deleteStrain']))
   if(sizeOf(getStrainByID($id)) != 0)
     {
       deleteStrainByID($id);
-      header("Location:getStrains.php?msg=Sorte gelöscht$err=0");
+      // deleteLabelByStrain()
+      header("Location:getStrains.php?msg=Sorte gelöscht&err=0");
     }
   else
   {
-    header("Location:getStrains.php?msg=Sorte existiert nicht$err");
+    header("Location:getStrains.php?msg=Sorte existiert nicht&err=1");
   }
+
 }
 
 

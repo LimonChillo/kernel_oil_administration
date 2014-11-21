@@ -15,16 +15,12 @@ function getAnyTable($table, $orderBy)
 
 function getJoinedLabels($orderBy)
 {
-    $query = "SELECT l.ID AS ID, l.name AS label, s.name AS strain, b.name AS bottle
+    $query = "SELECT l.ID AS ID, s.name AS strain, b.name AS bottle, l.amount AS amount
       FROM label l LEFT OUTER JOIN strain s ON l.strainFK = s.ID LEFT OUTER JOIN bottle b ON l.bottleFK = b.ID";
 
     switch ($orderBy) {
       case 'sorte':
         $query .= " ORDER BY s.name";
-        break;
-
-      case 'label':
-        $query .= " ORDER BY l.name";
         break;
 
       case 'bottle':
@@ -219,8 +215,8 @@ function getDeliveredProductsByCustomerOrderedByDate($customer_id, $strain_id, $
   $sth = $dbh->prepare("SELECT SUM(sh.amount) as amount, sh.date as date GROUP BY sh.date
   FROM product p JOIN strain s JOIN bottle b JOIN shipmentitem shi JOIN shipment sh JOIN customer c
   ON p.bottleFK = b.ID AND p.strainFK = s.ID AND shi.productFK = p.ID AND shi.shipmentFK = sh.ID AND sh.customerFK = c.ID
-  WHERE c.ID = ? 
-  AND s.ID = ? AND b.ID = ? 
+  WHERE c.ID = ?
+  AND s.ID = ? AND b.ID = ?
   ORDER BY sh.date;");
   $sth->execute(array( $customer_id, $strain_id, $bottle_id ));
 
