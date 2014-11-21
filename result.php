@@ -1,6 +1,9 @@
 <?php
 include "database/functions.php";
 
+
+#########
+// STRAINS
 if(isset($_POST['insertStrain']))
 {
   $name = strip_tags($_POST['name']);
@@ -14,6 +17,37 @@ if(isset($_POST['insertStrain']))
   header("Location:getStrains.php?msg=Sorte hinzugefügt&err=0");
 
 }
+
+if(isset($_POST['updateStrain']))
+{
+  $id = strip_tags($_POST['updateStrain']);
+  if(sizeOf(getStrainByID($id)) != 0)
+    {
+      updateStrain($id, $_POST['name']);
+      header("Location:getStrains.php?msg=Sorte geändert&err=0");
+    }
+  else
+  {
+    header("Location:getStrains.php?msg=Sorte existiert nicht&err=1");
+  }
+}
+
+if(isset($_POST['deleteStrain']))
+{
+  $id = $_POST['deleteStrain'];
+  if(sizeOf(getStrainByID($id)) != 0)
+    {
+      deleteStrainByID($id);
+      // deleteLabelByStrain()
+      header("Location:getStrains.php?msg=Sorte gelöscht&err=0");
+    }
+  else
+  {
+    header("Location:getStrains.php?msg=Sorte existiert nicht&err=1");
+  }
+
+}
+
 
 if(isset($_POST['insertBottle']))
 {
@@ -177,22 +211,6 @@ if(isset($_POST['insertUser']))
   header("Location:addUser.php?msg=1");
 }
 
-// if(isset($_POST['updateUser']))
-// {
-//   $username = strip_tags($_POST['username']);
-//   $password = strip_tags($_POST['password']);
-//   $email = strip_tags($_POST['email']);
-//   $is_admin = ($_POST['is_admin'] == null) ? "0" : "1" ;
-
-//   if (sizeOf(getUserByName($username)) > 0)
-//   {
-//     header("Location:addUser.php?error=0");
-//   }
-
-//   updateUser($username, $password, $email, $is_admin);
-//   header("Location:addUser.php?msg=1");
-// }
-
 if(isset($_POST['stockBottles']))
 {
   $amount = strip_tags($_POST['amount']);
@@ -223,17 +241,4 @@ if(isset($_POST['bottlePresssing']))
 
 
 
-
-/*  FÜR ARRAY
-if(isset($_POST['test']))
-{
-  $tags[0] = $_POST['test'];
-  for ($i = 0; $i < count($tags); $i++)
-  {
-    $tags[$i] = strip_tags($tags[$i]);
-  }
-}
-
-echo $tags[];
-*/
 ?>

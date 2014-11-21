@@ -1,10 +1,10 @@
 <?php include "head.php";?>
 <div class="container">
-  <h1>Sorten</h1>
+  <h1>Etiketten</h1>
   <?php printMessage(); ?>
-  <a href="addStrain.php" class="btn btn-default">Sorte hinzufügen</a>
+  <a href="addLabel.php" class="btn btn-default">Etikette hinzufügen</a>
   </p>
-  <?php printDatarows("strain", false, "name"); ?>
+  <?php printDatarows("labels", true, "sorte"); ?>
 
 
   </div>

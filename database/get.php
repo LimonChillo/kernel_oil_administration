@@ -12,6 +12,34 @@ function getAnyTable($table, $orderBy)
   return $sth->fetchAll();
 }
 
+
+function getJoinedLabels($orderBy)
+{
+    $query = "SELECT l.ID AS ID, s.name AS strain, b.name AS bottle, l.amount AS amount
+      FROM label l LEFT OUTER JOIN strain s ON l.strainFK = s.ID LEFT OUTER JOIN bottle b ON l.bottleFK = b.ID";
+
+    switch ($orderBy) {
+      case 'sorte':
+        $query .= " ORDER BY s.name";
+        break;
+
+      case 'bottle':
+        $query .= " ORDER BY b.name";
+        break;
+
+      default:
+        # code...
+        break;
+
+  }
+
+  $dbh = connectToDB();
+  $sth = $dbh->prepare($query);
+  $sth->execute();
+
+  return $sth->fetchAll();
+}
+
 function getColumnNames($table)
 {
   $dbh = connectToDB();
@@ -35,6 +63,18 @@ function getStrainByName($name)
 
   $sth = $dbh->prepare("SELECT * FROM strain WHERE strain.name = ?");
   $sth->execute(array($name));
+  $result = $sth->fetchObject();
+  if($result == null)
+    return null;
+  return $result;
+}
+
+function getStrainByID($id)
+{
+  $dbh = connectToDB();
+
+  $sth = $dbh->prepare("SELECT * FROM strain WHERE ID = ?");
+  $sth->execute(array($id));
   $result = $sth->fetchObject();
   if($result == null)
     return null;
@@ -170,12 +210,25 @@ function getAllBottlings () {
   return $sth->fetchAll();
 }
 
+
 function getPressingById ($id) {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM pressing WHERE ID = ?");
   $sth->execute(array( $id ));
 
   return $sth->fetchObject();
+
+function getDeliveredProductsByCustomerOrderedByDate($customer_id, $strain_id, $bottle_id) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT SUM(sh.amount) as amount, sh.date as date GROUP BY sh.date
+  FROM product p JOIN strain s JOIN bottle b JOIN shipmentitem shi JOIN shipment sh JOIN customer c
+  ON p.bottleFK = b.ID AND p.strainFK = s.ID AND shi.productFK = p.ID AND shi.shipmentFK = sh.ID AND sh.customerFK = c.ID
+  WHERE c.ID = ?
+  AND s.ID = ? AND b.ID = ?
+  ORDER BY sh.date;");
+  $sth->execute(array( $customer_id, $strain_id, $bottle_id ));
+
+  return $sth->fetchAll();
 }
 
 // ----------- Gets für die überprüfung

@@ -62,7 +62,7 @@ function printMessage()
   if(isset($_GET['msg']))
   {
     $msg = $_GET['msg'];
-    if(isset($_GET['err']))
+    if(isset($_GET['err']) && $_GET['err'] == 1)
       $signal = "alert-danger";
     else
       $signal = "alert-success";
@@ -72,9 +72,20 @@ function printMessage()
 
 function printDatarows($tab, $stockable, $orderBy)
 {
+  if($tab == "labels")
+  {
+    $datarows = getJoinedLabels($orderBy);
+    $columns = array((object) array('Field'=>'ID'),
+                      (object) array('Field'=> 'Sorte'),
+                        (object) array('Field'=> 'Flasche'),
+                          (object) array('Field'=> 'Menge'));
+  }
+  else
+  {
+    $datarows = getAnyTable($tab, $orderBy);
+    $columns = getColumnNames($tab);
 
-  $datarows = getAnyTable($tab, $orderBy);
-  $columns = getColumnNames($tab);
+  }
 
 
   echo '<table class="table table-hover '.$tab.'List">
