@@ -5,20 +5,20 @@ if(isset($_POST['insertStrain']))
 {
   $name = strip_tags($_POST['name']);
 
-  if (sizeOf(getStrainByName($name)) > 0)
+  if (getStrainByName($name) != null)
   {
-    header("Location:addStrain.php?msg=0");
+    header("Location:addStrain.php?msg=Sorte existiert bereits&err=1");
   }
 
   insertStrain($name);
-  header("Location:addStrain.php?msg=1");
+  header("Location:getStrains.php?msg=Sorte hinzugefügt&err=0");
 
 }
 
 if(isset($_POST['insertBottle']))
 {
   $ml = strip_tags($_POST['ml']);
-  if (sizeOf(getBottleByMl($ml)) != null)
+  if (getBottleByMl($ml) != null)
   {
     header("Location:addBottle.php?error=0");
   }
@@ -33,11 +33,11 @@ if(isset($_POST['updateBottle']))
   if(sizeOf(getBottleByID($_POST['updateBottle'])) != 0)
     {
       updateBottle($_POST['updateBottle'], $ml);
-      header("Location:getBottles.php?msg=1");
+      header("Location:getBottles.php?msg=Flaschentyp geändert");
     }
   else
   {
-    header("Location:getBottles.php?msg=0");
+    header("Location:getBottles.php?msg=Flasche existiert nicht");
   }
 }
 
@@ -46,11 +46,11 @@ if(isset($_POST['deleteBottle']))
   if(sizeOf(getBottleByID($_POST['deleteBottle'])) != 0)
     {
       deleteBottleByID($_POST['deleteBottle']);
-      header("Location:getBottles.php?msg=1");
+      header("Location:getBottles.php?msg=Flaschentyp gelöscht");
     }
   else
   {
-    header("Location:getBottles.php?msg=0");
+    header("Location:getBottles.php?msg=Flaschentyp existiert nicht");
   }
 }
 
@@ -62,11 +62,11 @@ if(isset($_POST['stockBottle']))
     {
 
       stockBottle($bottle->ID, $amount);
-      header("Location:getBottles.php?msg=1");
+      header("Location:getBottles.php?msg=Flaschen eingelagert");
     }
   else
   {
-    header("Location:getBottles.php?msg=0");
+    header("Location:getBottles.php?msg=Flasche existiert nicht");
   }
 }
 
@@ -103,16 +103,27 @@ if(isset($_POST['insertBottling']))
 
 if(isset($_POST['insertCustomer']))
 {
-  $firstname = strip_tags($_POST['firstname']);
-  $lastname = strip_tags($_POST['lastname']);
-  $company = strip_tags($_POST['company']);
-  $road = strip_tags($_POST['road']);
-  $zip = strip_tags($_POST['ZIP']);
-  $city = strip_tags($_POST['city']);
-  $country = strip_tags($_POST['country']);
+  try{
+    $firstname = strip_tags($_POST['firstname']);
+    $lastname = strip_tags($_POST['lastname']);
+    $company = strip_tags($_POST['company']);
+    $road = strip_tags($_POST['road']);
+    $zip = strip_tags($_POST['ZIP']);
+    $city = strip_tags($_POST['city']);
+    $country = strip_tags($_POST['country']);
 
-  insertCustomer($firstname, $lastname, $company, $road, $zip, $city, $country);
-  header("Location:addCustomer.php?msg=1");
+    // if(!is_numeric($_POST['ZIP']))
+    // {
+    //   throw new Exception("PLZ muss eine Zahl sein. Ihre Eingabe: ");
+    // }
+    // else
+      insertCustomer($firstname, $lastname, $company, $road, $zip, $city, $country);
+  }
+  catch(Exception $e)
+  {
+    header("Location:addCustomer.php?msg=Es ist ein Fehler aufgetreten. ");
+  }
+  header("Location:getCustomers.php?msg=Kunde hinzugefügt");
 }
 
 if(isset($_POST['updateCustomer']))

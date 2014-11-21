@@ -35,8 +35,9 @@ function getStrainByName($name)
 
   $sth = $dbh->prepare("SELECT * FROM strain WHERE strain.name = ?");
   $sth->execute(array($name));
-  $result = $sth->fetchAll();
-
+  $result = $sth->fetchObject();
+  if($result == null)
+    return null;
   return $result;
 }
 
@@ -46,8 +47,9 @@ function getStrainNameByID($id)
 
   $sth = $dbh->prepare("SELECT strain.name FROM strain WHERE strain.ID = ?");
   $sth->execute(array($id));
-  $result = $sth->fetch();
-
+  $result = $sth->fetchObject();
+  if($result == null)
+    return null;
   return $result;
 }
 
@@ -65,8 +67,10 @@ function getBottleByMl($ml)
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM bottle WHERE ml = ?");
   $sth->execute(array($ml));
-
-  return $sth->fetchAll();
+  $bottle = $sth->fetchObject();
+  if($bottle == null)
+    return null;
+  return $bottle;
 }
 
 function getBottleByID($id)
