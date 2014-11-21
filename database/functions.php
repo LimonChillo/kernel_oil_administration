@@ -3,7 +3,6 @@ include "get.php";
 include "insert.php";
 include "update.php";
 include "delete.php";
-require_once 'HTML/Table.php';
 $dbh = connectToDB();
 
 
