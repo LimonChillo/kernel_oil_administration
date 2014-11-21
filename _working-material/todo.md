@@ -1,8 +1,8 @@
 todo
-formularüberprüfung
+formularüberprüfung 
 messages handeln
 label eintragen
-botteling funktion
-produktansicht
+botteling funktion - > simon 
+produktansicht 
 DASHBOARD
 kunden und lieferungen
