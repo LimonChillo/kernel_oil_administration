@@ -217,6 +217,7 @@ function getPressingById ($id) {
   $sth->execute(array( $id ));
 
   return $sth->fetchObject();
+}
 
 function getDeliveredProductsByCustomerOrderedByDate($customer_id, $strain_id, $bottle_id) {
   $dbh = connectToDB();
@@ -240,4 +241,5 @@ function getUserByName ($username) {
   $sth->execute($username);
   return $sth->fetchAll();
 }
+
 ?>
