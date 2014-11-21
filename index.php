@@ -2,7 +2,8 @@
 <div class="container">
 	<h1>Kernölverwaltung</h1>
 	<p class="lead"><br>Hier sollten alle relevaten Informationen zu den aktuellen Lagerstände und Produktionsmengen stehen</p>
-	<p class="lead"><a href="addBarrel.php" class="btn btn-default">Fass hinzufügen</a>
+	<p class="lead">
+	<a href="addBarrel.php" class="btn btn-default">Fass hinzufügen</a>
 	<a href="#" class="btn btn-default">neue Bestellung hinzufügen</a>
 	<a href="addCustomer.php" class="btn btn-default">neuen Kunden hinzufügen</a>
 	</p>
