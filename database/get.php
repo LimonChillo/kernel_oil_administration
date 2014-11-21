@@ -41,6 +41,18 @@ function getStrainByName($name)
   return $result;
 }
 
+function getStrainByID($id)
+{
+  $dbh = connectToDB();
+
+  $sth = $dbh->prepare("SELECT * FROM strain WHERE ID = ?");
+  $sth->execute(array($id));
+  $result = $sth->fetchObject();
+  if($result == null)
+    return null;
+  return $result;
+}
+
 function getStrainNameByID($id)
 {
   $dbh = connectToDB();

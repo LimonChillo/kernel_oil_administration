@@ -1,9 +1,11 @@
 <?php include "head.php";?>
 <div class="container">
   <h1>Sorten</h1>
+  <?php printMessage(); ?>
   <a href="addStrain.php" class="btn btn-default">Sorte hinzufügen</a>
   </p>
   <?php printDatarows("strain", false, "name"); ?>
+
 
   </div>
 </div>
