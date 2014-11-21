@@ -3,7 +3,7 @@ include "get.php";
 include "insert.php";
 include "update.php";
 include "delete.php";
-require_once 'lib/Table.php';
+require_once 'HTML/Table.php';
 $dbh = connectToDB();
 
 
@@ -64,41 +64,34 @@ function printDatarows($tab, $stockable, $orderBy)
   $datarows = getAnyTable($tab, $orderBy);
   $columns = getColumnNames($tab);
 
-  $attrs = array('class' => 'table table-hover '.$tab.'List');
-  $table = new HTML_Table($attrs);
-  $table->setAutoGrow(true);
-  $table->setAutoFill(' ');
 
-  $cell = 0;
-  $row = 0;
+  echo '<table class="table table-hover '.$tab.'List">
+          <tr>';
+
   foreach ($columns as $headline) {
-    $table->setHeaderContents(0, $cell, ucfirst($headline->Field));
-    $cell++;
+    echo "<th> ".ucfirst($headline->Field)."</th>";
   }
 
-  $hrAttrs = array('bgcolor' => 'silver');
-  $table->setRowAttributes(0, $hrAttrs, true);
-  $table->setColAttributes(0, $hrAttrs);
+      echo "<th>Optionen</th>";
 
   foreach ($datarows as $datarow) {
-    $row++;
-    $cell = 0;
-
+    echo "</tr>";
+    echo "<tr>";
     foreach ($datarow as $data){
-      $table->setCellContents($row, $cell, $data);
-      $cell++;
+      echo "<td> ".ucfirst($data)."</td>";
     }
+
     $options = "<a href='add$tab.php?id=$datarow->ID'>bearbeiten </a>";
 
     if($stockable == true)
     {
       $options .= "   <a href='stock$tab.php?id=$datarow->ID'> einlagern</a>";
     }
+    echo "<td> ".ucfirst($options)."</td>";
+    echo "</tr>";
 
-    $table->setCellContents($row, $cell, $options);
   }
-  echo $table->toHtml();
-
+  echo "</table>";
 }
 
 ?>
