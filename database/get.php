@@ -214,6 +214,19 @@ function getAllBottlings () {
   return $sth->fetchAll();
 }
 
+function getDeliveredProductsByCustomerOrderedByDate($customer_id, $strain_id, $bottle_id) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT SUM(sh.amount) as amount, sh.date as date GROUP BY sh.date
+  FROM product p JOIN strain s JOIN bottle b JOIN shipmentitem shi JOIN shipment sh JOIN customer c
+  ON p.bottleFK = b.ID AND p.strainFK = s.ID AND shi.productFK = p.ID AND shi.shipmentFK = sh.ID AND sh.customerFK = c.ID
+  WHERE c.ID = ? 
+  AND s.ID = ? AND b.ID = ? 
+  ORDER BY sh.date;");
+  $sth->execute(array( $customer_id, $strain_id, $bottle_id ));
+
+  return $sth->fetchAll();
+}
+
 // ----------- Gets für die überprüfung
 
 

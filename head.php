@@ -39,6 +39,8 @@
             <li><a href="">Pressung</a></li>
             <li><a href="">Produkte</a></li>
             <li><a href="getCustomers.php">Kunden</a></li>
+            <li><a href="getDelieveries.php">Lieferungen</a></li>
+
           </ul>
           </div><!--/.nav-collapse -->
         </div>
