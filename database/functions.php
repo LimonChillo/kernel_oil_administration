@@ -44,6 +44,19 @@ function printAllBarrelsAsTable(){
   }
 }
 
+function printAllPressingsAsTable(){
+  $allPressings = getAllPressings();
+  foreach ($allPressings as $pressing)
+  {
+    echo "<tr>";
+    echo "<td>".$pressing->ID."</td>";
+    echo "<td>".$pressing->date."</td>";
+    echo "<td>".$pressing->amount."</td>";
+    echo "<td><a href='addBotteling.php?id=".$pressing->ID."'>abfüllen</a></td>";
+    echo "</tr>";
+  }
+}
+
 function printMessage()
 {
   if(isset($_GET['msg']))
