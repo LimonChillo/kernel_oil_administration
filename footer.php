@@ -1,6 +1,6 @@
   
 <div class="container">
-  <footer>
+  <footer> 
   	David Kranewitter | Fabian Hoffmann | Simon Hintersonnleitner
   </footer>
   </div>

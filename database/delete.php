@@ -17,5 +17,14 @@ function deleteCustomerByID($id) {
   return false;
 }
 
+function deleteStrainByID ($id) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("DELETE FROM strain WHERE ID = ?");
+  $sth->execute(array($id));
+  if( sizeOf(getStrainByID($id)) == null)
+    return true;
+  return false;
+}
+
 
 ?>

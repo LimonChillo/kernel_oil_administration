@@ -1,11 +1,10 @@
 <?php include "head.php";?>
 <div class="container">
-  <h1>Sorten</h1>
+  <h1>Kunden*innen</h1>
   <?php printMessage(); ?>
-  <a href="addStrain.php" class="btn btn-default">Sorte hinzufügen</a>
+  <a href="addCustomer.php" class="btn btn-default">Kunden*innen hinzufügen</a>
   </p>
-  <?php printDatarows("strain", false, "name"); ?>
-
+  <?php printDatarows("customer", false, "ID"); ?>
 
   </div>
 </div>
