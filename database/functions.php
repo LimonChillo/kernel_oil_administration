@@ -3,7 +3,7 @@ include "get.php";
 include "insert.php";
 include "update.php";
 include "delete.php";
-require_once 'Table.php';
+require_once 'lib/Table.php';
 $dbh = connectToDB();
 
 
