@@ -13,8 +13,8 @@
 	</div>
 	<div class="row">
 		<div class="col-md-4"><a href="getBottles.php"><h3>Leerflaschen</h3></a></div>
-		<div class="col-md-4"><h3>Pressung</h3></div>
-		<div class="col-md-4"><h3>Produkte</h3></div>
+		<div class="col-md-4"><a href="getStrains.php"><h3>Sorten</h3></a></div>
+		<div class="col-md-4"><a href="getLabels.php"><h3>Etiketten</h3></a></div>
 	</div>
 	</div>
 </div>

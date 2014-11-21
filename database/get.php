@@ -12,6 +12,38 @@ function getAnyTable($table, $orderBy)
   return $sth->fetchAll();
 }
 
+
+function getJoinedLabels($orderBy)
+{
+    $query = "SELECT l.ID AS ID, l.name AS label, s.name AS strain, b.name AS bottle
+      FROM label l LEFT OUTER JOIN strain s ON l.strainFK = s.ID LEFT OUTER JOIN bottle b ON l.bottleFK = b.ID";
+
+    switch ($orderBy) {
+      case 'sorte':
+        $query .= " ORDER BY s.name";
+        break;
+
+      case 'label':
+        $query .= " ORDER BY l.name";
+        break;
+
+      case 'bottle':
+        $query .= " ORDER BY b.name";
+        break;
+
+      default:
+        # code...
+        break;
+
+  }
+
+  $dbh = connectToDB();
+  $sth = $dbh->prepare($query);
+  $sth->execute();
+
+  return $sth->fetchAll();
+}
+
 function getColumnNames($table)
 {
   $dbh = connectToDB();
