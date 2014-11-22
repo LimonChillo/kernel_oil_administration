@@ -232,7 +232,7 @@ function getDeliveredProductsByCustomerOrderedByDate($customer_id, $strain_id, $
   return $sth->fetchAll();
 }
 
-function getAmountOfBottleTyps()
+function getAmountOfBottleTypes()
 {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT count(*) as count FROM bottle");
