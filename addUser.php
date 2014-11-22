@@ -18,6 +18,7 @@ include "head.php";
 ?>
 <div class="container">
   <h1>User <?php echo $title; ?></h1>
+    <?php printMessage(); ?>
   <form class="form-horizontal" role="form" method="POST" action="result.php">
 
     <div class="form-group">

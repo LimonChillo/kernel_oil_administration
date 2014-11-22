@@ -1,7 +1,10 @@
 <?php session_start(); ?>
 
 <?php
-      include_once "database/functions.php";
+  if (! isset($_SESSION['user']) && substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1) != "login.php")
+    header("Location: login.php?msg=Sie sind leider nicht eingeloggt&err=1");
+
+  include_once "database/functions.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,13 +37,16 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="index.php">Übersicht</a></li>
-            <li><a href="getBarrels.php">Fässer</a></li>
-            <li><a href="">Pressung</a></li>
-            <li><a href="">Produkte</a></li>
-            <li><a href="getCustomers.php">Kunden</a></li>
-            <li><a href="getDelieveries.php">Lieferungen</a></li>
-            <li><a href="getUsers.php">Benutzer</a></li>
+            <?php if(isset($_SESSION['user'])): ?>
+              <li><a href="index.php">Übersicht</a></li>
+              <li><a href="getBarrels.php">Fässer</a></li>
+              <li><a href="">Pressung</a></li>
+              <li><a href="">Produkte</a></li>
+              <li><a href="getCustomers.php">Kunden</a></li>
+              <li><a href="getDelieveries.php">Lieferungen</a></li>
+              <li><a href="getUsers.php">Benutzer</a></li>
+              <li><a href="login.php?logout=1">Logout</a></li>
+            <?php endif;?>
 
           </ul>
           </div><!--/.nav-collapse -->

@@ -250,7 +250,7 @@ function getUserByName ($username) {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM user WHERE username = ?");
   $sth->execute(array($username));
-  return $sth->fetchObject();
+  return $sth->fetch();
 }
 
 function getUserByID ($id) {
@@ -260,4 +260,13 @@ function getUserByID ($id) {
   return $sth->fetchObject();
 }
 
+function userExists($username) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM user WHERE username = ?");
+  $sth->execute(array($username));
+  $user = $sth->fetchObject();
+  if ($user == null)
+    return false;
+  return true;
+}
 ?>

@@ -197,23 +197,25 @@ if(isset($_POST['deleteCustomer']))
 
 if(isset($_POST['insertUser']))
 {
-  $username = strip_tags($_POST['username']);
+  $username = strtolower(strip_tags($_POST['username']));
   $password = strip_tags($_POST['password']);
   $email = strip_tags($_POST['email']);
   $admin = ($_POST['admin'] == null) ? "0" : "1" ;
 
-  if (sizeOf(getUserByName($username)) > 0)
+  if (getUserByName($username) != 0)
   {
-    header("Location:addUser.php?error=0");
+    header("Location:addUser.php?msg=Benutzer existiert bereits&err=1");
   }
-
-  insertUser($username, $password, $email, $admin);
-  header("Location:addUser.php?msg=1");
+  else
+  {
+    insertUser($username, $password, $email, $admin);
+    header("Location:getUsers.php?msg=Benutzer hinzugefügt");
+  }
 }
 
 if(isset($_POST['updateUser']))
 {
-  $username = strip_tags($_POST['username']);
+  $username = strtolower(strip_tags($_POST['username']));
   $password = strip_tags($_POST['password']);
   $email = strip_tags($_POST['email']);
   $admin = strip_tags($_POST['admin']);
@@ -221,11 +223,11 @@ if(isset($_POST['updateUser']))
   if(sizeOf(getUserByID($_POST['updateUser'])) != 0)
     {
       updateUser($_POST['updateUser'], $username, $password, $email, $admin);
-      header("Location:getUsers.php?msg=Benutzer hinzugefügt");
+      header("Location:getUsers.php?msg=Benutzer bearbeitet");
     }
   else
   {
-    header("Location:getCustomers.php?msg=Benutzer existiert nicht");
+    header("Location:getUsers.php?msg=Benutzer existiert nicht");
   }
 }
 
@@ -274,19 +276,21 @@ if(isset($_POST['bottlePresssing']))
 if (isset($_POST['login']))
 {
 
-  $username = strip_tags($_POST['username']);
+  $username = strtolower(strip_tags($_POST['username']));
   $password = strip_tags($_POST['password']);
   $user = getUserByName($username);
-  if(sizeOf($user) == null)
+  if($user == false)
     header("Location:login.php?msg=Benutzer existiert nicht&err=1");
-
-  if($user->password == $password)
+  else if($user->password == $password)
   {
-
+    session_start();
+    $_SESSION['username'] = $user->username;
+    $_SESSION['user'] = $user->ID;
+    header("Location:index.php");
   }
   else
   {
-    header("Location:login.php?msg=Passwort falsch&err=1&user=$username");
+    header("Location:login.php?msg=Passwort falsch&err=1&user=".$username);
   }
 }
 
