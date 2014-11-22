@@ -49,7 +49,8 @@ include "head.php";
       <div class="col-sm-4">
         <label>
         <input type="checkbox" class="form-control" value="1" name="admin"
-        <?php if(isset($user) && $user->admin == true) echo 'checked'; ?> >
+        <?php if(isset($user) && $user->admin == true): echo 'checked';
+              if (isset($user) && $user->ID == $_SESSION['user']) echo ' disabled'; endif; ?> >
         Administrator?</label>
       </div>
     </div>
@@ -57,7 +58,7 @@ include "head.php";
       <div class="col-sm-4">
         <button type="submit" name="<?php echo $action; ?>" value="<?php if(isset($user))echo $user->ID; ?>"
           class="btn btn-default"> <?php echo ucfirst($title); ?> </button>
-        <?php if(isset($user)) : ?>
+        <?php if(isset($user) && $user->ID != $_SESSION['user']) : ?>
           <button type="submit" name="deleteUser" value="<?php echo $user->ID; ?>" class="btn btn-default"> Löschen </button>
         <?php endif; ?>
       </div>
