@@ -249,7 +249,7 @@ function getAmountOfBottleTypes()
 function getUserByName ($username) {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM user WHERE username = ?");
-  $sth->execute($username);
+  $sth->execute(array($username));
   return $sth->fetchAll();
 }
 

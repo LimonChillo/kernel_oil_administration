@@ -40,6 +40,7 @@
             <li><a href="">Produkte</a></li>
             <li><a href="getCustomers.php">Kunden</a></li>
             <li><a href="getDelieveries.php">Lieferungen</a></li>
+            <li><a href="getUsers.php">Benutzer</a></li>
 
           </ul>
           </div><!--/.nav-collapse -->

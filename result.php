@@ -200,14 +200,14 @@ if(isset($_POST['insertUser']))
   $username = strip_tags($_POST['username']);
   $password = strip_tags($_POST['password']);
   $email = strip_tags($_POST['email']);
-  $is_admin = ($_POST['is_admin'] == null) ? "0" : "1" ;
+  $admin = ($_POST['admin'] == null) ? "0" : "1" ;
 
   if (sizeOf(getUserByName($username)) > 0)
   {
     header("Location:addUser.php?error=0");
   }
 
-  insertUser($username, $password, $email, $is_admin);
+  insertUser($username, $password, $email, $admin);
   header("Location:addUser.php?msg=1");
 }
 

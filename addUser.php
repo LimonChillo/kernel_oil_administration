@@ -26,7 +26,7 @@
     <div class="checkbox">
       <div class="col-sm-4">
         <label>
-        <input type="checkbox" class="form-control" value="1" name="is_admin">
+        <input type="checkbox" class="form-control" value="1" name="admin">
         Administrator?</label>
       </div>
     </div>
