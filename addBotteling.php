@@ -23,14 +23,14 @@
 		<div class="form-group">
 			<label  class="col-sm-4 control-label">Abfüllung in die einzelnen Flaschen</label>
 		</div>
-
+		<?php $amountPerBottleType =  $pressing->amount*1000 / getAmountOfBottleTypes()?>
 		<?php foreach ($allBottels as $bottle):?>
 		<div class="form-group">
 			<div class="col-sm-offset-1 col-sm-2">
 				<input type="text" class="form-control" value='<?php echo $bottle->ml.ml; ?>' name="ml" readonly>
 			</div>
 			<div class=" col-sm-1">
-				<input type="text" class="form-control"  name="count">
+				<input type="text" class="form-control" value='<?php echo $amountPerBottleType/$bottle->ml; ?>' name="count_<?php echo $bottle->ml; ?>">
 			</div>
 		</div>
 		<?php endforeach;?>
