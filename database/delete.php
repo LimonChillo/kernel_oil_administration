@@ -34,5 +34,13 @@ function deleteStrainByID ($id) {
   return false;
 }
 
+function deleteUserByID ($id) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("DELETE FROM user WHERE ID = ?");
+  $sth->execute(array($id));
+  if( sizeOf(getUserByID($id)) == null)
+    return true;
+  return false;
+}
 
 ?>

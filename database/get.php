@@ -253,4 +253,11 @@ function getUserByName ($username) {
   return $sth->fetchAll();
 }
 
+function getUserByID ($id) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM user WHERE ID = ?");
+  $sth->execute(array($id));
+  return $sth->fetchObject();
+}
+
 ?>

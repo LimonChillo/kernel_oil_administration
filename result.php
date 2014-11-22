@@ -170,29 +170,29 @@ if(isset($_POST['updateCustomer']))
   $city = strip_tags($_POST['city']);
   $country = strip_tags($_POST['country']);
 
-if(sizeOf(getCustomerByID($_POST['updateCustomer'])) != 0)
+  if(sizeOf(getCustomerByID($_POST['updateCustomer'])) != 0)
+    {
+      updateCustomer($_POST['updateCustomer'], $firstname, $lastname, $company, $road, $zip, $city, $country);
+      header("Location:getCustomers.php?msg=1");
+    }
+  else
   {
-    updateCustomer($_POST['updateCustomer'], $firstname, $lastname, $company, $road, $zip, $city, $country);
-    header("Location:getCustomers.php?msg=1");
+    header("Location:getCustomers.php?msg=0");
   }
-else
-{
-  header("Location:getCustomers.php?msg=0");
-}
 }
 
 if(isset($_POST['deleteCustomer']))
 {
 
-if(sizeOf(getCustomerByID($_POST['deleteCustomer'])) != 0)
+  if(sizeOf(getCustomerByID($_POST['deleteCustomer'])) != 0)
+    {
+      deleteCustomerByID($_POST['deleteCustomer']);
+      header("Location:getCustomers.php?msg=2");
+    }
+  else
   {
-    deleteCustomerByID($_POST['deleteCustomer']);
-    header("Location:getCustomers.php?msg=2");
+    header("Location:getCustomers.php?msg=3");
   }
-else
-{
-  header("Location:getCustomers.php?msg=3");
-}
 }
 
 if(isset($_POST['insertUser']))
@@ -211,13 +211,45 @@ if(isset($_POST['insertUser']))
   header("Location:addUser.php?msg=1");
 }
 
+if(isset($_POST['updateUser']))
+{
+  $username = strip_tags($_POST['username']);
+  $password = strip_tags($_POST['password']);
+  $email = strip_tags($_POST['email']);
+  $admin = strip_tags($_POST['admin']);
+
+  if(sizeOf(getUserByID($_POST['updateUser'])) != 0)
+    {
+      updateUser($_POST['updateUser'], $username, $password, $email, $admin);
+      header("Location:getUsers.php?msg=Benutzer hinzugefügt");
+    }
+  else
+  {
+    header("Location:getCustomers.php?msg=Benutzer existiert nicht");
+  }
+}
+
+if(isset($_POST['deleteUser']))
+{
+
+  if(sizeOf(getUserByID($_POST['deleteUser'])) != 0)
+    {
+      deleteUserByID($_POST['deleteUser']);
+      header("Location:getUsers.php?msg=Benutzer entfernt");
+    }
+  else
+  {
+    header("Location:getCustomers.php?msg=Benutzer existiert nicht");
+  }
+}
+
 if(isset($_POST['stockBottles']))
 {
   $amount = strip_tags($_POST['amount']);
   $name = strip_tags($_POST['name']);
 
   stockBottles($amount, $name);
-  header("Location:stockBottles.php?msg=1");
+  header("Location:stockBottles.php?msg=Flaschen eingelagert");
 }
 
 if(isset($_POST['stockLabels']))
@@ -227,7 +259,7 @@ if(isset($_POST['stockLabels']))
   $strain = strip_tags($_POST['strain']);
 
   stockLabels($amount,$bottle,$strain);
-  header("Location:stockLabels.php?msg=1");
+  header("Location:stockLabels.php?msg=Etiketten eingelagert");
 }
 
 if(isset($_POST['bottlePresssing']))
@@ -236,7 +268,7 @@ if(isset($_POST['bottlePresssing']))
   $bool = strip_tags($_POST['bool']);
 
   bottlePresssing($pressing, $bool);
-  header("Location:bottlePressing.php?msg=1");
+  header("Location:bottlePressing.php?msg=Pressung abgefüllt");
 }
 
 
