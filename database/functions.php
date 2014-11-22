@@ -104,8 +104,12 @@ function printDatarows($tab, $stockable, $orderBy)
       echo "<td> ".ucfirst($data)."</td>";
     }
 
-    $options = "<a href='add$tab.php?id=$datarow->ID'>bearbeiten </a>";
+    $options ="";
 
+    if($tab != "labels")
+    {
+      $options = "<a href='add$tab.php?id=$datarow->ID'>bearbeiten </a>";
+    }
     if($stockable == true)
     {
       $options .= "   <a href='stock$tab.php?id=$datarow->ID'> einlagern</a>";

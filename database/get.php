@@ -1,10 +1,13 @@
 <?php
 function getAnyTable($table, $orderBy)
 {
+
+  $query = "SELECT * FROM $table";
+  if($table == "strain")
+    $query .= " WHERE ID != 0";
   if($orderBy != null)
-    $query = "SELECT * FROM $table ORDER BY $orderBy";
-  else
-    $query = "SELECT * FROM $table";
+    $query .= " ORDER BY $orderBy";
+
   $dbh = connectToDB();
   $sth = $dbh->prepare($query);
   $sth->execute();
@@ -51,7 +54,7 @@ function getColumnNames($table)
 
 function getAllStrains () {
   $dbh = connectToDB();
-  $sth = $dbh->prepare("SELECT * FROM strain");
+  $sth = $dbh->prepare("SELECT * FROM strain WHERE ID != 0");
   $sth->execute();
 
   return $sth->fetchAll();

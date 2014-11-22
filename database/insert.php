@@ -31,7 +31,7 @@ function insertBottle($ml)
   $sth->execute(array($name, $ml, "0"));
 
   $bottle = $dbh->lastInsertId();
-  insertLabel('Rückettikett', $bottle, "0");
+
   foreach (getAllStrains() as $strain)
   {
     insertLabel($name." ".$strain->name, $bottle, $strain->ID);
