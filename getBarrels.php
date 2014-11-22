@@ -1,7 +1,12 @@
-<?php include "head.php";?>
+<?php
+$level = 1;
+include "head.php";
+?>
 <div class="container">
 	<h1>Fässer</h1>
+  <?php if (isAdmin($_SESSION['user'])) : ?>
 	<a href="addBarrel.php" class="btn btn-default">Fässer hinzufügen</a>
+  <?php endif; ?>
 	</p>
   <form name="addBarrelsToPressing" method="POST" action="addPressing.php">
 	<table class="table table-hover">

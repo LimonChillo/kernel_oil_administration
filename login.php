@@ -14,6 +14,8 @@ if (isset($_GET['logout'])) :
     session_destroy();
     header("Location: login.php");
 endif;
+
+$level = 0;
 include "head.php";
 
 ?>

@@ -1,4 +1,7 @@
-<?php include "head.php";?>
+<?php
+$level = 2;
+include "head.php";
+?>
 <div class="container">
   <h1>Benutzer*innen</h1>
   <?php printMessage(); ?>

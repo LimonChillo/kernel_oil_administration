@@ -13,7 +13,7 @@ else
   $action = "insertBottle";
   $title = "hinzufügen";
 }
-
+$level = 2;
 include "head.php";
 ?>
 <div class="container">

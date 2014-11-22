@@ -1,6 +1,10 @@
-<?php include "head.php";?>
+<?php
+$level = 1;
+include "head.php";
+?>
 <div class="container">
 	<h1>Kernölverwaltung</h1>
+	<?php printMessage(); ?>
 	<p class="lead"><br>Hier sollten alle relevaten Informationen zu den aktuellen Lagerstände und Produktionsmengen stehen</p>
 	<p class="lead">
 	<a href="addBarrel.php" class="btn btn-default">Fass hinzufügen</a>

@@ -1,4 +1,7 @@
-<?php include "head.php";?>
+<?php
+$level = 1;
+include "head.php";
+?>
 <div class="container">
 	<h1>noch nicht abgefüllte Pressungen</h1>
 	<table class="table table-hover">

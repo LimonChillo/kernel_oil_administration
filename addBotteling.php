@@ -1,10 +1,13 @@
-<?php include "head.php";?>
+<?php
+$level = 2;
+include "head.php";
+?>
 <div class="container">
 	<h1>Pressung abfüllen</h1>
 	<?php printMessage(); ?>
 
-	<?php $pressing = getPressingById($_GET['id']); ?> 
-	<?php $allBottels = getAllBottles(); ?> 
+	<?php $pressing = getPressingById($_GET['id']); ?>
+	<?php $allBottels = getAllBottles(); ?>
 
 
 	<form class="form-horizontal" role="form" method="post" action="result.php">

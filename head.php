@@ -1,10 +1,9 @@
 <?php session_start(); ?>
 
 <?php
-  if (! isset($_SESSION['user']) && substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1) != "login.php")
-    header("Location: login.php?msg=Sie sind leider nicht eingeloggt&err=1");
 
   include_once "database/functions.php";
+  restrict($level);
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,9 +41,11 @@
               <li><a href="getBarrels.php">Fässer</a></li>
               <li><a href="">Pressung</a></li>
               <li><a href="">Produkte</a></li>
+              <?php if(isAdmin($_SESSION['user'])): ?>
               <li><a href="getCustomers.php">Kunden</a></li>
               <li><a href="getDelieveries.php">Lieferungen</a></li>
               <li><a href="getUsers.php">Benutzer</a></li>
+              <?php endif; ?>
               <li><a href="login.php?logout=1">Logout</a></li>
             <?php endif;?>
 

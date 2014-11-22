@@ -1,4 +1,7 @@
-<?php include "head.php";?>
+<?php
+$level = 1;
+include "head.php";
+?>
 <div class="container">
   <h1>Etiketten</h1>
   </p>

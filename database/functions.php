@@ -99,7 +99,8 @@ function printDatarows($tab, $stockable, $orderBy)
     echo "<th> ".ucfirst($headline->Field)."</th>";
     $counter++;
   }
-      echo "<th>Optionen</th>";
+  if (isAdmin($_SESSION['user']))
+    echo "<th>Optionen</th>";
 
   foreach ($datarows as $datarow) {
     echo "</tr>";
@@ -120,11 +121,11 @@ function printDatarows($tab, $stockable, $orderBy)
 
     $options ="";
 
-    if($tab != "labels")
+    if($tab != "labels" && isAdmin($_SESSION['user']))
     {
       $options = "<a href='add$tab.php?id=$datarow->ID'>bearbeiten </a>";
     }
-    if($stockable == true)
+    if($stockable == true && isAdmin($_SESSION['user']))
     {
       $options .= "   <a href='stock$tab.php?id=$datarow->ID'> einlagern</a>";
     }
@@ -135,4 +136,15 @@ function printDatarows($tab, $stockable, $orderBy)
   echo "</table>";
 }
 
+function restrict ($level) {
+  if ($level > 0)
+  {
+    if (! isset($_SESSION['user']) )
+      header("Location: login.php?msg=Sie sind leider nicht eingeloggt&err=1");
+    if ($level == 2 && ! isAdmin($_SESSION['user']))
+    {
+      header("Location: index.php?msg=Die angeforderte Seite ist Administratoren vorbehalten&err=1");
+    }
+  }
+}
 ?>

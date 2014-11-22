@@ -1,15 +1,17 @@
-<?php include "head.php";?>
+<?php
+$level = 2;
+include "head.php";
+?>
 
-
-<?php 
+<?php
 $customers = getAllCustomers();
-?>	
+?>
 
 <div class="container">
   <h1>Lieferungen</h1>
   	<form method='get' action='getDelieveries.php'>
   		<select name='get' id='getCustomerDeliveries' width="200">
-  			<?php 
+  			<?php
   				foreach ($customers as $c)
   				{
   					echo "<option value='" . $c->ID . "'>" . $c->company . " - "  . $c->lastname . "</option>";

@@ -250,7 +250,7 @@ function getUserByName ($username) {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM user WHERE username = ?");
   $sth->execute(array($username));
-  return $sth->fetch();
+  return $sth->fetchObject();
 }
 
 function getUserByID ($id) {
@@ -268,5 +268,15 @@ function userExists($username) {
   if ($user == null)
     return false;
   return true;
+}
+function isAdmin($userid) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM user WHERE ID = ?");
+  $sth->execute(array($userid));
+  $user = $sth->fetchObject();
+  // return var_dump($user);
+  if ($user->admin == 1)
+    return true;
+  return false;
 }
 ?>

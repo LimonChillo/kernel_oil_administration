@@ -1,4 +1,6 @@
-<?php include "head.php";
+<?php
+$level = 2;
+include "head.php";
 if (isset($_GET['id']))
 {
   $action = "updateCustomer";

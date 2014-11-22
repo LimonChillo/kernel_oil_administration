@@ -1,4 +1,8 @@
-<?php include "head.php";?>
+<?php
+$level = 2;
+include "head.php";
+?>
+
 <div class="container">
 	<h1>Fässer hinzufügen</h1>
 
@@ -22,7 +26,7 @@
 				<input type="date" class="form-control" name="date" placeholder="Datum" required>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<div class="col-sm-4">
 				<button type="submit" name="insertBarrel" class="btn btn-default">Hinzufügen</button>
