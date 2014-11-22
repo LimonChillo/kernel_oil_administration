@@ -271,6 +271,24 @@ if(isset($_POST['bottlePresssing']))
   header("Location:bottlePressing.php?msg=Pressung abgefüllt");
 }
 
+if (isset($_POST['login']))
+{
+
+  $username = strip_tags($_POST['username']);
+  $password = strip_tags($_POST['password']);
+  $user = getUserByName($username);
+  if(sizeOf($user) == null)
+    header("Location:login.php?msg=Benutzer existiert nicht&err=1");
+
+  if($user->password == $password)
+  {
+
+  }
+  else
+  {
+    header("Location:login.php?msg=Passwort falsch&err=1&user=$username");
+  }
+}
 
 
 ?>
