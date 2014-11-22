@@ -1,10 +1,13 @@
 <?php
 function getAnyTable($table, $orderBy)
 {
+
+  $query = "SELECT * FROM $table";
+  if($table == "strain")
+    $query .= " WHERE ID != 0";
   if($orderBy != null)
-    $query = "SELECT * FROM $table ORDER BY $orderBy";
-  else
-    $query = "SELECT * FROM $table";
+    $query .= " ORDER BY $orderBy";
+
   $dbh = connectToDB();
   $sth = $dbh->prepare($query);
   $sth->execute();
@@ -51,7 +54,7 @@ function getColumnNames($table)
 
 function getAllStrains () {
   $dbh = connectToDB();
-  $sth = $dbh->prepare("SELECT * FROM strain");
+  $sth = $dbh->prepare("SELECT * FROM strain WHERE ID != 0");
   $sth->execute();
 
   return $sth->fetchAll();
@@ -246,8 +249,24 @@ function getAmountOfBottleTypes()
 function getUserByName ($username) {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM user WHERE username = ?");
-  $sth->execute($username);
-  return $sth->fetchAll();
+  $sth->execute(array($username));
+  return $sth->fetch();
 }
 
+function getUserByID ($id) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM user WHERE ID = ?");
+  $sth->execute(array($id));
+  return $sth->fetchObject();
+}
+
+function userExists($username) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM user WHERE username = ?");
+  $sth->execute(array($username));
+  $user = $sth->fetchObject();
+  if ($user == null)
+    return false;
+  return true;
+}
 ?>

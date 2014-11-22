@@ -31,7 +31,7 @@ function insertBottle($ml)
   $sth->execute(array($name, $ml, "0"));
 
   $bottle = $dbh->lastInsertId();
-  insertLabel('Rückettikett', $bottle, "0");
+
   foreach (getAllStrains() as $strain)
   {
     insertLabel($name." ".$strain->name, $bottle, $strain->ID);
@@ -84,14 +84,14 @@ function insertCustomer($firstname, $lastname, $company, $road, $zip, $city, $co
         $sth->execute(array($firstname, $lastname, $company, $road, $zip, $city, $country));
 }
 
-function insertUser($username, $password, $email, $is_admin) {
+function insertUser($username, $password, $email, $admin) {
   $dbh = connectToDB();
   $sth = $dbh->prepare(
         "INSERT INTO user
-        (username, password, email, is_admin)
+        (username, password, email, admin)
           VALUES
         (?, ?, ?, ?)");
-        $sth->execute(array($username, $password, $email, $is_admin));
+        $sth->execute(array($username, $password, $email, $admin));
 }
 
 function insertProduct($strainID, $bottleID, $amount)

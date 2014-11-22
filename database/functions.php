@@ -91,21 +91,39 @@ function printDatarows($tab, $stockable, $orderBy)
   echo '<table class="table table-hover '.$tab.'List">
           <tr>';
 
+  $adminColumn = 999;
+  $counter = 0;
   foreach ($columns as $headline) {
+    if($headline->Field == "admin")
+      $adminColumn = $counter;
     echo "<th> ".ucfirst($headline->Field)."</th>";
+    $counter++;
   }
-
       echo "<th>Optionen</th>";
 
   foreach ($datarows as $datarow) {
     echo "</tr>";
     echo "<tr>";
+    $counter = 0;
     foreach ($datarow as $data){
-      echo "<td> ".ucfirst($data)."</td>";
+      if($counter == $adminColumn)
+      {
+
+        if($data == "1")
+          $data = "Ja";
+        else if($data == "0")
+          $data = "Nein";
+      }
+      echo "<td> ".$data."</td>";
+      $counter++;
     }
 
-    $options = "<a href='add$tab.php?id=$datarow->ID'>bearbeiten </a>";
+    $options ="";
 
+    if($tab != "labels")
+    {
+      $options = "<a href='add$tab.php?id=$datarow->ID'>bearbeiten </a>";
+    }
     if($stockable == true)
     {
       $options .= "   <a href='stock$tab.php?id=$datarow->ID'> einlagern</a>";
