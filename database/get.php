@@ -262,6 +262,27 @@ function getAmountOfBottleTypes()
 
   return $sth->fetchObject()->count;
 }
+
+function getShipmentIDByCustomerByDate($customer, $date)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT sh.ID as ID 
+  FROM shipment sh
+  WHERE sh.date = ? AND sh.customerFK = ?
+  LIMIT 1");
+  $sth->execute(array( $customer, $date ));
+  return $sth->fetch();
+}
+
+function getProductByStrainByBottle($strain, $bottle)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT p.amount as amount, p.ID as ID 
+  FROM product p
+  WHERE p.strainFK = ? AND p.bottleFK = ?");
+  $sth->execute(array( $strain, $bottle ));
+  return $sth->fetch();
+}
 // ----------- Gets für die überprüfung
 
 

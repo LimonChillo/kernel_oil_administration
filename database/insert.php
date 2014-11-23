@@ -116,15 +116,15 @@ function insertShipment($customerFK, $date)
         $sth->execute(array($customerFK, $date));
 }
 
-function insertShipmentItem($produktFK, $shipmentFK, $amount)
+function insertShipmentItem($productFK, $shipmentFK, $amount)
 {
   $dbh = connectToDB();
   $sth = $dbh->prepare(
         "INSERT INTO shipmentitem
-        (produktFK, shipmentFK, amount)
+        (productFK, shipmentFK, amount)
           VALUES
         (?, ?, ?)");
-        $sth->execute(array($produktFK, $shipmentFK), $amount);
+        $sth->execute(array($productFK, $shipmentFK), $amount);
 }
 
 

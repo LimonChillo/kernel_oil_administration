@@ -296,5 +296,37 @@ if (isset($_POST['login']))
   }
 }
 
+if (isset($_POST['insertDelivery']))
+{
+  $strains = array();
+  $bottles = array();
+  $amounts = array();
+
+  $customer = strtolower(strip_tags($_POST['customer']));
+  $date = strtolower(strip_tags($_POST['date']));
+
+  $strains = $_POST['strain']);
+  $bottles = $_POST['bottle']);
+  $amounts = $_POST['amount']);
+
+  insertShipment($customer, $date);
+  $shipmentID = getShipmentIDByCustomerByDate($customer, $date);
+  
+  for($i = 0; i<sizeOf($strains); i++)
+  {
+    if($amounts[$i] <=  (getProductByStrainByBottle($strains[$i], $bottles[i]) -> amount)
+    { 
+      insertShipmentItem(getProductByStrainByBottle($strains[$i], $bottles[i]) -> ID, $shipmentID, $amounts[$i])
+      updateProduct($strain, $bottle, $amount)
+    }
+    else
+    {
+      header("Location:addDelivery.php?msg=Nicht genug " . getStrainByID($strains[$i]) -> name . " in der Größe "  . getBottleByID($bottles[$i]) -> name . . " vorhanden&err=1");
+    }
+  }  
+  
+  header("Location:addDelivery.php?msg=Lieferung eingetragen&err=0");
+
+  
 
 ?>
