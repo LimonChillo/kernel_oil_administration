@@ -15,7 +15,7 @@ else
 
 ?>
 <div class="container">
-  <h1>Kund*innen <?php echo $title; ?></h1>
+  <h1>Kund*in <?php echo $title; ?></h1>
   <?php printMessage(); ?>
 
   <form class="form-horizontal" role="form" method="POST" action="result.php">

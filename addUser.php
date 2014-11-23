@@ -17,7 +17,7 @@ $level = 2;
 include "head.php";
 ?>
 <div class="container">
-  <h1>User <?php echo $title; ?></h1>
+  <h1>Benutzer*in <?php echo $title; ?></h1>
     <?php printMessage(); ?>
   <form class="form-horizontal" role="form" method="POST" action="result.php">
 
@@ -29,7 +29,7 @@ include "head.php";
     </div>
     <div class="form-group">
       <div class="col-sm-4">
-        <input type="text" class="form-control" name="password" id="password1" placeholder="Passwort"
+        <input type="text" class="form-control" name="password" placeholder="Passwort"
         <?php
               if(isset($user))
                 echo 'value="'.$user->password.'"';
@@ -60,7 +60,7 @@ include "head.php";
           class="btn btn-default"> <?php echo ucfirst($title); ?> </button>
         <?php if(isset($user) && $user->ID != $_SESSION['user']) : ?>
           <button type="submit" name="deleteUser" value="<?php echo $user->ID; ?>" class="btn btn-default"> Löschen </button>
-        <?php endif; ?>
+        <?php else : echo '<input type="hidden" name="admin" value="1">'; endif; ?>
       </div>
     </div>
   </form>

@@ -219,8 +219,10 @@ if(isset($_POST['updateUser']))
   $password = strip_tags($_POST['password']);
   $email = strip_tags($_POST['email']);
   $admin = strip_tags($_POST['admin']);
-
-  if(sizeOf(getUserByID($_POST['updateUser'])) != 0)
+  if(isset($_POST['admin']))
+        $admin = true;
+  $user = getUserByID($_POST['updateUser']);
+  if(sizeOf($user) != 0)
     {
       updateUser($_POST['updateUser'], $username, $password, $email, $admin);
       header("Location:getUsers.php?msg=Benutzer bearbeitet");
