@@ -1,7 +1,10 @@
-<?php include "head.php";?>
+<?php
+$level = 2;
+include "head.php";
+?>
 <div class="container">
 	<h1>Pressung hinzufügen</h1>
-	<?php 
+	<?php
 	if(isset($_POST["choosenBarrels"]))
 	{
 		$_SESSION['choosenBarrels'] = $_POST["choosenBarrels"];

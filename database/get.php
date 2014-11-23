@@ -1,10 +1,41 @@
 <?php
 function getAnyTable($table, $orderBy)
 {
+
+  $query = "SELECT * FROM $table";
+  if($table == "strain")
+    $query .= " WHERE ID != 0";
   if($orderBy != null)
-    $query = "SELECT * FROM $table ORDER BY $orderBy";
-  else
-    $query = "SELECT * FROM $table";
+    $query .= " ORDER BY $orderBy";
+
+  $dbh = connectToDB();
+  $sth = $dbh->prepare($query);
+  $sth->execute();
+
+  return $sth->fetchAll();
+}
+
+
+function getJoinedLabels($orderBy)
+{
+    $query = "SELECT l.ID AS ID, s.name AS strain, b.name AS bottle, l.amount AS amount
+      FROM label l LEFT OUTER JOIN strain s ON l.strainFK = s.ID LEFT OUTER JOIN bottle b ON l.bottleFK = b.ID";
+
+    switch ($orderBy) {
+      case 'sorte':
+        $query .= " ORDER BY s.name";
+        break;
+
+      case 'bottle':
+        $query .= " ORDER BY b.name";
+        break;
+
+      default:
+        # code...
+        break;
+
+  }
+
   $dbh = connectToDB();
   $sth = $dbh->prepare($query);
   $sth->execute();
@@ -23,7 +54,7 @@ function getColumnNames($table)
 
 function getAllStrains () {
   $dbh = connectToDB();
-  $sth = $dbh->prepare("SELECT * FROM strain");
+  $sth = $dbh->prepare("SELECT * FROM strain WHERE ID != 0");
   $sth->execute();
 
   return $sth->fetchAll();
@@ -125,7 +156,7 @@ function getBarrelsByStrain($strain){
 
 function getAllPressings() {
   $dbh = connectToDB();
-  $sth = $dbh->prepare("SELECT * FROM pressing");
+  $sth = $dbh->prepare("SELECT * FROM pressing WHERE bottled != 0");
   $sth->execute();
 
   return $sth->fetchAll();
@@ -182,6 +213,14 @@ function getAllBottlings () {
   return $sth->fetchAll();
 }
 
+function getPressingById ($id) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM pressing WHERE ID = ?");
+  $sth->execute(array( $id ));
+
+  return $sth->fetchObject();
+}
+
 function getDatesWhenCustomerGotDeliveries($customer_id) {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT DISTINCT sh.date as date
@@ -212,17 +251,51 @@ function getDeliveredProductsByCustomerByStrainByBottleByDate($customer_id, $str
   ON p.bottleFK = b.ID AND p.strainFK = s.ID AND shi.productFK = p.ID AND shi.shipmentFK = sh.ID AND sh.customerFK = c.ID
   WHERE c.ID = ? AND s.ID = ? AND b.ID = ? AND sh.date = ?");
   $sth->execute(array( $customer_id, $strain_id, $bottle_id, $date ));
-
   return $sth->fetchAll();
 }
 
+function getAmountOfBottleTypes()
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT count(*) as count FROM bottle");
+  $sth->execute(array( $id ));
+
+  return $sth->fetchObject()->count;
+}
 // ----------- Gets für die überprüfung
 
 
 function getUserByName ($username) {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM user WHERE username = ?");
-  $sth->execute($username);
-  return $sth->fetchAll();
+  $sth->execute(array($username));
+  return $sth->fetchObject();
+}
+
+function getUserByID ($id) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM user WHERE ID = ?");
+  $sth->execute(array($id));
+  return $sth->fetchObject();
+}
+
+function userExists($username) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM user WHERE username = ?");
+  $sth->execute(array($username));
+  $user = $sth->fetchObject();
+  if ($user == null)
+    return false;
+  return true;
+}
+function isAdmin($userid) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM user WHERE ID = ?");
+  $sth->execute(array($userid));
+  $user = $sth->fetchObject();
+  // return var_dump($user);
+  if ($user->admin == 1)
+    return true;
+  return false;
 }
 ?>

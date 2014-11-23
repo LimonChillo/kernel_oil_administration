@@ -3,11 +3,11 @@ $level = 2;
 include "head.php";
 ?>
 <div class="container">
-  <h1>Kund*innen</h1>
+  <h1>Benutzer*innen</h1>
   <?php printMessage(); ?>
-  <a href="addCustomer.php" class="btn btn-default">Kund*in hinzufügen</a>
+  <a href="addUser.php" class="btn btn-default">Benutzer*in hinzufügen</a>
   </p>
-  <?php printDatarows("customer", false, "ID"); ?>
+  <?php printDatarows("user", false, "username"); ?>
 
   </div>
 </div>

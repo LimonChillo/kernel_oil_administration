@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 21. Nov 2014 um 17:16
+-- Erstellungszeit: 22. Nov 2014 um 23:47
 -- Server Version: 5.6.16
 -- PHP-Version: 5.5.9
 
@@ -235,16 +235,14 @@ CREATE TABLE IF NOT EXISTS `bottle` (
   `ml` int(255) NOT NULL,
   `amount` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=489 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=492 ;
 
 --
 -- Daten für Tabelle `bottle`
 --
 
 INSERT INTO `bottle` (`ID`, `name`, `ml`, `amount`) VALUES
-(475, '250ml', 250, 200),
-(476, '100ml', 100, 222),
-(485, '520ml', 520, 123);
+(491, '100ml', 100, 20);
 
 -- --------------------------------------------------------
 
@@ -311,7 +309,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `city` varchar(255) COLLATE latin1_general_ci DEFAULT NULL,
   `country` varchar(255) COLLATE latin1_general_ci DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=481 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=480 ;
 
 --
 -- Daten für Tabelle `customer`
@@ -328,8 +326,7 @@ INSERT INTO `customer` (`ID`, `firstname`, `lastname`, `company`, `road`, `zip`,
 (470, 'Ivan', 'Rohrmoser', NULL, 'Marius-Nindl-Straße 2', '4010', 'Linz', 'Österreich'),
 (471, 'Ursula', 'Kinleburg', NULL, 'Golda-Stockinger-Straße 54', '7000', 'Eisenstadt', 'Österreich'),
 (472, 'Anna', 'Schwendinger', '', 'Eva-Mayr-Straße 20', '5020', 'Salzburg', 'Österreich'),
-(479, 'Fabian', 'Hoffmann', '', 'asd', '5020', 'Salzburg', 'Österreich'),
-(480, 'a', 'a', 'a', 'asd', '', 'a', 'a');
+(479, 'Fabian', 'Hoffmann', '', 'asd', '5020', 'Salzburg', 'Österreich');
 
 -- --------------------------------------------------------
 
@@ -586,52 +583,26 @@ CREATE TABLE IF NOT EXISTS `label` (
   PRIMARY KEY (`ID`),
   KEY `strainFK` (`strainFK`),
   KEY `bottleFK` (`bottleFK`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3826 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3843 ;
 
 --
 -- Daten für Tabelle `label`
 --
 
 INSERT INTO `label` (`ID`, `name`, `bottleFK`, `strainFK`, `amount`) VALUES
-(3787, 'Rückettikett', NULL, NULL, 0),
-(3788, 'Rückettikett', 475, NULL, 0),
-(3789, '100ml Chardonnay', NULL, 142, 200),
-(3790, '250ml Chardonnay', 475, 142, 200),
-(3791, '100ml Sauvignon Blanc', NULL, 143, 200),
-(3792, '250ml Sauvignon Blanc', 475, 143, 200),
-(3793, '100ml Merlot', NULL, 144, 200),
-(3794, '250ml Merlot', 475, 144, 200),
-(3795, '100ml  Grauburgunder', NULL, 145, 200),
-(3796, '250ml  Grauburgunder', 475, 145, 200),
-(3797, '100ml Spätburgunder', NULL, 146, 200),
-(3798, '250ml Spätburgunder', 475, 146, 200),
-(3799, '100ml Gamay', NULL, 147, 200),
-(3800, '250ml Gamay', 475, 147, 200),
-(3801, '100ml Chenin', NULL, 148, 200),
-(3802, '250ml Chenin', 475, 148, 200),
-(3803, '100ml Riesling', NULL, 149, 200),
-(3804, '250ml Riesling', 475, 149, 200),
-(3805, '100ml Grenache', NULL, 150, 200),
-(3806, '250ml Grenache', 475, 150, 200),
-(3807, '100ml Grüner Veltliner', NULL, 151, 200),
-(3808, '250ml Grüner Veltliner', 475, 151, 200),
-(3809, '100ml Weißburgunder', NULL, 152, 200),
-(3810, '250ml Weißburgunder', 475, 152, 200),
-(3811, '100ml Welschriesling', NULL, 153, 200),
-(3812, '250ml Welschriesling', 475, 153, 200),
-(3813, 'Rückettikett', 476, NULL, 0),
-(3814, 'Rückettikett', NULL, NULL, 0),
-(3815, 'Rückettikett', NULL, NULL, 0),
-(3816, 'Rückettikett', NULL, NULL, 0),
-(3817, 'Rückettikett', NULL, NULL, 0),
-(3818, 'Rückettikett', NULL, NULL, 0),
-(3819, 'Rückettikett', NULL, NULL, 0),
-(3820, 'Rückettikett', NULL, NULL, 0),
-(3821, 'Rückettikett', NULL, NULL, 0),
-(3822, 'Rückettikett', 485, NULL, 0),
-(3823, 'Rückettikett', NULL, NULL, 0),
-(3824, 'Rückettikett', NULL, NULL, 0),
-(3825, 'Rückettikett', NULL, NULL, 0);
+(3828, '100ml Rückettikett', 491, 0, 0),
+(3829, '100ml Chardonnay', 491, 142, 0),
+(3830, '100ml Sauvignon Blanc', 491, 143, 0),
+(3831, '100ml Merlot', 491, 144, 0),
+(3832, '100ml  Grauburgunder', 491, 145, 0),
+(3833, '100ml Spätburgunder', 491, 146, 0),
+(3834, '100ml Gamayz', 491, 147, 0),
+(3835, '100ml Chenin', 491, 148, 0),
+(3836, '100ml Riesling', 491, 149, 0),
+(3837, '100ml Grenache', 491, 150, 0),
+(3838, '100ml Grüner Veltliner', 491, 151, 0),
+(3839, '100ml Weißburgunder', 491, 152, 0),
+(3840, '100ml Welschriesling', 491, 153, 0);
 
 -- --------------------------------------------------------
 
@@ -686,29 +657,29 @@ CREATE TABLE IF NOT EXISTS `product` (
 --
 
 INSERT INTO `product` (`ID`, `strainFK`, `bottleFK`, `amount`) VALUES
-(100, 153, 475, 1401),
+(100, 153, NULL, 1401),
 (101, 153, NULL, 3506),
-(102, 153, 475, 1387),
+(102, 153, NULL, 1387),
 (103, 153, NULL, 3468),
-(104, 153, 475, 1327),
+(104, 153, NULL, 1327),
 (105, 153, NULL, 3317),
-(106, 153, 475, 1379),
+(106, 153, NULL, 1379),
 (107, 153, NULL, 3451),
-(108, 153, 475, 1395),
+(108, 153, NULL, 1395),
 (109, 153, NULL, 3489),
-(110, 153, 475, 1239),
+(110, 153, NULL, 1239),
 (111, 153, NULL, 3101),
-(112, 153, 475, 1254),
+(112, 153, NULL, 1254),
 (113, 153, NULL, 3138),
-(114, 153, 475, 1238),
+(114, 153, NULL, 1238),
 (115, 153, NULL, 3098),
-(116, 153, 475, 1341),
+(116, 153, NULL, 1341),
 (117, 153, NULL, 3352),
-(118, 153, 475, 1201),
+(118, 153, NULL, 1201),
 (119, 153, NULL, 3004),
-(120, 153, 475, 1262),
+(120, 153, NULL, 1262),
 (121, 153, NULL, 3157),
-(122, 153, 475, 1267),
+(122, 153, NULL, 1267),
 (123, 153, NULL, 3169);
 
 -- --------------------------------------------------------
@@ -751,17 +722,18 @@ CREATE TABLE IF NOT EXISTS `strain` (
   `ID` int(255) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=161 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=159 ;
 
 --
 -- Daten für Tabelle `strain`
 --
 
 INSERT INTO `strain` (`ID`, `name`) VALUES
+(0, 'Rücketikett'),
 (142, 'Chardonnay'),
 (143, 'Sauvignon Blanc'),
 (144, 'Merlot'),
-(145, ' Grauburgunde'),
+(145, ' Grauburgunder'),
 (146, 'Spätburgunder'),
 (147, 'Gamay'),
 (148, 'Chenin'),
@@ -769,8 +741,7 @@ INSERT INTO `strain` (`ID`, `name`) VALUES
 (150, 'Grenache'),
 (151, 'Grüner Veltliner'),
 (152, 'Weißburgunder'),
-(153, 'Welschriesling'),
-(157, 'df');
+(153, 'Welschriesling');
 
 -- --------------------------------------------------------
 
@@ -783,28 +754,17 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(64) COLLATE latin1_general_ci NOT NULL,
   `password` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `email` varchar(64) COLLATE latin1_general_ci NOT NULL,
-  `is_admin` tinyint(1) NOT NULL DEFAULT '0',
+  `admin` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=86 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=92 ;
 
 --
 -- Daten für Tabelle `user`
 --
 
-INSERT INTO `user` (`ID`, `username`, `password`, `email`, `is_admin`) VALUES
-(1, 'wAndexer', 'abc', 'Wilfried@Andexer.at', 1),
-(74, 'aGrall', 'abc', 'Andreas@Grall.at', 0),
-(75, 'fPföss', 'abc', 'Franz@Pföss.at', 0),
-(76, 'fHoffmann', 'a', 'asdf@a.at', 0),
-(77, 'abasjdlk', 'a', 'a@a.at', 0),
-(78, 'abasjdlka', 'a', 'asdf@a.at', 0),
-(79, 'a', 'a', 'asdf@a.at', 1),
-(80, 's', 's', 'asdf@a.at', 0),
-(81, 'a', 'a', 'asdf@a.at', 1),
-(82, 'b', 'b', 'asdf@a.at', 0),
-(83, 'k', 'k', 'asdf@a.at', 1),
-(84, 'y', 'y', 'asdf@a.at', 1),
-(85, 'n', 'n', 'asdf@a.at', 0);
+INSERT INTO `user` (`ID`, `username`, `password`, `email`, `admin`) VALUES
+(90, 'wandexer', 'a', 'a@a.at', 0),
+(91, 'fabi', 'asdf', 'asdf@a.at', 0);
 
 --
 -- Constraints der exportierten Tabellen
@@ -837,8 +797,8 @@ ALTER TABLE `label`
 -- Constraints der Tabelle `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_4` FOREIGN KEY (`bottleFK`) REFERENCES `bottle` (`ID`) ON DELETE SET NULL ON UPDATE NO ACTION,
-  ADD CONSTRAINT `product_ibfk_3` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`);
+  ADD CONSTRAINT `product_ibfk_3` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`),
+  ADD CONSTRAINT `product_ibfk_4` FOREIGN KEY (`bottleFK`) REFERENCES `bottle` (`ID`) ON DELETE SET NULL ON UPDATE NO ACTION;
 
 --
 -- Constraints der Tabelle `shipment`

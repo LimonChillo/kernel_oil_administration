@@ -57,4 +57,11 @@ function updateStrain($id, $name) {
   $sth->execute(array($name, $id));
 }
 
+function updateUser($id, $username, $password, $email, $admin) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare( "UPDATE user SET username = ?, password = ?, email = ?, admin = ? WHERE ID = ? ");
+  $sth->execute(array($username, $password, $email, $admin, $id));
+}
+
+
 ?>

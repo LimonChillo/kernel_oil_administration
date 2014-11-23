@@ -1,8 +1,11 @@
-<?php include "head.php";?>
+<?php
+$level = 2;
+include "head.php";
+?>
 
-
-<?php 
+<?php
 $customers = getAllCustomers();
+
 $bottles = getAllBottles();
 //$strains = getAllStrains();
 
@@ -21,6 +24,7 @@ if(isset($_GET['get']))
   	<form method='get' id="customerForm" action='getDelieveries.php'>
   		<select name='get' id='customerFormSelect'>
   			<?php 
+
   				foreach ($customers as $c)
   				{
   					echo "<option value='" . $c->ID . "'>" . $c->company . " - "  . $c->lastname . "</option>";

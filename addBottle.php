@@ -6,14 +6,14 @@ if (isset($_GET['id']))
   $title = "bearbeiten";
   $bottle = getBottleByID($_GET['id']);
   if(sizeOf(getBottleByID($_GET['id'])) == null)
-    header("Location:getBottles.php?msg=0");
+    header("Location:getBottles.php?msg=Flasche existiert nicht");
 }
 else
 {
   $action = "insertBottle";
   $title = "hinzufügen";
 }
-
+$level = 2;
 include "head.php";
 ?>
 <div class="container">

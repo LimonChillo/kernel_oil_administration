@@ -1,7 +1,9 @@
 <?php session_start(); ?>
 
 <?php
-      include_once "database/functions.php";
+
+  include_once "database/functions.php";
+  restrict($level);
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,16 +32,22 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php">Kernölverwaltung</a>
+          <a class="navbar-brand" href="index.php"></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="index.php">Übersicht</a></li>
-            <li><a href="getBarrels.php">Fässer</a></li>
-            <li><a href="">Pressung</a></li>
-            <li><a href="">Produkte</a></li>
-            <li><a href="getCustomers.php">Kunden</a></li>
-            <li><a href="getDelieveries.php">Lieferungen</a></li>
+            <?php if(isset($_SESSION['user'])): ?>
+              <li><a href="index.php">Übersicht</a></li>
+              <li><a href="getBarrels.php">Fässer</a></li>
+              <li><a href="">Pressung</a></li>
+              <li><a href="">Produkte</a></li>
+              <?php if(isAdmin($_SESSION['user'])): ?>
+              <li><a href="getCustomers.php">Kunden</a></li>
+              <li><a href="getDelieveries.php">Lieferungen</a></li>
+              <li><a href="getUsers.php">Benutzer</a></li>
+              <?php endif; ?>
+              <li><a href="login.php?logout=1">Logout</a></li>
+            <?php endif;?>
 
           </ul>
           </div><!--/.nav-collapse -->
