@@ -50,7 +50,7 @@ SELECT SUM(sh.amount) as amount GROUP BY sh.date
 	ORDER BY s.name;
 
 # Auflistung aller Verkäufe an einen Kunden, sortiert nach Tagen
-SELECT SUM(sh.amount) as amount, sh.date as date GROUP BY sh.date
+SELECT sh.date SUM(sh.amount) as amount, as date GROUP BY sh.date
 	FROM product p JOIN strain s JOIN bottle b JOIN shipmentitem shi JOIN shipment sh JOIN customer c
 	ON p.bottleFK = b.ID AND p.strainFK = s.ID AND shi.productFK = p.ID AND shi.shipmentFK = sh.ID AND sh.customerFK = c.ID
 	WHERE c.ID = ? 

@@ -7,4 +7,8 @@ $(function()
   	var month = ("0" + (d.getMonth() + 1)).slice(-2);
   	var today = d.getFullYear()+"-"+(month)+"-"+(day);
   	$("input[type=date]").val(today);
+
+    $('#customerFormSelect').change(function() {
+        $('#customerForm').submit();
+    });
 });
