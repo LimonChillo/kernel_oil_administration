@@ -105,4 +105,27 @@ function insertProduct($strainID, $bottleID, $amount)
         $sth->execute(array($strainID, $bottleID, $amount));
 }
 
+function insertShipment($customerFK, $date)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare(
+        "INSERT INTO shipment
+        (customerFK, date)
+          VALUES
+        (?, ?)");
+        $sth->execute(array($customerFK, $date));
+}
+
+function insertShipmentItem($produktFK, $shipmentFK, $amount)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare(
+        "INSERT INTO shipmentitem
+        (produktFK, shipmentFK, amount)
+          VALUES
+        (?, ?, ?)");
+        $sth->execute(array($produktFK, $shipmentFK), $amount);
+}
+
+
 ?>

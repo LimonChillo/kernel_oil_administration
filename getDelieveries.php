@@ -15,7 +15,7 @@ if(isset($_GET['get']))
 	$deliveryDays = getDatesWhenCustomerGotDeliveries($customer_id); 
 	//getDeliveredProductsByCustomerByStrainByBottleByDate($customer_id, $strain_id, $bottle_id, $date);
 	//getDeliveredStrainsByCustomerByDate($customer_id, $date)
-}
+
 
 ?>	
 
@@ -76,13 +76,15 @@ if(isset($_GET['get']))
 						</div>
 		<?php  		$currentStrain++;
 					end;
+		?>
+				</div>
+				<?php 
 				$rowCount--;
 			end;
 
 		 ?>
 		
 	<?php end; ?>
-  </div>
 </div>
 
 
