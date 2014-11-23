@@ -10,7 +10,7 @@ include "head.php";
 	<a href="addBarrel.php" class="btn btn-default">Fass hinzufügen</a>
 	<a href="getBarrels.php" class="btn btn-default">neue Pressung</a>
 	<a href="getPressings.php" class="btn btn-default">Pressung abfüllen</a>
-	<a href="#" class="btn btn-default">Bestellung hinzufügen</a>
+	<a href="addDelivery.php" class="btn btn-default">Bestellung hinzufügen</a>
 	<a href="addCustomer.php" class="btn btn-default">Kund*in hinzufügen</a>
 	</p>
 	<div class="row">

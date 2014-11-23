@@ -30,6 +30,22 @@ function printAllStrainOptions() {
   }
 }
 
+function printAllCustomerOptions() {
+  $allCustomers = getAllCustomers();
+  foreach ($allCustomers as $customer)
+  {
+    echo "<option value='".$customer->ID."'> ".$customer->lastname."</option>";
+  }
+}
+
+function printAllBottleOptions() {
+  $allBottles = getAllBottles();
+  foreach ($allBottles as $bottles)
+  {
+    echo "<option value='".$bottles->ID."'> ".$bottles->name."</option>";
+  }
+}
+
 function printAllBarrelsAsTable(){
   $allBarrels = getAllBarrels();
   foreach ($allBarrels as $barrel)
