@@ -4,6 +4,29 @@ body {
 .main-content {
   text-align: left;
 }
+.navbar
+{
+  background-color: #9A8985;
+  padding-left: 20px;
+}
+.navbar-brand
+{
+  background: url('../images/logo.png') bottom no-repeat;
+  background-size: 100%;
+  margin-top: -8px;
+  margin-bottom: 8px;
+  width:170px;
+}
+.navbar-inverse .navbar-nav>li>a
+{
+  color: #fff;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover
+{
+  color: #5C4D4A;
+}
+
 .container{
   padding-top: 30px;
 	max-width: 1000px;
@@ -29,3 +52,4 @@ body {
 {
   max-width: 30px;
 }
+
