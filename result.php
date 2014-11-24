@@ -295,7 +295,7 @@ if (isset($_POST['login']))
     header("Location:login.php?msg=Passwort falsch&err=1&user=".$username);
   }
 }
-
+/*
 if (isset($_POST['insertDelivery']))
 {
   $strains = array();
@@ -305,9 +305,9 @@ if (isset($_POST['insertDelivery']))
   $customer = strtolower(strip_tags($_POST['customer']));
   $date = strtolower(strip_tags($_POST['date']));
 
-  $strains = $_POST['strain']);
-  $bottles = $_POST['bottle']);
-  $amounts = $_POST['amount']);
+  //$strains = $_POST['strain']);
+  //$bottles = $_POST['bottle']);
+  //$amounts = $_POST['amount']);
 
   insertShipment($customer, $date);
   $shipmentID = getShipmentIDByCustomerByDate($customer, $date);
@@ -326,7 +326,5 @@ if (isset($_POST['insertDelivery']))
   }  
   
   header("Location:addDelivery.php?msg=Lieferung eingetragen&err=0");
-
-  
-
+}*/
 ?>

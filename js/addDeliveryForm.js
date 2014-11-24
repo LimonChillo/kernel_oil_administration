@@ -1,3 +1,17 @@
+function add(selector, key) {
+        $.ajax({
+          type: "POST",
+          url: "addItemTool.php",
+          data: "key=" + key,
+          success: function(html) {
+              if (html != null) {
+                  selector.html(html);
+              }
+          }
+        });
+  return false;
+}
+
 $(function()
 {
 
@@ -22,7 +36,7 @@ $(function()
         		.append($('<div></div>')
      				.addClass("col-sm-4")
      				.append($('<select></select>')
-     					.addClass("form-control")
+     					.addClass("form-control bottleSelector")
      					.attr("name", "bottle[]")
      					.append('&lt;?php printAllBottleOptions();?&gt;'))));
 
@@ -32,9 +46,12 @@ $(function()
         		.append($('<div></div>')
      				.addClass("col-sm-4")
      				.append($('<select></select>')
-     					.addClass("form-control")
+     					.addClass("form-control strainSelector")
      					.attr("name", "strain[]")
      					.append('&lt;?php printAllStrainOptions();?&gt;'))));
+
+        add($(".bottleSelector"), "bottle");
+        add($(".strainSelector"), "strain");    
     });
 
 
