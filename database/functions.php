@@ -166,4 +166,16 @@ function restrict ($level) {
     }
   }
 }
+
+function mystrtolower ($string){
+  $bad = array("Ä", "Ö", "Ü");
+  $good = array("_a", "_o", "_u");
+  $letters = str_replace($bad, $good, $string);
+
+  $letters = mb_strtolower($letters);
+  $bad = array("_a", "_o", "_u");
+  $good = array("ä", "ö", "ü");
+
+  return str_replace($bad, $good,$letters);
+}
 ?>
