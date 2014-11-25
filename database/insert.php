@@ -64,14 +64,14 @@ function insertBarrel($strain, $literPerBarrel, $date) {
         $sth->execute(array($strain, $literPerBarrel, $date));
 }
 
-function insertBottling($pressing, $bottle, $amount, $date) {
+function insertBottling($pressing, $bottle, $amount, $date, $strainFK) {
   $dbh = connectToDB();
   $sth = $dbh->prepare(
         "INSERT INTO bottling
-        (pressingFK, bottleFK, amount, date)
+        (pressingFK, bottleFK, amount, date, strainFK)
           VALUES
-        (?, ?, ?, ?)");
-        $sth->execute(array($pressing, $bottle, $amount, $date));
+        (?, ?, ?, ?, ?)");
+        $sth->execute(array($pressing, $bottle, $amount, $date, $strainFK));
 }
 
 function insertCustomer($firstname, $lastname, $company, $road, $zip, $city, $country) {
