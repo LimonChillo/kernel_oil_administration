@@ -7,7 +7,7 @@ include "head.php";
   <?php printMessage(); ?>
   <a href="addCustomer.php" class="btn btn-default">Kund*in hinzufügen</a>
   </p>
-  <?php printDatarows("customer", false, "ID"); ?>
+  <?php printDatarows("customer", false, "ID", array()); ?>
 
   </div>
 </div>

@@ -124,7 +124,7 @@ function insertShipmentItem($productFK, $shipmentFK, $amount)
         (productFK, shipmentFK, amount)
           VALUES
         (?, ?, ?)");
-        $sth->execute(array($productFK, $shipmentFK), $amount);
+        $sth->execute(array($productFK, $shipmentFK, $amount));
 }
 
 
