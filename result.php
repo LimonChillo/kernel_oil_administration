@@ -201,7 +201,7 @@ if(isset($_POST['deleteCustomer']))
 
 if(isset($_POST['insertUser']))
 {
-  $username = strtolower(strip_tags($_POST['username']));
+  $username = mystrtolower(strip_tags($_POST['username']));
   $password = strip_tags($_POST['password']);
   $email = strip_tags($_POST['email']);
   $admin = ($_POST['admin'] == null) ? "0" : "1" ;
@@ -219,7 +219,7 @@ if(isset($_POST['insertUser']))
 
 if(isset($_POST['updateUser']))
 {
-  $username = strtolower(strip_tags($_POST['username']));
+  $username = mystrtolower(strip_tags($_POST['username']));
   $password = strip_tags($_POST['password']);
   $email = strip_tags($_POST['email']);
   $admin = strip_tags($_POST['admin']);
