@@ -91,7 +91,7 @@ function printMessage()
   }
 }
 
-function printDatarows($tab, $stockable, $orderBy)
+function printDatarows($tab, $stockable, $orderBy, $showCol)
 {
   if($tab == "labels")
   {
@@ -105,7 +105,6 @@ function printDatarows($tab, $stockable, $orderBy)
   {
     $datarows = getAnyTable($tab, $orderBy);
     $columns = getColumnNames($tab);
-
   }
 
 
@@ -114,10 +113,16 @@ function printDatarows($tab, $stockable, $orderBy)
 
   $adminColumn = 999;
   $counter = 0;
+  $showData = array();
   foreach ($columns as $headline) {
     if($headline->Field == "admin")
       $adminColumn = $counter;
-    echo "<th> ".ucfirst($headline->Field)."</th>";
+    if(in_array($headline->Field, $showCol) || $showCol == null)
+    {
+      echo "<th> ".ucfirst($headline->Field)."</th>";
+      array_push($showData, $counter);
+
+    }
     $counter++;
   }
   if (isAdmin($_SESSION['user']))
@@ -128,15 +133,19 @@ function printDatarows($tab, $stockable, $orderBy)
     echo "<tr>";
     $counter = 0;
     foreach ($datarow as $data){
-      if($counter == $adminColumn)
+      if(in_array($counter, $showData))
       {
+        if($counter == $adminColumn)
+        {
 
-        if($data == "1")
-          $data = "Ja";
-        else if($data == "0")
-          $data = "Nein";
+          if($data == "1")
+            $data = "Ja";
+          else if($data == "0")
+            $data = "Nein";
+        }
+        echo "<td> ".$data."</td>";
+
       }
-      echo "<td> ".$data."</td>";
       $counter++;
     }
 
@@ -144,11 +153,11 @@ function printDatarows($tab, $stockable, $orderBy)
 
     if($tab != "labels" && isAdmin($_SESSION['user']))
     {
-      $options = "<a href='add$tab.php?id=$datarow->ID'>bearbeiten </a>";
+      $options = "<a href='add$tab.php?id=$datarow->ID'><img class='small' src='images/edit.png' alt='bearbeiten'> </a>";
     }
     if($stockable == true && isAdmin($_SESSION['user']))
     {
-      $options .= "   <a href='stock$tab.php?id=$datarow->ID'> einlagern</a>";
+      $options .= "   <a href='stock$tab.php?id=$datarow->ID'><img class='small' src='images/stock.png' alt='einlagern'></a>";
     }
     echo "<td> ".ucfirst($options)."</td>";
     echo "</tr>";

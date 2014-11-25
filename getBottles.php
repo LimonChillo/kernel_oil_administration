@@ -9,7 +9,7 @@ include "head.php";
   <a href="addBottle.php" class="btn btn-default">Flasche hinzufügen</a>
   <?php endif; ?>
   </p>
-  <?php printDatarows("bottle", true, "ml"); ?>
+  <?php printDatarows("bottle", true, "ml", array()); ?>
 
   </div>
 </div>
