@@ -133,12 +133,13 @@ if(isset($_POST['insertBottling']))
   //ToDo  
   //Flaschen & Etiketten überprüfen 
   //Update isBotteld in Pressing 
+
   $date = strip_tags($_POST['date']);
   $pressing = strip_tags($_POST['pressing']);
 
   $count = strip_tags($_POST['count']);
 
-  //insert date for each bottle type
+  //insert dateset for each bottle type
   for($i = 0; $i < $count; $i++)
   {
     echo(" ".$_POST[$i.'_amount']. " # ");

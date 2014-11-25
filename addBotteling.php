@@ -64,7 +64,6 @@ function updateDisplay()
 	<?php $pressing = getPressingById($_GET['id']); ?>
 	<?php $allBottels = getAllBottles(); ?>
 
-
 	<form class="form-horizontal" role="form" method="post" action="result.php">
 		<div class="form-group">
 			<label  class="col-sm-2 control-label">Pressnummer</label>
@@ -82,6 +81,12 @@ function updateDisplay()
 			<label  class="col-sm-2 control-label">Menge(l)</label>
 			<div class="col-sm-2">
 				<input type="text" class="form-control" value='<?php echo $pressing->amount; ?>' name="total_amount" readonly>
+			</div>
+		</div>
+		<div class="form-group">
+			<label  class="col-sm-2 control-label">Sorte</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" value='<?php echo getStrainNameByID(getStrainIdByPressingId($pressing->ID)); ?>' name="strain" readonly>
 			</div>
 		</div>
 		<div class="form-group">
