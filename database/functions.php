@@ -156,7 +156,9 @@ function restrict ($level) {
   if ($level > 0)
   {
     if (! isset($_SESSION['user']) )
+    {
       header("Location: login.php?msg=Sie sind leider nicht eingeloggt&err=1");
+    }
     if ($level == 2 && ! isAdmin($_SESSION['user']))
     {
       header("Location: index.php?msg=Die angeforderte Seite ist Administratoren vorbehalten&err=1");
