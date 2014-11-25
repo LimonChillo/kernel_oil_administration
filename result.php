@@ -313,10 +313,6 @@ if (isset($_POST['insertDelivery']))
   $bottles = $_POST['bottle'];
   $amounts = $_POST['amount'];
 
-  
-
-  //echo $shipmentID;
-
   for($i = 0; $i < sizeOf($strains); $i++)
   {
     if ($i == 0)

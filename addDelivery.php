@@ -20,19 +20,22 @@ include "head.php";
 
 		<div class="form-group">
 			<div class="col-sm-4">
-				<input type="date" class="form-control" name="date" placeholder="Datum" id="deliveryDate" required>
+				<input type="date" class="form-control" name="date" placeholder="Datum" required>
+			</div>
+		</div>
+
+		<div id="deliveryItems">
+		</div>
+
+		<div class="form-group">
+			<div class="col-sm-4">
+				<button  name="add" id="addItemButton" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Eintrag hinzufügen!</button>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<div class="col-sm-4">
-				<button  name="add" id="addItemButton" class="btn btn-default">Add Item</button>
-			</div>
-		</div>
-
-		<div class="form-group">
-			<div class="col-sm-4">
-				<button type="submit" name="insertDelivery" class="btn btn-default">Eintragen</button>
+				<button type="submit" name="insertDelivery" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Bestellung eintragen!</button>
 			</div>
 		</div>
 	</form>
