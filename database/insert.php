@@ -71,7 +71,7 @@ function insertBottling($pressing, $bottle, $amount, $date) {
         (pressingFK, bottleFK, amount, date)
           VALUES
         (?, ?, ?, ?)");
-        $sth->execute(array($pressing->ID, $bottle->ID, $amount, $date));
+        $sth->execute(array($pressing, $bottle, $amount, $date));
 }
 
 function insertCustomer($firstname, $lastname, $company, $road, $zip, $city, $country) {
