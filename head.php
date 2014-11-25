@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <?php
   include_once "database/functions.php";
   restrict($level);
