@@ -158,6 +158,7 @@ function printDatarows($tab, $stockable, $orderBy)
 }
 
 function restrict ($level) {
+  session_start();
   if ($level > 0)
   {
     if (! isset($_SESSION['user']) )
