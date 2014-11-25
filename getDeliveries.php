@@ -37,6 +37,12 @@ if(isset($_GET['get'])):
 	<h3><?php  echo getCustomerByID($customerID) -> firstname . " " . getCustomerByID($customerID) -> lastname . " (" . getCustomerByID($customerID) -> company  . ")"; ?></h3>
 
 	<?php
+  	
+	if ($deliveryDays[0] == 0)
+	{
+		echo "<h3> Es sind noch keine Lieferungen erfolgt</h3>";
+	}
+
   	foreach ($deliveryDays as $day) :?>
 		<div class="row">
 			<div class="col-md-12"><h3><?php  echo $day -> date; ?></h3></div>
@@ -56,16 +62,19 @@ if(isset($_GET['get'])):
 									$currentBottle = 0;
 
 									while ($currentBottle < $bottleCount):
-								?>
-									<div class="col-md-4">
-										<?php
-											echo $bottles[$currentBottle] -> name . " - ";
-											echo getDeliveredProductsByCustomerByStrainByBottleByDate($customerID, $strains[$currentStrain] -> ID, $bottles[$currentBottle] -> ID, $day -> date) -> amount;
-										?>
-									</div>
+
+									if (getDeliveredProductsByCustomerByStrainByBottleByDate($customerID, $strains[$currentStrain] -> ID, $bottles[$currentBottle] -> ID, $day -> date) -> amount > 0):
+									?>
+										<div class="col-md-4">
+											<?php
+												echo $bottles[$currentBottle] -> name . " - ";
+												echo getDeliveredProductsByCustomerByStrainByBottleByDate($customerID, $strains[$currentStrain] -> ID, $bottles[$currentBottle] -> ID, $day -> date) -> amount;
+											?>
+										</div>
 									<?php
+										endif;
 										$currentBottle ++;
-										endwhile;
+									endwhile;
 									?>
 							</div>
 						</div>

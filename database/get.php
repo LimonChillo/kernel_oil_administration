@@ -256,10 +256,9 @@ function getDeliveredProductsByCustomerByStrainByBottleByDate($customer_id, $str
   $sth = $dbh->prepare("SELECT SUM(shi.amount) as amount
   FROM product p JOIN strain s JOIN bottle b JOIN shipmentitem shi JOIN shipment sh JOIN customer c
   ON p.bottleFK = b.ID AND p.strainFK = s.ID AND shi.productFK = p.ID AND shi.shipmentFK = sh.ID AND sh.customerFK = c.ID
-  WHERE c.ID = ? AND s.ID = ? AND b.ID = ? AND sh.date = ?
-  GROUP BY sh.date");
+  WHERE c.ID = ? AND s.ID = ? AND b.ID = ? AND sh.date = ?");
   $sth->execute(array( $customer_id, $strain_id, $bottle_id, $date ));
-  return $sth->fetchAll();
+  return $sth->fetch();
 }
 
 function getAmountOfBottleTypes()
