@@ -93,7 +93,7 @@ function getStrainNameByID($id)
   $result = $sth->fetchObject();
   if($result == null)
     return null;
-  return $result;
+  return $result->name;
 }
 
 function getAllBottles()
@@ -219,6 +219,13 @@ function getPressingById ($id) {
   $sth->execute(array( $id ));
 
   return $sth->fetchObject();
+}
+
+function getStrainIdByPressingId($id){
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT strainFK FROM barrel WHERE pressingFK = ? LIMIT 1");
+  $sth->execute(array( $id ));
+  return $sth->fetchObject()->strainFK;
 }
 
 function getDatesWhenCustomerGotDeliveries($customer_id) {
