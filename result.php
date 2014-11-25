@@ -136,19 +136,18 @@ if(isset($_POST['insertBottling']))
 
   $date = strip_tags($_POST['date']);
   $pressing = strip_tags($_POST['pressing']);
-
+  $strainFK = strip_tags($_POST['strainFK']);
   $count = strip_tags($_POST['count']);
+
 
   //insert dateset for each bottle type
   for($i = 0; $i < $count; $i++)
   {
-    echo(" ".$_POST[$i.'_amount']. " # ");
-    echo(" ".$_POST[$i.'_bottleId']. " # ");
-    insertBottling($pressing, strip_tags($_POST[$i.'_bottleId']), strip_tags($_POST[$i.'_amount']), $date);
+    insertBottling($pressing, strip_tags($_POST[$i.'_bottleId']), strip_tags($_POST[$i.'_amount']), $date,  $strainFK);
   }
 
   
-  header("Location:addBottling.php?msg=Abfüllung hinzugefügt&err=0");
+  header("Location:addBotteling.php?msg=Abfüllung hinzugefügt&err=0");
 }
 
 if(isset($_POST['insertCustomer']))

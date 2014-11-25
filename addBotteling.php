@@ -86,7 +86,8 @@ function updateDisplay()
 		<div class="form-group">
 			<label  class="col-sm-2 control-label">Sorte</label>
 			<div class="col-sm-2">
-				<input type="text" class="form-control" value='<?php echo getStrainNameByID(getStrainIdByPressingId($pressing->ID)); ?>' name="strain" readonly>
+				<input type="text" class="form-control" value='<?php echo getStrainNameByID(getStrainIdByPressingId($pressing->ID)); ?>' readonly>
+				<input type="hidden"  name="strainFK" value="<?php echo getStrainIdByPressingId($pressing->ID); ?>">
 			</div>
 		</div>
 		<div class="form-group">
