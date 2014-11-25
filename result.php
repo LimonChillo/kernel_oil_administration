@@ -299,7 +299,7 @@ if (isset($_POST['login']))
     header("Location:login.php?msg=Passwort falsch&err=1&user=".$username);
   }
 }
-/*
+
 if (isset($_POST['insertDelivery']))
 {
   $strains = array();
@@ -309,26 +309,32 @@ if (isset($_POST['insertDelivery']))
   $customer = strtolower(strip_tags($_POST['customer']));
   $date = strtolower(strip_tags($_POST['date']));
 
-  //$strains = $_POST['strain']);
-  //$bottles = $_POST['bottle']);
-  //$amounts = $_POST['amount']);
+  $strains = $_POST['strain'];
+  $bottles = $_POST['bottle'];
+  $amounts = $_POST['amount'];
 
-  insertShipment($customer, $date);
-  $shipmentID = getShipmentIDByCustomerByDate($customer, $date);
+  
 
-  for($i = 0; i<sizeOf($strains); i++)
+  //echo $shipmentID;
+
+  for($i = 0; $i < sizeOf($strains); $i++)
   {
-    if($amounts[$i] <=  (getProductByStrainByBottle($strains[$i], $bottles[i]) -> amount)
+    if ($i == 0)
+      insertShipment($customer, $date);
+    
+
+    if($amounts[$i] <=  (getProductByStrainByBottle($strains[$i], $bottles[$i]) -> amount))
     {
-      insertShipmentItem(getProductByStrainByBottle($strains[$i], $bottles[i]) -> ID, $shipmentID, $amounts[$i])
-      updateProduct($strain, $bottle, $amount)
+      insertShipmentItem(getProductByStrainByBottle($strains[$i], $bottles[$i]) -> ID, getShipmentIDByCustomerByDate($customer, $date) -> ID, $amounts[$i]);
+      updateProduct($strains[$i], $bottles[$i], $amounts[$i]);
     }
     else
     {
-      header("Location:addDelivery.php?msg=Nicht genug " . getStrainByID($strains[$i]) -> name . " in der Größe "  . getBottleByID($bottles[$i]) -> name . . " vorhanden&err=1");
+      header("Location:addDelivery.php?msg=Nicht genug " . getStrainByID($strains[$i]) -> name . " in der Größe "  . getBottleByID($bottles[$i]) -> name . " vorhanden&err=1");
+      exit;
     }
   }
 
   header("Location:addDelivery.php?msg=Lieferung eingetragen&err=0");
-}*/
+}
 ?>
