@@ -233,23 +233,24 @@ function getDatesWhenCustomerGotDeliveries($customer_id) {
   return $sth->fetchAll();
 }
 
-function getDeliveredStrainsByCustomerByDate($customer_id, $date) {
+function getDeliveredStrainsByCustomerByDate($customerID, $date) {
   $dbh = connectToDB();
-  $sth = $dbh->prepare("SELECT s.ID as ID s.name as name
+  $sth = $dbh->prepare("SELECT DISTINCT s.ID as ID, s.name as name
   FROM product p JOIN strain s JOIN bottle b JOIN shipmentitem shi JOIN shipment sh JOIN customer c
   ON p.strainFK = s.ID AND shi.productFK = p.ID AND shi.shipmentFK = sh.ID AND sh.customerFK = c.ID
   WHERE c.ID = ? AND sh.date = ?");
-  $sth->execute(array( $customer_id, $date ));
+  $sth->execute(array( $customerID, $date ));
 
   return $sth->fetchAll();
 }
 
 function getDeliveredProductsByCustomerByStrainByBottleByDate($customer_id, $strain_id, $bottle_id, $date) {
   $dbh = connectToDB();
-  $sth = $dbh->prepare("SELECT SUM(sh.amount) as amount
+  $sth = $dbh->prepare("SELECT SUM(shi.amount) as amount
   FROM product p JOIN strain s JOIN bottle b JOIN shipmentitem shi JOIN shipment sh JOIN customer c
   ON p.bottleFK = b.ID AND p.strainFK = s.ID AND shi.productFK = p.ID AND shi.shipmentFK = sh.ID AND sh.customerFK = c.ID
-  WHERE c.ID = ? AND s.ID = ? AND b.ID = ? AND sh.date = ?");
+  WHERE c.ID = ? AND s.ID = ? AND b.ID = ? AND sh.date = ?
+  GROUP BY sh.date");
   $sth->execute(array( $customer_id, $strain_id, $bottle_id, $date ));
   return $sth->fetchAll();
 }

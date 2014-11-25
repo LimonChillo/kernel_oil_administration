@@ -56,7 +56,6 @@ $(function()
             .addClass("col-sm-2")
             .append($('<button></button>')
               .addClass("btn btn-danger")
-              .attr("id", "deleteItem" + count)
               .addClass("deleteItem")
               .attr("type", "button")
               .append($('<span></span>')
@@ -70,8 +69,6 @@ $(function()
         $('.deleteItem').click(function(e) {
           console.log(e);
           e.preventDefault();
-          //e.target.parent().parent().remove();
-          //e.target.parent.parent.remove;
           $(e.target).parent().parent().remove();
     
     });

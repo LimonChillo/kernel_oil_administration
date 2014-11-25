@@ -7,23 +7,15 @@ include "head.php";
 $customers = getAllCustomers();
 
 $bottles = getAllBottles();
-//$strains = getAllStrains();
-
-if(isset($_GET['get']))
-{
-	$customer_id = strip_tags($_GET['get']);
-	$deliveryDays = getDatesWhenCustomerGotDeliveries($customer_id);
-	//getDeliveredProductsByCustomerByStrainByBottleByDate($customer_id, $strain_id, $bottle_id, $date);
-	//getDeliveredStrainsByCustomerByDate($customer_id, $date)
-
 
 ?>
 
 <div class="container">
   <h1>Lieferungen</h1>
   <?php printMessage(); ?>
-  	<form method='get' id="customerForm" action='getDelieveries.php'>
+  	<form method='get' id="customerForm" action='getDeliveries.php'>
   		<select name='get' id='customerFormSelect'>
+  			<option disabled selected>Bitte einen Kunden wählen!</option>
   			<?php
 
   				foreach ($customers as $c)
@@ -34,28 +26,30 @@ if(isset($_GET['get']))
   		</select>
   	</form>
 
-  	<?php foreach ($deliveryDays as $day) :?>
+  	<?php 
+
+if(isset($_GET['get'])):
+
+	$customerID = strip_tags($_GET['get']);
+	$deliveryDays = getDatesWhenCustomerGotDeliveries($customerID);
+	?>
+
+	<h3><?php  echo getCustomerByID($customerID) -> firstname . " " . getCustomerByID($customerID) -> lastname . " (" . getCustomerByID($customerID) -> company  . ")"; ?></h3>
+
+	<?php
+  	foreach ($deliveryDays as $day) :?>
 		<div class="row">
-			<div class="col-md-12"><h3>DAY</h3></div>
+			<div class="col-md-12"><h3><?php  echo $day -> date; ?></h3></div>
 		</div>
 		<?php
-			$rowCount = sizeOf(getDeliveredStrainsByCustomerByDate($customer_id, $day));
-			$strains = getDeliveredStrainsByCustomerByDate($customer_id, $day));
+			$rowCount = sizeOf(getDeliveredStrainsByCustomerByDate($customerID, $day -> date));
+			$strains = getDeliveredStrainsByCustomerByDate($customerID, $day -> date);
 			$currentStrain = 0;
-			// 3 Spaltige Anzeige für Sorten
-			while ($rowCount % 3 != 0)
-			{
-				$rowCount++;
-			}
-			$rowCount /= 3;
 
-			while ($rowCount > 0)
+			while ($currentStrain < sizeOf($strains)):
 		?>
-				<div class="row">
-					<?php  for(int i = 0; i < 3; i++): ?>
-
 						<div class="col-md-4">
-							<?php echo $strains[$currentStrain] -> name ?>
+							<?php echo $strains[$currentStrain] -> name; ?>
 							<div class="row">
 								<?php
 									$bottleCount = sizeOf($bottles);
@@ -65,27 +59,23 @@ if(isset($_GET['get']))
 								?>
 									<div class="col-md-4">
 										<?php
-											echo $bottles[$currentBottle] -> id . " - ";
-											echo getDeliveredProductsByCustomerByStrainByBottleByDate($customer_id, $strains[$currentStrain], $bottles[$currentBottle], $day);
+											echo $bottles[$currentBottle] -> name . " - ";
+											echo getDeliveredProductsByCustomerByStrainByBottleByDate($customerID, $strains[$currentStrain] -> ID, $bottles[$currentBottle] -> ID, $day -> date) -> amount;
 										?>
 									</div>
 									<?php
 										$currentBottle ++;
-										end;
+										endwhile;
 									?>
 							</div>
 						</div>
 		<?php  		$currentStrain++;
-					end;
-		?>
-				</div>
-				<?php
-				$rowCount--;
-			end;
+					
+			endwhile;
+	endforeach; 
+endif;
 
-		 ?>
-
-	<?php end; ?>
+?>
 </div>
 
 
