@@ -36,7 +36,7 @@
           <ul class="nav navbar-nav">
             <?php if(isset($_SESSION['user'])): ?>
               <li><a href="getBarrels.php">Fässer</a></li>
-              <li><a href="">Pressung</a></li>
+              <li><a href="getPressings.php ">Pressung</a></li>
               <li><a href="">Produkte</a></li>
               <?php if(isAdmin($_SESSION['user'])): ?>
               <li><a href="getCustomers.php">Kunden</a></li>
