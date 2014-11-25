@@ -91,15 +91,21 @@ function printMessage()
   }
 }
 
-function printDatarows($tab, $stockable, $orderBy, $showCol)
+function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0)
 {
-  if($tab == "labels")
+
+  $showData = array();
+  $rowcount = 0;
+  if($rows == 0)
+    $rowcount = -99999;
+  if($tab == "labels" || $tab == "label")
   {
     $datarows = getJoinedLabels($orderBy);
     $columns = array((object) array('Field'=>'ID'),
                       (object) array('Field'=> 'Sorte'),
                         (object) array('Field'=> 'Flasche'),
                           (object) array('Field'=> 'Menge'));
+    $showData = $columns;
   }
   else
   {
@@ -113,7 +119,7 @@ function printDatarows($tab, $stockable, $orderBy, $showCol)
 
   $adminColumn = 999;
   $counter = 0;
-  $showData = array();
+
   foreach ($columns as $headline) {
     if($headline->Field == "admin")
       $adminColumn = $counter;
@@ -126,14 +132,17 @@ function printDatarows($tab, $stockable, $orderBy, $showCol)
     $counter++;
   }
   if (isAdmin($_SESSION['user']))
-    echo "<th>Optionen</th>";
+    echo "<th></th>";
 
   foreach ($datarows as $datarow) {
     echo "</tr>";
     echo "<tr>";
     $counter = 0;
+    if($rowcount >= $rows)
+        break;
     foreach ($datarow as $data){
-      if(in_array($counter, $showData))
+
+      if(in_array((string)$counter, $showData))
       {
         if($counter == $adminColumn)
         {
@@ -162,6 +171,7 @@ function printDatarows($tab, $stockable, $orderBy, $showCol)
     echo "<td> ".ucfirst($options)."</td>";
     echo "</tr>";
 
+    $rowcount++;
   }
   echo "</table>";
 }

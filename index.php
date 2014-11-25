@@ -19,7 +19,7 @@ include "head.php";
 	<div class="row">
 		<div class="col-md-4">
 			<h3>Fässer</h3>
-
+			<?php printDatarows("barrel", false, "date", array("strainFK", "filllevel", "pressingFK", "date"), 5) ?>
 		</div>
 		<div class="col-md-4">
 			<h3>Pressungen</h3>
@@ -31,6 +31,7 @@ include "head.php";
 	<div class="row">
 		<div class="col-md-4">
 			<h3>Bestellungen</h3>
+			<?php printDatarows("shipment", false, "date", array()) ?>
 		</div>
 		<div class="col-md-4">
 			<h3>Flaschen</h3>
@@ -38,6 +39,7 @@ include "head.php";
 		</div>
 		<div class="col-md-4">
 			<h3>Etiketten</h3>
+			<?php printDatarows("label", true, "amount", array("name", "amount")) ?>
 		</div>
 	</div>
 	</div>
