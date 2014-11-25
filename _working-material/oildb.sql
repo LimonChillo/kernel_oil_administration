@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.6
+-- version 4.2.10
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Erstellungszeit: 22. Nov 2014 um 23:47
--- Server Version: 5.6.16
--- PHP-Version: 5.5.9
+-- Host: localhost
+-- Generation Time: Nov 25, 2014 at 02:26 PM
+-- Server version: 5.6.21
+-- PHP Version: 5.5.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,28 +17,25 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Datenbank: `oildb`
+-- Database: `oildb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `barrel`
+-- Table structure for table `barrel`
 --
 
 CREATE TABLE IF NOT EXISTS `barrel` (
-  `ID` int(255) NOT NULL AUTO_INCREMENT,
+`ID` int(255) NOT NULL,
   `strainFK` int(255) NOT NULL,
   `fillLevel` int(255) NOT NULL,
   `pressingFK` int(255) DEFAULT NULL,
-  `date` date NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `strainID` (`strainFK`),
-  KEY `pressingFK` (`pressingFK`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=39882 ;
+  `date` date NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=39882 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Daten für Tabelle `barrel`
+-- Dumping data for table `barrel`
 --
 
 INSERT INTO `barrel` (`ID`, `strainFK`, `fillLevel`, `pressingFK`, `date`) VALUES
@@ -226,45 +223,41 @@ INSERT INTO `barrel` (`ID`, `strainFK`, `fillLevel`, `pressingFK`, `date`) VALUE
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `bottle`
+-- Table structure for table `bottle`
 --
 
 CREATE TABLE IF NOT EXISTS `bottle` (
-  `ID` int(255) NOT NULL AUTO_INCREMENT,
+`ID` int(255) NOT NULL,
   `name` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `ml` int(255) NOT NULL,
-  `amount` int(255) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=492 ;
+  `amount` int(255) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=493 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Daten für Tabelle `bottle`
+-- Dumping data for table `bottle`
 --
 
 INSERT INTO `bottle` (`ID`, `name`, `ml`, `amount`) VALUES
-(491, '100ml', 100, 20);
+(491, '100ml', 100, 20),
+(492, '250ml', 250, 0);
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `bottling`
+-- Table structure for table `bottling`
 --
 
 CREATE TABLE IF NOT EXISTS `bottling` (
-  `ID` int(255) NOT NULL AUTO_INCREMENT,
+`ID` int(255) NOT NULL,
   `pressingFK` int(255) NOT NULL,
   `bottleFK` int(255) NOT NULL,
   `date` date NOT NULL,
   `amount` int(255) NOT NULL,
-  `strainFK` int(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `bottleFK` (`bottleFK`),
-  KEY `pressingFK` (`pressingFK`),
-  KEY `strainFK` (`strainFK`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=824 ;
+  `strainFK` int(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=824 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Daten für Tabelle `bottling`
+-- Dumping data for table `bottling`
 --
 
 INSERT INTO `bottling` (`ID`, `pressingFK`, `bottleFK`, `date`, `amount`, `strainFK`) VALUES
@@ -296,23 +289,22 @@ INSERT INTO `bottling` (`ID`, `pressingFK`, `bottleFK`, `date`, `amount`, `strai
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `customer`
+-- Table structure for table `customer`
 --
 
 CREATE TABLE IF NOT EXISTS `customer` (
-  `ID` int(255) NOT NULL AUTO_INCREMENT,
+`ID` int(255) NOT NULL,
   `firstname` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `lastname` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `company` varchar(255) COLLATE latin1_general_ci DEFAULT NULL,
   `road` varchar(255) COLLATE latin1_general_ci DEFAULT NULL,
   `zip` varchar(255) COLLATE latin1_general_ci DEFAULT NULL,
   `city` varchar(255) COLLATE latin1_general_ci DEFAULT NULL,
-  `country` varchar(255) COLLATE latin1_general_ci DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=480 ;
+  `country` varchar(255) COLLATE latin1_general_ci DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=480 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Daten für Tabelle `customer`
+-- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`ID`, `firstname`, `lastname`, `company`, `road`, `zip`, `city`, `country`) VALUES
@@ -331,17 +323,16 @@ INSERT INTO `customer` (`ID`, `firstname`, `lastname`, `company`, `road`, `zip`,
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `gen_firstnames`
+-- Table structure for table `gen_firstnames`
 --
 
 CREATE TABLE IF NOT EXISTS `gen_firstnames` (
-  `ID` int(255) NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=64 ;
+`ID` int(255) NOT NULL,
+  `firstname` varchar(255) COLLATE latin1_general_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Daten für Tabelle `gen_firstnames`
+-- Dumping data for table `gen_firstnames`
 --
 
 INSERT INTO `gen_firstnames` (`ID`, `firstname`) VALUES
@@ -405,17 +396,16 @@ INSERT INTO `gen_firstnames` (`ID`, `firstname`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `gen_lastnames`
+-- Table structure for table `gen_lastnames`
 --
 
 CREATE TABLE IF NOT EXISTS `gen_lastnames` (
-  `ID` int(255) NOT NULL AUTO_INCREMENT,
-  `lastname` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=151 ;
+`ID` int(255) NOT NULL,
+  `lastname` varchar(255) COLLATE latin1_general_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Daten für Tabelle `gen_lastnames`
+-- Dumping data for table `gen_lastnames`
 --
 
 INSERT INTO `gen_lastnames` (`ID`, `lastname`) VALUES
@@ -571,22 +561,19 @@ INSERT INTO `gen_lastnames` (`ID`, `lastname`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `label`
+-- Table structure for table `label`
 --
 
 CREATE TABLE IF NOT EXISTS `label` (
-  `ID` int(255) NOT NULL AUTO_INCREMENT,
+`ID` int(255) NOT NULL,
   `name` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `bottleFK` int(255) DEFAULT NULL,
   `strainFK` int(255) DEFAULT NULL,
-  `amount` int(255) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `strainFK` (`strainFK`),
-  KEY `bottleFK` (`bottleFK`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3843 ;
+  `amount` int(255) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=3855 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Daten für Tabelle `label`
+-- Dumping data for table `label`
 --
 
 INSERT INTO `label` (`ID`, `name`, `bottleFK`, `strainFK`, `amount`) VALUES
@@ -602,58 +589,66 @@ INSERT INTO `label` (`ID`, `name`, `bottleFK`, `strainFK`, `amount`) VALUES
 (3837, '100ml Grenache', 491, 150, 0),
 (3838, '100ml Grüner Veltliner', 491, 151, 0),
 (3839, '100ml Weißburgunder', 491, 152, 0),
-(3840, '100ml Welschriesling', 491, 153, 0);
+(3840, '100ml Welschriesling', 491, 153, 0),
+(3843, '250ml Chardonnay', 492, 142, 0),
+(3844, '250ml Sauvignon Blanc', 492, 143, 0),
+(3845, '250ml Merlot', 492, 144, 0),
+(3846, '250ml  Grauburgunder', 492, 145, 0),
+(3847, '250ml Spätburgunder', 492, 146, 0),
+(3848, '250ml Gamay', 492, 147, 0),
+(3849, '250ml Chenin', 492, 148, 0),
+(3850, '250ml Riesling', 492, 149, 0),
+(3851, '250ml Grenache', 492, 150, 0),
+(3852, '250ml Grüner Veltliner', 492, 151, 0),
+(3853, '250ml Weißburgunder', 492, 152, 0),
+(3854, '250ml Welschriesling', 492, 153, 0);
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `pressing`
+-- Table structure for table `pressing`
 --
 
 CREATE TABLE IF NOT EXISTS `pressing` (
-  `ID` int(255) NOT NULL AUTO_INCREMENT,
+`ID` int(255) NOT NULL,
   `date` date NOT NULL,
   `amount` int(255) NOT NULL,
-  `bottled` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1922 ;
+  `bottled` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=1922 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Daten für Tabelle `pressing`
+-- Dumping data for table `pressing`
 --
 
 INSERT INTO `pressing` (`ID`, `date`, `amount`, `bottled`) VALUES
-(1910, '2014-11-18', 700916, 1),
-(1911, '2014-11-18', 693649, 1),
-(1912, '2014-11-18', 663511, 1),
-(1913, '2014-11-18', 689891, 1),
-(1914, '2014-11-18', 697692, 1),
-(1915, '2014-11-18', 619939, 1),
-(1916, '2014-11-18', 627351, 1),
-(1917, '2014-11-18', 619302, 1),
-(1918, '2014-11-18', 670523, 1),
-(1919, '2014-11-18', 600746, 1),
-(1920, '2014-11-18', 631265, 1),
-(1921, '2014-11-18', 633690, 1);
+(1910, '2014-11-18', 140, 0),
+(1911, '2014-11-18', 85, 0),
+(1912, '2014-11-18', 38, 0),
+(1913, '2014-11-18', 140, 0),
+(1914, '2014-11-18', 30, 0),
+(1915, '2014-11-18', 194, 0),
+(1916, '2014-11-18', 394, 0),
+(1917, '2014-11-18', 293, 0),
+(1918, '2014-11-18', 100, 0),
+(1919, '2014-11-18', 139, 0),
+(1920, '2014-11-18', 130, 0),
+(1921, '2014-11-18', 84, 0);
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `product`
+-- Table structure for table `product`
 --
 
 CREATE TABLE IF NOT EXISTS `product` (
-  `ID` int(255) NOT NULL AUTO_INCREMENT,
+`ID` int(255) NOT NULL,
   `strainFK` int(255) NOT NULL,
   `bottleFK` int(255) DEFAULT NULL,
-  `amount` int(255) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `strainFK` (`strainFK`),
-  KEY `bottleFK` (`bottleFK`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=124 ;
+  `amount` int(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Daten für Tabelle `product`
+-- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`ID`, `strainFK`, `bottleFK`, `amount`) VALUES
@@ -685,47 +680,41 @@ INSERT INTO `product` (`ID`, `strainFK`, `bottleFK`, `amount`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `shipment`
+-- Table structure for table `shipment`
 --
 
 CREATE TABLE IF NOT EXISTS `shipment` (
-  `ID` int(255) NOT NULL AUTO_INCREMENT,
+`ID` int(255) NOT NULL,
   `customerFK` int(255) DEFAULT NULL,
-  `date` date NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `customerFK` (`customerFK`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `shipmentitem`
+-- Table structure for table `shipmentitem`
 --
 
 CREATE TABLE IF NOT EXISTS `shipmentitem` (
-  `ID` int(255) NOT NULL AUTO_INCREMENT,
+`ID` int(255) NOT NULL,
   `productFK` int(255) NOT NULL,
   `shipmentFK` int(255) DEFAULT NULL,
-  `amount` int(255) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `productFK` (`productFK`),
-  KEY `shipmentFK` (`shipmentFK`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+  `amount` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `strain`
+-- Table structure for table `strain`
 --
 
 CREATE TABLE IF NOT EXISTS `strain` (
-  `ID` int(255) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=159 ;
+`ID` int(255) NOT NULL,
+  `name` varchar(255) COLLATE latin1_general_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=159 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Daten für Tabelle `strain`
+-- Dumping data for table `strain`
 --
 
 INSERT INTO `strain` (`ID`, `name`) VALUES
@@ -746,72 +735,222 @@ INSERT INTO `strain` (`ID`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `ID` int(255) NOT NULL AUTO_INCREMENT,
+`ID` int(255) NOT NULL,
   `username` varchar(64) COLLATE latin1_general_ci NOT NULL,
   `password` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `email` varchar(64) COLLATE latin1_general_ci NOT NULL,
-  `admin` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=92 ;
+  `admin` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Daten für Tabelle `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`ID`, `username`, `password`, `email`, `admin`) VALUES
-(90, 'wandexer', 'a', 'a@a.at', 0),
-(91, 'fabi', 'asdf', 'asdf@a.at', 0);
+(90, 'wandexer', 'a', 'a@a.at', 1),
+(91, 'fabi', 'asdf', 'asdf@a.at', 1);
 
 --
--- Constraints der exportierten Tabellen
+-- Indexes for dumped tables
 --
 
 --
--- Constraints der Tabelle `barrel`
+-- Indexes for table `barrel`
 --
 ALTER TABLE `barrel`
-  ADD CONSTRAINT `barrel_ibfk_1` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`),
-  ADD CONSTRAINT `barrel_ibfk_2` FOREIGN KEY (`pressingFK`) REFERENCES `pressing` (`ID`);
+ ADD PRIMARY KEY (`ID`), ADD KEY `strainID` (`strainFK`), ADD KEY `pressingFK` (`pressingFK`);
 
 --
--- Constraints der Tabelle `bottling`
+-- Indexes for table `bottle`
+--
+ALTER TABLE `bottle`
+ ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `bottling`
 --
 ALTER TABLE `bottling`
-  ADD CONSTRAINT `bottling_ibfk_3` FOREIGN KEY (`pressingFK`) REFERENCES `pressing` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `bottling_ibfk_4` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`) ON DELETE SET NULL ON UPDATE NO ACTION,
-  ADD CONSTRAINT `bottling_ibfk_5` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `bottling_ibfk_7` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`) ON DELETE SET NULL;
+ ADD PRIMARY KEY (`ID`), ADD KEY `bottleFK` (`bottleFK`), ADD KEY `pressingFK` (`pressingFK`), ADD KEY `strainFK` (`strainFK`);
 
 --
--- Constraints der Tabelle `label`
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+ ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `gen_firstnames`
+--
+ALTER TABLE `gen_firstnames`
+ ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `gen_lastnames`
+--
+ALTER TABLE `gen_lastnames`
+ ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `label`
 --
 ALTER TABLE `label`
-  ADD CONSTRAINT `label_ibfk_2` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `label_ibfk_3` FOREIGN KEY (`bottleFK`) REFERENCES `bottle` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE;
+ ADD PRIMARY KEY (`ID`), ADD KEY `strainFK` (`strainFK`), ADD KEY `bottleFK` (`bottleFK`);
 
 --
--- Constraints der Tabelle `product`
+-- Indexes for table `pressing`
+--
+ALTER TABLE `pressing`
+ ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_3` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`),
-  ADD CONSTRAINT `product_ibfk_4` FOREIGN KEY (`bottleFK`) REFERENCES `bottle` (`ID`) ON DELETE SET NULL ON UPDATE NO ACTION;
+ ADD PRIMARY KEY (`ID`), ADD KEY `strainFK` (`strainFK`), ADD KEY `bottleFK` (`bottleFK`);
 
 --
--- Constraints der Tabelle `shipment`
+-- Indexes for table `shipment`
 --
 ALTER TABLE `shipment`
-  ADD CONSTRAINT `shipment_ibfk_2` FOREIGN KEY (`customerFK`) REFERENCES `customer` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE;
+ ADD PRIMARY KEY (`ID`), ADD KEY `customerFK` (`customerFK`);
 
 --
--- Constraints der Tabelle `shipmentitem`
+-- Indexes for table `shipmentitem`
 --
 ALTER TABLE `shipmentitem`
-  ADD CONSTRAINT `shipmentitem_ibfk_1` FOREIGN KEY (`productFK`) REFERENCES `product` (`ID`) ON UPDATE NO ACTION,
-  ADD CONSTRAINT `shipmentitem_ibfk_2` FOREIGN KEY (`shipmentFK`) REFERENCES `shipment` (`ID`) ON UPDATE NO ACTION;
+ ADD PRIMARY KEY (`ID`), ADD KEY `productFK` (`productFK`), ADD KEY `shipmentFK` (`shipmentFK`);
+
+--
+-- Indexes for table `strain`
+--
+ALTER TABLE `strain`
+ ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+ ADD PRIMARY KEY (`ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `barrel`
+--
+ALTER TABLE `barrel`
+MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=39882;
+--
+-- AUTO_INCREMENT for table `bottle`
+--
+ALTER TABLE `bottle`
+MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=493;
+--
+-- AUTO_INCREMENT for table `bottling`
+--
+ALTER TABLE `bottling`
+MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=824;
+--
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=480;
+--
+-- AUTO_INCREMENT for table `gen_firstnames`
+--
+ALTER TABLE `gen_firstnames`
+MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=64;
+--
+-- AUTO_INCREMENT for table `gen_lastnames`
+--
+ALTER TABLE `gen_lastnames`
+MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=151;
+--
+-- AUTO_INCREMENT for table `label`
+--
+ALTER TABLE `label`
+MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3855;
+--
+-- AUTO_INCREMENT for table `pressing`
+--
+ALTER TABLE `pressing`
+MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1922;
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=124;
+--
+-- AUTO_INCREMENT for table `shipment`
+--
+ALTER TABLE `shipment`
+MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `shipmentitem`
+--
+ALTER TABLE `shipmentitem`
+MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `strain`
+--
+ALTER TABLE `strain`
+MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=159;
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=92;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `barrel`
+--
+ALTER TABLE `barrel`
+ADD CONSTRAINT `barrel_ibfk_1` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`),
+ADD CONSTRAINT `barrel_ibfk_2` FOREIGN KEY (`pressingFK`) REFERENCES `pressing` (`ID`);
+
+--
+-- Constraints for table `bottling`
+--
+ALTER TABLE `bottling`
+ADD CONSTRAINT `bottling_ibfk_3` FOREIGN KEY (`pressingFK`) REFERENCES `pressing` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `bottling_ibfk_4` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`) ON DELETE SET NULL ON UPDATE NO ACTION,
+ADD CONSTRAINT `bottling_ibfk_5` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`) ON DELETE SET NULL ON UPDATE SET NULL,
+ADD CONSTRAINT `bottling_ibfk_7` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `label`
+--
+ALTER TABLE `label`
+ADD CONSTRAINT `label_ibfk_2` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `label_ibfk_3` FOREIGN KEY (`bottleFK`) REFERENCES `bottle` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `product`
+--
+ALTER TABLE `product`
+ADD CONSTRAINT `product_ibfk_3` FOREIGN KEY (`strainFK`) REFERENCES `strain` (`ID`),
+ADD CONSTRAINT `product_ibfk_4` FOREIGN KEY (`bottleFK`) REFERENCES `bottle` (`ID`) ON DELETE SET NULL ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `shipment`
+--
+ALTER TABLE `shipment`
+ADD CONSTRAINT `shipment_ibfk_2` FOREIGN KEY (`customerFK`) REFERENCES `customer` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `shipmentitem`
+--
+ALTER TABLE `shipmentitem`
+ADD CONSTRAINT `shipmentitem_ibfk_1` FOREIGN KEY (`productFK`) REFERENCES `product` (`ID`) ON UPDATE NO ACTION,
+ADD CONSTRAINT `shipmentitem_ibfk_2` FOREIGN KEY (`shipmentFK`) REFERENCES `shipment` (`ID`) ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
