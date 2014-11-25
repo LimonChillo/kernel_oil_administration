@@ -130,13 +130,33 @@ if(isset($_POST['insertBarrel']))
 
 if(isset($_POST['insertBottling']))
 {
-  $date = strip_tags($_POST['date']);
-  $amount = strip_tags($_POST['amount']);
-  $pressing = strip_tags($_POST['pressing']);
-  $bottle = strip_tags($_POST['bottle']);
+  //ToDo  
+  //Flaschen & Etiketten überprüfen 
+  //Update isBotteld in Pressing 
+  //Produkte hinzufügen
 
-  insertBottling($date, $amount, $pressing, $bottle);
-  header("Location:addBottling.php?msg=Abfüllung hinzugefügt&err=0");
+  $date = strip_tags($_POST['date']);
+  $pressing = strip_tags($_POST['pressing']);
+  $strainFK = strip_tags($_POST['strainFK']);
+  $count = strip_tags($_POST['count']);
+
+  //check for enough bottels and labels
+  for($i = 0; $i < $count; $i++)
+  {
+
+  }
+
+  //insert dateset for each bottle type
+  for($i = 0; $i < $count; $i++)
+  {
+    insertProduct($strainFK,strip_tags($_POST[$i.'_bottleId']),strip_tags($_POST[$i.'_amount']));
+    insertBottling($pressing, strip_tags($_POST[$i.'_bottleId']), strip_tags($_POST[$i.'_amount']), $date,  $strainFK);
+  }
+
+  bottlePressing( $pressing,true); 
+
+  
+  header("Location:getPressings.php?msg=Abfüllung erfolgreich hinzugefügt&err=0");
 }
 
 if(isset($_POST['insertCustomer']))
