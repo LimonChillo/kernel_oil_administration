@@ -39,7 +39,7 @@ include "head.php";
 		</div>
 		<div class="col-md-4">
 			<h3>Etiketten</h3>
-			<?php printDatarows("label", true, "amount", array("name", "amount")) ?>
+			<?php printDatarows("labels", true, "amount", array("name", "bottle", "amount")) ?>
 		</div>
 	</div>
 	</div>

@@ -101,11 +101,15 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0)
   if($tab == "labels" || $tab == "label")
   {
     $datarows = getJoinedLabels($orderBy);
-    $columns = array((object) array('Field'=>'ID'),
-                      (object) array('Field'=> 'Sorte'),
-                        (object) array('Field'=> 'Flasche'),
-                          (object) array('Field'=> 'Menge'));
-    $showData = $columns;
+    $columns = array();
+    foreach ($showCol as $col) {
+      array_push($columns, (object) array('Field'=>$col));
+    }
+    // $columns = array((object) array('Field'=>'ID'),
+    //                   (object) array('Field'=> 'Sorte'),
+    //                     (object) array('Field'=> 'Flasche'),
+    //                       (object) array('Field'=> 'Menge'));
+    // // $showData = array(array('Field'=>'ID'));
   }
   else
   {
@@ -119,11 +123,12 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0)
 
   $adminColumn = 999;
   $counter = 0;
-
+  if($tab == "labels")
+    $counter = 1;
   foreach ($columns as $headline) {
     if($headline->Field == "admin")
       $adminColumn = $counter;
-    if(in_array($headline->Field, $showCol) || $showCol == null)
+    if(in_array($headline->Field, $showCol) || ($showCol == null && $tab != "labels"))
     {
       echo "<th> ".ucfirst($headline->Field)."</th>";
       array_push($showData, $counter);
@@ -142,7 +147,7 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0)
         break;
     foreach ($datarow as $data){
 
-      if(in_array((string)$counter, $showData))
+      if(in_array($counter, $showData))
       {
         if($counter == $adminColumn)
         {

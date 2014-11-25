@@ -1,7 +1,6 @@
 <?php
 $level = 2;
 include "head.php";
-?>
 
   $bottle = getBottleByID($_GET['id']);
 ?>
