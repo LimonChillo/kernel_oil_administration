@@ -65,7 +65,7 @@ function updateUser($id, $username, $password, $email, $admin) {
 
 function updateProduct($strain, $bottle, $amount) {
   $dbh = connectToDB();
-  $sth = $dbh->prepare( "UPDATE product SET amount = ? WHERE strainFK = ? AND bottleFK");
+  $sth = $dbh->prepare( "UPDATE product SET amount = amount - ? WHERE strainFK = ? AND bottleFK = ?");
   $sth->execute(array($amount, $strain, $bottle));
 }
 

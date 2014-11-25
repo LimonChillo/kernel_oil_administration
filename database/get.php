@@ -268,7 +268,7 @@ function getShipmentIDByCustomerByDate($customer, $date)
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT sh.ID as ID 
   FROM shipment sh
-  WHERE sh.date = ? AND sh.customerFK = ?
+  WHERE sh.customerFK = ? AND sh.date = ? 
   LIMIT 1");
   $sth->execute(array( $customer, $date ));
   return $sth->fetch();
