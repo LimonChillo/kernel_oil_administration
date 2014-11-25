@@ -4,6 +4,7 @@ include "head.php";
 ?>
 <div class="container">
 	<h1>Fässer</h1>
+  <?php printMessage(); ?>
   <?php if (isAdmin($_SESSION['user'])) : ?>
 	<a href="addBarrel.php" class="btn btn-default">Fässer hinzufügen</a>
   <?php endif; ?>

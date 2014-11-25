@@ -4,6 +4,7 @@ include "head.php";
 ?>
 <div class="container">
 	<h1>noch nicht abgefüllte Pressungen</h1>
+  <?php printMessage(); ?>
 	<table class="table table-hover">
   		<tr>
   			<th>#</th>

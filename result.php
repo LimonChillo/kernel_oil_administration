@@ -54,11 +54,11 @@ if(isset($_POST['insertBottle']))
   $ml = strip_tags($_POST['ml']);
   if (getBottleByMl($ml) != null)
   {
-    header("Location:addBottle.php?error=0");
+    header("Location:addBottle.php?msg=Flaschengröße existiert bereits&err=1");
   }
 
   insertBottle($ml);
-  header("Location:getBottles.php?msg=1");
+  header("Location:getBottles.php?msg=Flasche hinzugefügt$err=0");
 }
 
 if(isset($_POST['updateBottle']))
@@ -67,11 +67,11 @@ if(isset($_POST['updateBottle']))
   if(sizeOf(getBottleByID($_POST['updateBottle'])) != 0)
     {
       updateBottle($_POST['updateBottle'], $ml);
-      header("Location:getBottles.php?msg=Flaschentyp geändert");
+      header("Location:getBottles.php?msg=Flaschentyp geändert&err=0");
     }
   else
   {
-    header("Location:getBottles.php?msg=Flasche existiert nicht");
+    header("Location:getBottles.php?msg=Flasche existiert nicht&err=1");
   }
 }
 
@@ -80,11 +80,11 @@ if(isset($_POST['deleteBottle']))
   if(sizeOf(getBottleByID($_POST['deleteBottle'])) != 0)
     {
       deleteBottleByID($_POST['deleteBottle']);
-      header("Location:getBottles.php?msg=Flaschentyp gelöscht");
+      header("Location:getBottles.php?msg=Flaschentyp gelöscht&err=0");
     }
   else
   {
-    header("Location:getBottles.php?msg=Flaschentyp existiert nicht");
+    header("Location:getBottles.php?msg=Flaschentyp existiert nicht&err=1");
   }
 }
 
@@ -96,11 +96,11 @@ if(isset($_POST['stockBottle']))
     {
 
       stockBottle($bottle->ID, $amount);
-      header("Location:getBottles.php?msg=Flaschen eingelagert");
+      header("Location:getBottles.php?msg=Flaschen eingelagert&err=0");
     }
   else
   {
-    header("Location:getBottles.php?msg=Flasche existiert nicht");
+    header("Location:getBottles.php?msg=Flasche existiert nicht&err=1");
   }
 }
 
@@ -109,9 +109,13 @@ if(isset($_POST['insertPressing']))
   $date = strip_tags($_POST['date']);
   $amount = strip_tags($_POST['amount']);
   $barrels = strip_tags($_POST['barrels']);
-
-  insertPressing($date, $amount, $barrels);
-  header("Location:addPressing.php?msg=1");
+  try{
+    insertPressing($date, $amount, $barrels);
+    header("Location:addPressing.php?msg=Pressung hinzugefügt&err=0");
+  } catch (Exception $e)
+  {
+    header("Location:addPressing.php?msg=Hinzufügen fehlgeschlagen&err=1");
+  }
 }
 
 if(isset($_POST['insertBarrel']))
@@ -121,7 +125,7 @@ if(isset($_POST['insertBarrel']))
   $strain = strip_tags($_POST['strain']);
 
   insertBarrel($strain, $literPerBarrel,$date);
-  header("Location:addBarrel.php?msg=1");
+  header("Location:addBarrel.php?msg=Fass hinzugefügt&err=0");
 }
 
 if(isset($_POST['insertBottling']))
@@ -132,7 +136,7 @@ if(isset($_POST['insertBottling']))
   $bottle = strip_tags($_POST['bottle']);
 
   insertBottling($date, $amount, $pressing, $bottle);
-  header("Location:addBottling.php?msg=1");
+  header("Location:addBottling.php?msg=Abfüllung hinzugefügt&err=0");
 }
 
 if(isset($_POST['insertCustomer']))
@@ -155,9 +159,9 @@ if(isset($_POST['insertCustomer']))
   }
   catch(Exception $e)
   {
-    header("Location:addCustomer.php?msg=Es ist ein Fehler aufgetreten. ");
+    header("Location:addCustomer.php?msg=Es ist ein Fehler aufgetreten&err=1 ");
   }
-  header("Location:getCustomers.php?msg=Kunde hinzugefügt");
+  header("Location:getCustomers.php?msg=Kunde hinzugefügt&err=0");
 }
 
 if(isset($_POST['updateCustomer']))
@@ -173,11 +177,11 @@ if(isset($_POST['updateCustomer']))
   if(sizeOf(getCustomerByID($_POST['updateCustomer'])) != 0)
     {
       updateCustomer($_POST['updateCustomer'], $firstname, $lastname, $company, $road, $zip, $city, $country);
-      header("Location:getCustomers.php?msg=1");
+      header("Location:getCustomers.php?msg=Kunde bearbeitet&err=0");
     }
   else
   {
-    header("Location:getCustomers.php?msg=0");
+    header("Location:getCustomers.php?msg=Kunde existiert nicht&err=1");
   }
 }
 
@@ -187,11 +191,11 @@ if(isset($_POST['deleteCustomer']))
   if(sizeOf(getCustomerByID($_POST['deleteCustomer'])) != 0)
     {
       deleteCustomerByID($_POST['deleteCustomer']);
-      header("Location:getCustomers.php?msg=2");
+      header("Location:getCustomers.php?msg=Kunde gelöscht&err=0");
     }
   else
   {
-    header("Location:getCustomers.php?msg=3");
+    header("Location:getCustomers.php?msg=Kunde existiert nicht&err=1");
   }
 }
 
@@ -209,7 +213,7 @@ if(isset($_POST['insertUser']))
   else
   {
     insertUser($username, $password, $email, $admin);
-    header("Location:getUsers.php?msg=Benutzer hinzugefügt");
+    header("Location:getUsers.php?msg=Benutzer hinzugefügt&err=0");
   }
 }
 
@@ -225,11 +229,11 @@ if(isset($_POST['updateUser']))
   if(sizeOf($user) != 0)
     {
       updateUser($_POST['updateUser'], $username, $password, $email, $admin);
-      header("Location:getUsers.php?msg=Benutzer bearbeitet");
+      header("Location:getUsers.php?msg=Benutzer bearbeitet&err=0");
     }
   else
   {
-    header("Location:getUsers.php?msg=Benutzer existiert nicht");
+    header("Location:getUsers.php?msg=Benutzer existiert nicht&err=1");
   }
 }
 
@@ -239,11 +243,11 @@ if(isset($_POST['deleteUser']))
   if(sizeOf(getUserByID($_POST['deleteUser'])) != 0)
     {
       deleteUserByID($_POST['deleteUser']);
-      header("Location:getUsers.php?msg=Benutzer entfernt");
+      header("Location:getUsers.php?msg=Benutzer entfernt&err=0");
     }
   else
   {
-    header("Location:getCustomers.php?msg=Benutzer existiert nicht");
+    header("Location:getCustomers.php?msg=Benutzer existiert nicht&err=1");
   }
 }
 
@@ -253,7 +257,7 @@ if(isset($_POST['stockBottles']))
   $name = strip_tags($_POST['name']);
 
   stockBottles($amount, $name);
-  header("Location:stockBottles.php?msg=Flaschen eingelagert");
+  header("Location:stockBottles.php?msg=Flaschen eingelagert&err=0");
 }
 
 if(isset($_POST['stockLabels']))
@@ -263,7 +267,7 @@ if(isset($_POST['stockLabels']))
   $strain = strip_tags($_POST['strain']);
 
   stockLabels($amount,$bottle,$strain);
-  header("Location:stockLabels.php?msg=Etiketten eingelagert");
+  header("Location:stockLabels.php?msg=Etiketten eingelagert&err=0");
 }
 
 if(isset($_POST['bottlePresssing']))
@@ -272,7 +276,7 @@ if(isset($_POST['bottlePresssing']))
   $bool = strip_tags($_POST['bool']);
 
   bottlePresssing($pressing, $bool);
-  header("Location:bottlePressing.php?msg=Pressung abgefüllt");
+  header("Location:bottlePressing.php?msg=Pressung abgefüllt&err=0");
 }
 
 if (isset($_POST['login']))
@@ -288,7 +292,7 @@ if (isset($_POST['login']))
     session_start();
     $_SESSION['username'] = $user->username;
     $_SESSION['user'] = $user->ID;
-    header("Location:index.php");
+    header("Location:index.php?msg=Willkommen ".$_SESSION['username']."&err=0");
   }
   else
   {
@@ -311,11 +315,11 @@ if (isset($_POST['insertDelivery']))
 
   insertShipment($customer, $date);
   $shipmentID = getShipmentIDByCustomerByDate($customer, $date);
-  
+
   for($i = 0; i<sizeOf($strains); i++)
   {
     if($amounts[$i] <=  (getProductByStrainByBottle($strains[$i], $bottles[i]) -> amount)
-    { 
+    {
       insertShipmentItem(getProductByStrainByBottle($strains[$i], $bottles[i]) -> ID, $shipmentID, $amounts[$i])
       updateProduct($strain, $bottle, $amount)
     }
@@ -323,8 +327,8 @@ if (isset($_POST['insertDelivery']))
     {
       header("Location:addDelivery.php?msg=Nicht genug " . getStrainByID($strains[$i]) -> name . " in der Größe "  . getBottleByID($bottles[$i]) -> name . . " vorhanden&err=1");
     }
-  }  
-  
+  }
+
   header("Location:addDelivery.php?msg=Lieferung eingetragen&err=0");
 }*/
 ?>

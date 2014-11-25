@@ -4,6 +4,7 @@ include "head.php";
 ?>
 <div class="container">
 	<h1>Pressung hinzufügen</h1>
+	<?php printMessage(); ?>
 	<?php
 	if(isset($_POST["choosenBarrels"]))
 	{

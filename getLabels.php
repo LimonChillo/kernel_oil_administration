@@ -4,6 +4,7 @@ include "head.php";
 ?>
 <div class="container">
   <h1>Etiketten</h1>
+  <?php printMessage(); ?>
   </p>
   <?php printDatarows("labels", true, "sorte"); ?>
 
