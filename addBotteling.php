@@ -7,7 +7,7 @@ include "head.php";
 function changeAmount()
 {
 	var res = event.target.name.split("_");
-	var inputName = 'count_'+res[1]+'_amount';
+	var inputName = res[0]+'_display';
 	var input = $("input[name="+inputName+"]");
 
 	var ml = $("input[name='ml']").eq(event.target.id).val();
@@ -17,6 +17,8 @@ function changeAmount()
 	var value = event.target.value;
 	value = parseInt(value);
 	input.val(parseFloat(value * ml/1000) + " l");
+
+
 
 	updateDisplay();
 }
@@ -106,7 +108,7 @@ function updateDisplay()
 				<input type="text" onKeyUp="changeAmount()" id="<?php echo $form_id; ?>" name="<?php echo $form_id; ?>_amount" class="form-control count" value='<?php echo $amountPerBottleType/$bottle->ml; ?>' >
 			</div>
 			<div class=" col-sm-1">
-				<input type="text" class="form-control" name="count_<?php echo $bottle->ml;?>_amount"  value="<?php echo ($amountPerBottleType / 1000 ).' l'; ?>" readonly>
+				<input type="text" class="form-control" name="<?php echo $form_id; ?>_display"  value="<?php echo ($amountPerBottleType / 1000 ).' l'; ?>" readonly>
 			</div>
 				<input type="hidden"  name="<?php echo $form_id ?>_bottleId" value="<?php echo  $bottle->ID; ?>">
 		</div>
