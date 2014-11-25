@@ -9,7 +9,7 @@ include "head.php";
   <a href="addStrain.php" class="btn btn-default">Sorte hinzufügen</a>
   <?php endif; ?>
   </p>
-  <?php printDatarows("strain", false, "name"); ?>
+  <?php printDatarows("strain", false, "name", array()); ?>
 
 
   </div>

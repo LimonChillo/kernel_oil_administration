@@ -6,7 +6,7 @@ include "head.php";
   <h1>Etiketten</h1>
   <?php printMessage(); ?>
   </p>
-  <?php printDatarows("labels", true, "sorte"); ?>
+  <?php printDatarows("labels", true, "sorte", array()); ?>
 
 
   </div>

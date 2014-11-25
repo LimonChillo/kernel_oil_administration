@@ -34,7 +34,7 @@ function updateDisplay()
 		sum += parseInt(values.eq(i).val()) * parseInt(ml.eq(i).val())
 	}
 
-	var totalAmount = $("input[name='amount']").val();
+	var totalAmount = $("input[name='total_amount']").val();
 
 	var diff = totalAmount - (sum/1000);
 	/*
@@ -64,23 +64,37 @@ function updateDisplay()
 	<?php $pressing = getPressingById($_GET['id']); ?>
 	<?php $allBottels = getAllBottles(); ?>
 
-
 	<form class="form-horizontal" role="form" method="post" action="result.php">
 		<div class="form-group">
 			<label  class="col-sm-2 control-label">Pressnummer</label>
 			<div class="col-sm-2">
-				<input type="text" class="form-control" value='<?php echo $pressing->ID; ?>' name="id" readonly>
+				<input type="text" class="form-control" value='<?php echo $pressing->ID; ?>' name="pressing" readonly>
+			</div>
+		</div>
+		<div class="form-group">
+			<label  class="col-sm-2 control-label">Datum</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" value='<?php echo $pressing->date; ?>' name="date" readonly>
 			</div>
 		</div>
 		<div class="form-group">
 			<label  class="col-sm-2 control-label">Menge(l)</label>
 			<div class="col-sm-2">
-				<input type="text" class="form-control" value='<?php echo $pressing->amount; ?>' name="amount" readonly>
+				<input type="text" class="form-control" value='<?php echo $pressing->amount; ?>' name="total_amount" readonly>
+			</div>
+		</div>
+		<div class="form-group">
+			<label  class="col-sm-2 control-label">Sorte</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" value='<?php echo getStrainNameByID(getStrainIdByPressingId($pressing->ID)); ?>' name="strain" readonly>
 			</div>
 		</div>
 		<div class="form-group">
 			<label  class="col-sm-4 control-label">Abfüllung in die einzelnen Flaschen</label>
 		</div>
+
+		<input type="hidden"  name="count" value="<?php echo getAmountOfBottleTypes(); ?>">
+
 		<?php $amountPerBottleType =  $pressing->amount*1000 / getAmountOfBottleTypes()?>
 		<?php $form_id = 0; foreach ($allBottels as $bottle): ?>
 		<div class="form-group">
@@ -88,12 +102,12 @@ function updateDisplay()
 				<input type="text" class="form-control" value='<?php echo $bottle->ml . " ml"; ?>' name="ml" readonly>
 			</div>
 			<div class=" col-sm-1">
-				<input type="text" onKeyUp="changeAmount()" id="<?php echo $form_id; ?>" class="form-control count" value='<?php echo $amountPerBottleType/$bottle->ml; ?>' name="count_<?php echo $bottle->ml; ?>">
+				<input type="text" onKeyUp="changeAmount()" id="<?php echo $form_id; ?>" name="<?php echo $form_id; ?>_amount" class="form-control count" value='<?php echo $amountPerBottleType/$bottle->ml; ?>' >
 			</div>
 			<div class=" col-sm-1">
 				<input type="text" class="form-control" name="count_<?php echo $bottle->ml;?>_amount"  value="<?php echo ($amountPerBottleType / 1000 ).' l'; ?>" readonly>
 			</div>
-				<input type="hidden"  name="bottle_id" value="<?php echo  $form_id; ?>">
+				<input type="hidden"  name="<?php echo $form_id ?>_bottleId" value="<?php echo  $bottle->ID; ?>">
 		</div>
 		<?php $form_id ++; endforeach;?>
 		<div class="form-group">
@@ -103,7 +117,7 @@ function updateDisplay()
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-3 col-sm-1">
-				<button type="submit" name="insertBotteling" class="btn btn-default" disable="true">Abfüllen</button>
+				<button type="submit" name="insertBottling" class="btn btn-default" disable="true">Abfüllen</button>
 			</div>
 		</div>
 	</form>

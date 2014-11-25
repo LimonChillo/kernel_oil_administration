@@ -37,6 +37,7 @@
               <li><a href="getBarrels.php">Fässer</a></li>
               <li><a href="getPressings.php ">Pressung</a></li>
               <li><a href="">Produkte</a></li>
+              <li><a href="getStrains.php">Sorten</a></li>
               <?php if(isAdmin($_SESSION['user'])): ?>
               <li><a href="getCustomers.php">Kunden</a></li>
               <li><a href="getDeliveries.php">Lieferungen</a></li>

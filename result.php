@@ -130,12 +130,24 @@ if(isset($_POST['insertBarrel']))
 
 if(isset($_POST['insertBottling']))
 {
-  $date = strip_tags($_POST['date']);
-  $amount = strip_tags($_POST['amount']);
-  $pressing = strip_tags($_POST['pressing']);
-  $bottle = strip_tags($_POST['bottle']);
+  //ToDo  
+  //Flaschen & Etiketten überprüfen 
+  //Update isBotteld in Pressing 
 
-  insertBottling($date, $amount, $pressing, $bottle);
+  $date = strip_tags($_POST['date']);
+  $pressing = strip_tags($_POST['pressing']);
+
+  $count = strip_tags($_POST['count']);
+
+  //insert dateset for each bottle type
+  for($i = 0; $i < $count; $i++)
+  {
+    echo(" ".$_POST[$i.'_amount']. " # ");
+    echo(" ".$_POST[$i.'_bottleId']. " # ");
+    insertBottling($pressing, strip_tags($_POST[$i.'_bottleId']), strip_tags($_POST[$i.'_amount']), $date);
+  }
+
+  
   header("Location:addBottling.php?msg=Abfüllung hinzugefügt&err=0");
 }
 
