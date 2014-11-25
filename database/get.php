@@ -156,7 +156,7 @@ function getBarrelsByStrain($strain){
 
 function getAllPressings() {
   $dbh = connectToDB();
-  $sth = $dbh->prepare("SELECT * FROM pressing WHERE bottled != 0");
+  $sth = $dbh->prepare("SELECT * FROM pressing WHERE bottled != 1");
   $sth->execute();
 
   return $sth->fetchAll();
