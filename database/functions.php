@@ -317,5 +317,18 @@ function unstockBottles ($bottleID,$amount)
     $stockAmount = getBottleByID($bottleID)->amount;
     stockBottle($bottleID, $stockAmount - $amount);
 }
+function insertOrUpdateProduct($bottleID,$strainFk,$amount)
+{
+    $actAmount = getProductByBottleIdAndStrainId($bottleID,$strainFk)->amount;
+    if($amount == null)
+    {
+      insertProduct($strainFk,$bottleID,$amount);
+    }
+    else
+    {
+      updateProduct($strainFk,$bottleID,$actAmount + $amount);
+    }
+
+}
 
 ?>

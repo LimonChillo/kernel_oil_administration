@@ -369,6 +369,15 @@ function getProductByStrainByBottle($strain, $bottle)
   $sth->execute(array( $strain, $bottle ));
   return $sth->fetch();
 }
+
+function getProductByBottleIdAndStrainId($bottleId, $strainId)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM product WHERE bottleFK = ? AND strainFK = ?");
+  $sth->execute(array($bottleId,$strainId));
+  return $sth->fetchObject();
+}
+
 // ----------- Gets für die überprüfung
 
 

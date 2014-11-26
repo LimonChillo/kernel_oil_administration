@@ -189,7 +189,7 @@ if(isset($_POST['insertBottling']))
   //insert dateset for each bottle type
   for($i = 0; $i < $count; $i++)
   {
-    insertProduct($strainFK,strip_tags($_POST[$i.'_bottleId']),strip_tags($_POST[$i.'_amount']));
+    insertOrUpdateProduct($strainFK,strip_tags($_POST[$i.'_bottleId']),strip_tags($_POST[$i.'_amount']));
     insertBottling($pressing, strip_tags($_POST[$i.'_bottleId']), strip_tags($_POST[$i.'_amount']), $date,  $strainFK);
     
     unstockLabels(strip_tags($_POST[$i.'_bottleId']),$strainFK,strip_tags($_POST[$i.'_amount']));
