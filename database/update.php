@@ -75,5 +75,10 @@ function updateProduct($strain, $bottle, $amount) {
   $sth = $dbh->prepare( "UPDATE product SET amount = amount - ? WHERE strainFK = ? AND bottleFK = ?");
   $sth->execute(array($amount, $strain, $bottle));
 }
+function updateProductPositiv($strain, $bottle, $amount) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare( "UPDATE product SET amount = amount + ? WHERE strainFK = ? AND bottleFK = ?");
+  $sth->execute(array($amount, $strain, $bottle));
+}
 
 ?>

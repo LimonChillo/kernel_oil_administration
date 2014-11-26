@@ -326,7 +326,7 @@ function insertOrUpdateProduct($strainFk,$bottleID,$amount)
     }
     else
     {
-      updateProduct($strainFk,$bottleID,$actAmount + $amount);
+      updateProductPositiv($strainFk,$bottleID,$amount);
     }
 
 }
