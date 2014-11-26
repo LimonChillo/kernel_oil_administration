@@ -36,7 +36,7 @@ include "head.php";
 		</div>
 		<div class="col-md-4">
 			<a href="addBottle.php" ><h3>Flaschen</h3></a>
-			<?php printDatarows("bottle", true, "ml", array("name", "amount")) ?>
+			<?php printDatarows("bottle", true, "ml", array("name", "amount"), 0, true) ?>
 		</div>
 		<div class="col-md-4">
 			<h3>Etiketten</h3>

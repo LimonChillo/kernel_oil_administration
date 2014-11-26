@@ -58,7 +58,7 @@ function printAllBarrelsAsTable(){
     echo "<tr>";
     echo "<td><input type='checkbox'></td>";
     echo "<td>".$barrel->ID."</td>";
-    echo "<td>".getStrainNameById($barrel->strainFK)->name."</td>";
+    echo "<td>".getStrainNameById($barrel->strainFK)."</td>";
     echo "<td>".$barrel->fillLevel."</td>";
     echo "<td>".$barrel->date."</td>";
     echo "</tr>";
@@ -91,7 +91,7 @@ function printMessage()
   }
 }
 
-function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0)
+function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, $editable=false)
 {
 
   $showData = array();
@@ -132,7 +132,10 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0)
   $adminColumn = 999;
   $counter = 0;
   if($tab == "labels")
+  {
     $counter = 1;
+    $tab = "label";
+  }
   if($tab == "lastBarrels")
   {
     // $counter = 1;
@@ -186,7 +189,7 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0)
 
     $options ="";
 
-    if($tab != "labels" && isAdmin($_SESSION['user']))
+    if($editable == true && isAdmin($_SESSION['user']))
     {
       $options = "<a href='add$tab.php?id=$datarow->ID'><img class='small' src='images/edit.png' alt='bearbeiten'> </a>";
     }
