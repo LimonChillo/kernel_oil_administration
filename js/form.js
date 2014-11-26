@@ -11,4 +11,10 @@ $(function()
     $('#customerFormSelect').change(function() {
         $('#customerForm').submit();
     });
+
+
+    $('tr.barrelList').on('click', function(e){
+    	var id = $(e.target).parent().attr("id");
+    	$('input#' + id).prop('checked');
+    })
 });

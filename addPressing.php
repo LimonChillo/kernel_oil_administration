@@ -6,13 +6,9 @@ include "head.php";
 	<h1>Pressung hinzufügen</h1>
 	<?php printMessage(); ?>
 	<?php
-	if(isset($_POST["choosenBarrels"]))
-	{
-		$_SESSION['choosenBarrels'] = $_POST["choosenBarrels"];
-		echo "Params!";
-	}
+		$barrels = $_POST['barrel']
 	?>
-	<form class="form-horizontal" role="form">
+	<form class="form-horizontal" role="form" name="insertPressing" method="POST" action="result.php">
 		<div class="form-group">
 			<div class="col-sm-4">
 				<input type="text" class="form-control" name="amount" placeholder="Menge (l)" required>
@@ -20,9 +16,17 @@ include "head.php";
 		</div>
 		<div class="form-group">
 			<div class="col-sm-4">
-				<input type="date" class="form-control" id="date" placeholder="Datum" required>
+				<input type="date" class="form-control" name="date" id="date" placeholder="Datum" required>
 			</div>
 		</div>
+		<?php
+			$barrels = $_POST['barrel'];
+			foreach ($barrels as $b)
+			{
+				echo "<input type='hidden' name='barrel[]' value='$b'>";
+			}
+
+		?>
 		<div class="form-group">
 			<div class="col-sm-4">
 				<button type="submit" class="btn btn-default">Hinzufügen</button>

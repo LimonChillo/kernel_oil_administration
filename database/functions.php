@@ -51,6 +51,33 @@ function printAllBottleOptions() {
   }
 }
 
+function printAllStrainsAsTable(){
+  
+  $allStrains = getAllStrains();
+  foreach ($allStrains as $strain)
+  {
+    echo "<tr>";
+    echo "<td>". $strain -> name ."</td>";
+    echo "<td>" . sizeOf(getBarrelsByStrain($strain -> ID)) . "</td>";
+    echo "<td><a href='getBarrels.php?get=$strain->ID'><img class='small' src='images/forward.png' alt='bearbeiten'></a></td>";
+    echo "</tr>";
+  }
+}
+
+function printBarrelsAsTableByStrain($strain){
+  $allBarrels = getBarrelsByStrain($strain);
+  foreach ($allBarrels as $barrel)
+  {
+    echo "<tr class='barrelList' id='$barrel->ID'>";
+    echo "<td><input type='checkbox' id='$barrel->ID' name='barrel[]' value='$barrel->ID' ></td>";
+    echo "<td>".$barrel->ID."</td>";
+    echo "<td>".getStrainNameById($barrel->strainFK)."</td>";
+    echo "<td>".$barrel->fillLevel."</td>";
+    echo "<td>".$barrel->date."</td>";
+    echo "</tr>";
+  }
+}
+
 function printAllBarrelsAsTable(){
   $allBarrels = getAllBarrels();
   foreach ($allBarrels as $barrel)
