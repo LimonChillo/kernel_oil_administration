@@ -52,7 +52,26 @@ body {
 .col-md-4 h3
 {
   margin-top: 10px;
+  margin-bottom: 5px;
+  float:left;
 }
+.col-md-4 strong.float
+{
+  float:left;
+  margin-top: 13px;
+  margin-left: 10px;
+  width:10px;
+}
+
+.col-md-4 strong.float img
+{
+  width:15px;
+}
+.col-md-4 .dashboard, .col-md-4 p
+{
+  clear:both;
+}
+
 
 .strainList
 {
