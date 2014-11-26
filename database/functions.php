@@ -114,7 +114,7 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
       array_push($columns, (object) array('Field'=>$col));
     }
   }
-  else if($tab == "products")
+  else if($tab == "products" || $tab == "product")
   {
     $datarows = getJoinedProducts($orderBy);
     $columns = array();
@@ -149,10 +149,15 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
     // $counter = 1;
     $tab = "label";
   }
+  if($tab == "product")
+  {
+    $counter = 1;
+  }
   if($tab == "products")
   {
     $tab = "product";
   }
+
   foreach ($columns as $headline) {
     if($headline->Field == "admin")
       $adminColumn = $counter;

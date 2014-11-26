@@ -58,3 +58,8 @@ body {
   max-width: 30px;
 }
 
+.dashboard
+{
+  height:220px;
+  overflow-y:scroll;
+}
