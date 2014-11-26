@@ -159,6 +159,13 @@ if(isset($_POST['insertBottling']))
   //check for enough bottels and labels
   for($i = 0; $i < $count; $i++)
   {
+    if(!checkBottleAmmount(strip_tags($_POST[$i.'_bottleId']),strip_tags($_POST[$i.'_amount'])))
+    {
+        $name = getBottleByID(strip_tags($_POST[$i.'_bottleId']))->name;
+        header("Location:getPressings.php?msg=zu wenig leere Flaschen (".$name.") verfügbar&err=1");
+        exit;
+    }
+
 
   }
 
