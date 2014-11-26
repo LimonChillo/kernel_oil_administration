@@ -32,9 +32,10 @@ function insertBottle($ml)
 
   $bottle = $dbh->lastInsertId();
 
-  foreach (getAllStrains() as $strain)
+  foreach (getReallyAllStrains() as $strain)
   {
-    insertLabel($name." ".$strain->name, $bottle, $strain->ID);
+    $labelname = $name." ".$strain->name;
+    insertLabel($labelname, $bottle, $strain->ID);
   }
 }
 

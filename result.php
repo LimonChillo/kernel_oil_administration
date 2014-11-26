@@ -104,6 +104,22 @@ if(isset($_POST['stockBottle']))
   }
 }
 
+if(isset($_POST['stockLabel']))
+{
+  $label = getLabelByID($_POST['stockLabel']);
+  $amount = $label->amount + $_POST['amount'];
+  if(sizeOf($label) != 0)
+    {
+
+      stockLabelByID($label->ID, $amount);
+      header("Location:getLabels.php?msg=Etikette eingelagert&err=0");
+    }
+  else
+  {
+    header("Location:getBottles.php?msg=Etikette existiert nicht&err=1");
+  }
+}
+
 if(isset($_POST['insertPressing']))
 {
   $date = strip_tags($_POST['date']);

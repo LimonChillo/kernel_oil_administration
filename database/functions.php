@@ -98,7 +98,7 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0)
   $rowcount = 0;
   if($rows == 0)
     $rowcount = -99999;
-  if($tab == "labels" || $tab == "label")
+  if($tab == "labels" || $tab == "allLabels")
   {
     $datarows = getJoinedLabels($orderBy);
     $columns = array();
@@ -135,8 +135,13 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0)
     $counter = 1;
   if($tab == "lastBarrels")
   {
-    $counter = 1;
+    // $counter = 1;
     $tab = "barrel";
+  }
+  if($tab == "allLabels")
+  {
+    // $counter = 1;
+    $tab = "label";
   }
   foreach ($columns as $headline) {
     if($headline->Field == "admin")
