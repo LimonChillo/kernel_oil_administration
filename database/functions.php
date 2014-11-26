@@ -228,4 +228,14 @@ function mystrtolower ($string){
 
   return str_replace($bad, $good,$letters);
 }
+
+function checkBottleAmmount($bottleID,$amount)
+{
+  $stockAmount = getBottleByID($bottleID)->amount;
+  if($stockAmount > $amount)
+    return true;
+  else
+    return false;
+} 
+
 ?>
