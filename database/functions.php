@@ -111,6 +111,14 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0)
     //                       (object) array('Field'=> 'Menge'));
     // // $showData = array(array('Field'=>'ID'));
   }
+  else if($tab == "lastBarrels")
+  {
+    $datarows = getJoinedBarrels($orderBy);
+    $columns = array();
+    foreach ($showCol as $col) {
+      array_push($columns, (object) array('Field'=>$col));
+    }
+  }
   else
   {
     $datarows = getAnyTable($tab, $orderBy);
@@ -125,12 +133,20 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0)
   $counter = 0;
   if($tab == "labels")
     $counter = 1;
+  if($tab == "lastBarrels")
+  {
+    $counter = 1;
+    $tab = "barrel";
+  }
   foreach ($columns as $headline) {
     if($headline->Field == "admin")
       $adminColumn = $counter;
     if(in_array($headline->Field, $showCol) || ($showCol == null && $tab != "labels"))
     {
-      echo "<th> ".ucfirst($headline->Field)."</th>";
+      if($headline->Field != "strain")
+        echo "<th> ".ucfirst($headline->Field)."</th>";
+      else
+        echo "<th>Sorte</th>";
       array_push($showData, $counter);
 
     }
