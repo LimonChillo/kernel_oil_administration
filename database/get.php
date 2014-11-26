@@ -50,6 +50,23 @@ function getJoinedBarrels($orderBy)
   return $sth->fetchAll();
 }
 
+function getJoinedPressings($orderBy, $all = true)
+{
+
+  $query = "SELECT p.ID AS ID, p.date AS date, p.bottled AS bottled
+      FROM pressing p INNER JOIN barrel b ON b.pressingFK = p.ID
+      ";
+
+  // if($all == false)
+  //   $query .= " AND p.bottled IS NULL";
+
+  $dbh = connectToDB();
+  $sth = $dbh->prepare($query);
+  $sth->execute();
+
+  return $sth->fetchAll();
+}
+
 function getJoinedProducts($orderBy)
 {
     $query = "SELECT p.ID AS ID, s.name AS strain, b.name AS bottle, p.amount AS amount
@@ -233,13 +250,23 @@ function getBarrelsByStrain($strain){
   return $sth->fetchAll();
 }
 
-function getAllPressings() {
+function getUnpressedPressings() {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM pressing WHERE bottled != 1");
   $sth->execute();
 
   return $sth->fetchAll();
 }
+
+
+function getAllPressings() {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM pressing");
+  $sth->execute();
+
+  return $sth->fetchAll();
+}
+
 
 function getPressingsByStrain($strain){
 

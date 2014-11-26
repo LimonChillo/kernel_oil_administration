@@ -27,6 +27,7 @@ include "head.php";
 			<a href="getPressings.php?show=all"><strong class="float"><img class='small' src='images/show.png' alt='anzeigen'> </strong></a>
 			<a href="getPressings.php"><strong class="float"><img class='small' src='images/bottle.png' alt='abfüllen'> </strong></a>
 			<div class="dashboard">
+				<?php printDatarows("pressings", false, "date DESC", array("ID", "date", "strain", "amount"), 5, true) ?>
 			</div>
 		</div>
 		<div class="col-md-4">

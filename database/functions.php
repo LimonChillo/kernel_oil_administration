@@ -92,6 +92,19 @@ function printAllBarrelsAsTable(){
   }
 }
 
+function printUnpressedPressingsAsTable(){
+  $allPressings = getUnpressedPressings();
+  foreach ($allPressings as $pressing)
+  {
+    echo "<tr>";
+    echo "<td>".$pressing->ID."</td>";
+    echo "<td>".$pressing->date."</td>";
+    echo "<td>".$pressing->amount."</td>";
+    echo "<td><a href='addBotteling.php?id=".$pressing->ID."'>abfüllen</a></td>";
+    echo "</tr>";
+  }
+}
+
 function printAllPressingsAsTable(){
   $allPressings = getAllPressings();
   foreach ($allPressings as $pressing)
@@ -100,7 +113,12 @@ function printAllPressingsAsTable(){
     echo "<td>".$pressing->ID."</td>";
     echo "<td>".$pressing->date."</td>";
     echo "<td>".$pressing->amount."</td>";
-    echo "<td><a href='addBotteling.php?id=".$pressing->ID."'>abfüllen</a></td>";
+
+    if($pressing -> bottled != 1)
+      echo "<td><a href='addBotteling.php?id=".$pressing->ID."'>abfüllen</a></td>";
+    else
+      echo "<td>Abgefüllt!</td>";
+
     echo "</tr>";
   }
 }
@@ -136,6 +154,14 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
   else if($tab == "allLabels")
   {
     $datarows = getJoinedLabels($orderBy);
+    $columns = array();
+    foreach ($showCol as $col) {
+      array_push($columns, (object) array('Field'=>$col));
+    }
+  }
+  else if($tab == "pressings")
+  {
+    $datarows = getJoinedPressings($orderBy, false);
     $columns = array();
     foreach ($showCol as $col) {
       array_push($columns, (object) array('Field'=>$col));
