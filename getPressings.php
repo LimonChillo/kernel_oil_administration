@@ -3,7 +3,11 @@ $level = 1;
 include "head.php";
 ?>
 <div class="container">
-	<h1>noch nicht abgefüllte Pressungen</h1>
+  <?php if($_GET['show'] != 'all'): ?>
+  	<h1>noch nicht abgefüllte Pressungen</h1>
+  <?php else : ?>
+    <h1>Alle Pressungen</h1>
+  <?php endif; ?>
   <?php printMessage(); ?>
   <p><a href="getBarrels.php" class="btn btn-default">Pressung hinzufügen</a></p>
 	<table class="table table-hover">
