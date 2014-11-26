@@ -93,34 +93,38 @@ function printAllBarrelsAsTable(){
 }
 
 function printUnpressedPressingsAsTable(){
-  $allPressings = getUnpressedPressings();
+  $allPressings = getJoinedPressings(false);
   foreach ($allPressings as $pressing)
   {
     echo "<tr>";
-    echo "<td>".$pressing->ID."</td>";
-    echo "<td>".$pressing->date."</td>";
-    echo "<td>".$pressing->amount."</td>";
-    echo "<td><a href='addBotteling.php?id=".$pressing->ID."'>abfüllen</a></td>";
+    echo "<td>".$pressing[0]."</td>";
+    echo "<td>".$pressing[1]."</td>";
+    echo "<td>".$pressing[2]."</td>";
+    echo "<td>".$pressing[3]."</td>";
+    echo "<td><a href='addBotteling.php?id=".$pressing[0]."'>abfüllen</a></td>";
     echo "</tr>";
   }
 }
 
 function printAllPressingsAsTable(){
-  $allPressings = getAllPressings();
+  $allPressings = getJoinedPressings(true);
   foreach ($allPressings as $pressing)
   {
     echo "<tr>";
-    echo "<td>".$pressing->ID."</td>";
-    echo "<td>".$pressing->date."</td>";
-    echo "<td>".$pressing->amount."</td>";
+    echo "<td>".$pressing[0]."</td>";
+    echo "<td>".$pressing[1]."</td>";
+    echo "<td>".$pressing[2]."</td>";
+    echo "<td>".$pressing[3]."</td>";
 
-    if($pressing -> bottled != 1)
-      echo "<td><a href='addBotteling.php?id=".$pressing->ID."'>abfüllen</a></td>";
+    if($pressing[4] != 1)
+      echo "<td><a href='addBotteling.php?id=".$pressing[0]."'>abfüllen</a></td>";
     else
       echo "<td>Abgefüllt!</td>";
 
     echo "</tr>";
   }
+
+
 }
 
 function printMessage()

@@ -50,21 +50,24 @@ function getJoinedBarrels($orderBy)
   return $sth->fetchAll();
 }
 
-function getJoinedPressings($orderBy, $all = true)
+function getJoinedPressings( $all = true)
 {
+  $pressings = getAllPressings();
+  $returnArray = array();
+  foreach ($pressings as $pressing) {
+    $barrel = getOneBarrelByPressing($pressing);
+    if($all || (! $all && $pressing->bottled == 0))
+    {
+      array_push($returnArray,
+               array($pressing->ID,
+                     getStrainNameByID($barrel->strainFK),
+                     $pressing->date,
+                     $pressing->amount,
+                     $pressing->bottled));
+    }
+  }
 
-  $query = "SELECT p.ID AS ID, p.date AS date, p.bottled AS bottled
-      FROM pressing p INNER JOIN barrel b ON b.pressingFK = p.ID
-      ";
-
-  // if($all == false)
-  //   $query .= " AND p.bottled IS NULL";
-
-  $dbh = connectToDB();
-  $sth = $dbh->prepare($query);
-  $sth->execute();
-
-  return $sth->fetchAll();
+  return $returnArray;
 }
 
 function getJoinedProducts($orderBy)
@@ -239,6 +242,15 @@ function getAllBarrels(){
   $sth->execute();
 
   return $sth->fetchAll();
+}
+
+function getOneBarrelByPressing($pressing){
+
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM barrel WHERE pressingFK = ? LIMIT 1");
+  $sth->execute(array($pressing->ID));
+
+  return $sth->fetchObject();
 }
 
 function getBarrelsByStrain($strain){
