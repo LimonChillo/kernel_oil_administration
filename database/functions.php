@@ -276,4 +276,19 @@ function checkLabelAmmount($bottleID,$amount,$strainFk)
     return false;
 } 
 
+function unstockLabels ($bottleID,$strainFk,$amount)
+{
+    $stockAmountFront = getLabelByBottleIdAndStrainId($bottleID,$strainFk)->amount;
+    $stockAmountBack = getLabelByBottleIdAndStrainId($bottleID,0)->amount;
+
+    stockLabel($stockAmountFront - $amount, $strainFk, $bottleID);
+    stockLabel($stockAmountBack - $amount, 0, $bottleID);
+}
+
+function unstockBottles ($bottleID,$amount)
+{
+    $stockAmount = getBottleByID($bottleID)->amount;
+    stockBottle($bottleID, $stockAmount - $amount);
+}
+
 ?>
