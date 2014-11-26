@@ -227,7 +227,7 @@ function getAllBarrels(){
 function getBarrelsByStrain($strain){
 
   $dbh = connectToDB();
-  $sth = $dbh->prepare("SELECT * FROM barrel WHERE strainFK = ?");
+  $sth = $dbh->prepare("SELECT * FROM barrel WHERE strainFK = ? AND pressingFK IS NULL");
   $sth->execute(array($strain));
 
   return $sth->fetchAll();
