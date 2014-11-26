@@ -40,12 +40,18 @@ body {
 .col-md-4
 {
 	background: #fff;
-  max-width: 300px;
+  max-width: 310px;
   border: 1px solid #DDD;
   box-shadow: 1px 2px 4px rgba(0, 0, 0, .2);
   margin: 5px;
   margin-left: 15px;
   padding: 5px;
+  height: 290px;
+}
+
+.col-md-4 h3
+{
+  margin-top: 10px;
 }
 
 .strainList
@@ -58,3 +64,8 @@ body {
   max-width: 30px;
 }
 
+.dashboard
+{
+  height:200px;
+  overflow-x:hidden;
+}

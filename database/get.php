@@ -43,23 +43,35 @@ function getJoinedBarrels($orderBy)
   $query = "SELECT b.ID AS ID, s.name AS sorte, b.date AS date
       FROM barrel b INNER JOIN strain s WHERE b.strainFK = s.ID AND b.pressingFK IS NULL";
 
-    // switch ($orderBy) {
-    //   case 'sorte':
-    //     $query .= " ORDER BY s.name";
-    //     break;
+  $dbh = connectToDB();
+  $sth = $dbh->prepare($query);
+  $sth->execute();
 
-    //   case 'bottle':
-    //     $query .= " ORDER BY b.name";
-    //     break;
+  return $sth->fetchAll();
+}
 
-    //   case 'amount ASC':
-    //     $query .= " ORDER BY l.amount ASC";
-    //     break;
-    //   default:
-    //     # code...
-    //     break;
+function getJoinedProducts($orderBy)
+{
+    $query = "SELECT p.ID AS ID, s.name AS strain, b.name AS bottle, p.amount AS amount
+      FROM product p INNER JOIN strain s ON p.strainFK = s.ID INNER JOIN bottle b ON p.bottleFK = b.ID";
 
-  // }
+    switch ($orderBy) {
+      case 'sorte':
+        $query .= " ORDER BY s.name";
+        break;
+
+      case 'bottle':
+        $query .= " ORDER BY b.name";
+        break;
+
+      case 'amount ASC':
+        $query .= " ORDER BY l.amount ASC";
+        break;
+      default:
+        # code...
+        break;
+
+  }
 
   $dbh = connectToDB();
   $sth = $dbh->prepare($query);
@@ -68,11 +80,13 @@ function getJoinedBarrels($orderBy)
   return $sth->fetchAll();
 }
 
-function getJoinedLabels($orderBy)
+function getJoinedLabels($orderBy, $lowAmount = false)
 {
     $query = "SELECT l.ID AS ID, s.name AS strain, b.name AS bottle, l.amount AS amount
       FROM label l LEFT OUTER JOIN strain s ON l.strainFK = s.ID LEFT OUTER JOIN bottle b ON l.bottleFK = b.ID";
 
+    if($lowAmount)
+      $query .= " WHERE l.amount < 100";
     switch ($orderBy) {
       case 'sorte':
         $query .= " ORDER BY s.name";
