@@ -5,11 +5,16 @@ include "head.php";
 <div class="container">
 	<h1>Fässer</h1>
   <?php printMessage(); ?>
+
+  <form name="addBarrelsToPressing" method="POST" action="addPressing.php">
+
+
   <?php if (isAdmin($_SESSION['user'])) : ?>
 	<a href="addBarrel.php" class="btn btn-default">Fässer hinzufügen</a>
+  <button type="submit" name="submit" class="btn btn-default">gewählte Fässer pressen</button>
   <?php endif; ?>
-	</p>
-  <form name="addBarrelsToPressing" method="POST" action="addPressing.php">
+	
+  </p>
 	<table class="table table-hover">
   		<tr>
   			<th>#</th>
@@ -20,7 +25,6 @@ include "head.php";
   		</tr>
   		<?php printAllBarrelsAsTable(); ?>
 	</table>
-  <button type="submit" name="submit" class="btn btn-default">gewählte Fässer pressen</button>
   </form>
 	</div>
 </div>
