@@ -18,7 +18,9 @@ include "head.php";
 		</div>
 		<div class="form-group">
 			<div class="col-sm-4">
-				<input type="text" class="form-control" name="literPerBarrel" placeholder="Füllstand" required>
+				<input type="range" min="10" max="100" value="10" step="5"
+				 name="literPerBarrel" onchange="showValue(this.value)" onmousemove="showValue(this.value)">
+				<span id="range">10%</span>
 			</div>
 		</div>
 		<div class="form-group">
@@ -35,4 +37,10 @@ include "head.php";
 	</form>
 </div>
 </div>
+<script type="text/javascript">
+	function showValue(newValue)
+	{
+		document.getElementById("range").innerHTML=newValue + "%";
+	}
+</script>
 <?php include "footer.php";?>

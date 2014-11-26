@@ -52,7 +52,7 @@ function printAllBottleOptions() {
 }
 
 function printAllStrainsAsTable(){
-  
+
   $allStrains = getAllStrains();
   foreach ($allStrains as $strain)
   {
@@ -72,7 +72,7 @@ function printBarrelsAsTableByStrain($strain){
     echo "<td><input type='checkbox' id='$barrel->ID' name='barrel[]' value='$barrel->ID' ></td>";
     echo "<td>".$barrel->ID."</td>";
     echo "<td>".getStrainNameById($barrel->strainFK)."</td>";
-    echo "<td>".$barrel->fillLevel."</td>";
+    echo "<td>".$barrel->fillLevel."%</td>";
     echo "<td>".$barrel->date."</td>";
     echo "</tr>";
   }
@@ -228,6 +228,7 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
           else if($data == "0")
             $data = "Nein";
         }
+
         echo "<td> ".$data."</td>";
 
       }
@@ -292,7 +293,7 @@ function checkBottleAmmount($bottleID,$amount)
     return true;
   else
     return false;
-} 
+}
 
 function checkLabelAmmount($bottleID,$amount,$strainFk)
 {
@@ -301,6 +302,6 @@ function checkLabelAmmount($bottleID,$amount,$strainFk)
     return true;
   else
     return false;
-} 
+}
 
 ?>

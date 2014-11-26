@@ -3,7 +3,7 @@ todo
 formularüberprüfung
 messages handeln -- bei akuellem Stand erledigt 25.11.
 botteling funktion - > simon
-produktansicht
+produktansicht - fertig
 DASHBOARD
 kunden und lieferungen - fertig
 
