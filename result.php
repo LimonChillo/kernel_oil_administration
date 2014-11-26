@@ -120,20 +120,6 @@ if(isset($_POST['stockLabel']))
   }
 }
 
-if(isset($_POST['insertPressing']))
-{
-  $date = strip_tags($_POST['date']);
-  $amount = strip_tags($_POST['amount']);
-  $barrels = strip_tags($_POST['barrels']);
-  try{
-    insertPressing($date, $amount, $barrels);
-    header("Location:addPressing.php?msg=Pressung hinzugefügt&err=0");
-  } catch (Exception $e)
-  {
-    header("Location:addPressing.php?msg=Hinzufügen fehlgeschlagen&err=1");
-  }
-}
-
 if(isset($_POST['insertBarrel']))
 {
   $date = strip_tags($_POST['date']);
@@ -184,16 +170,19 @@ if(isset($_POST['insertBottling']))
     exit;
   }
 
+
+
   //insert dateset for each bottle type
   for($i = 0; $i < $count; $i++)
   {
-    insertProduct($strainFK,strip_tags($_POST[$i.'_bottleId']),strip_tags($_POST[$i.'_amount']));
+    insertOrUpdateProduct($strainFK,strip_tags($_POST[$i.'_bottleId']),strip_tags($_POST[$i.'_amount']));
     insertBottling($pressing, strip_tags($_POST[$i.'_bottleId']), strip_tags($_POST[$i.'_amount']), $date,  $strainFK);
+    
+    unstockLabels(strip_tags($_POST[$i.'_bottleId']),$strainFK,strip_tags($_POST[$i.'_amount']));
+    unstockBottles(strip_tags($_POST[$i.'_bottleId']),strip_tags($_POST[$i.'_amount']));
   }
 
   bottlePressing( $pressing,true);
-
-
   header("Location:getPressings.php?msg=Abfüllung erfolgreich hinzugefügt&err=0");
 }
 
@@ -360,10 +349,7 @@ if (isset($_POST['login']))
 
 if (isset($_POST['insertDelivery']))
 {
-  $strains = array();
-  $bottles = array();
-  $amounts = array();
-
+  
   $customer = strtolower(strip_tags($_POST['customer']));
   $date = strtolower(strip_tags($_POST['date']));
 
@@ -391,4 +377,25 @@ if (isset($_POST['insertDelivery']))
 
   header("Location:addDelivery.php?msg=Lieferung eingetragen&err=0");
 }
+
+
+if (isset($_POST['insertPressing']))
+{
+  $barrels = array();
+
+  $date = strip_tags($_POST['date']);
+  $amount = strip_tags($_POST['amount']);
+  $barrels = $_POST['barrel'];
+  
+  if (is_numeric($amount) && $amount > 0)
+  { 
+    insertPressing($date, $amount, $barrels);
+    header("Location:index.php?msg=Pressing eingetragen" . $barrels[0]->ID . "&err=0");
+  }
+  else
+  {
+    header("Location:getBarrels.php?msg=Fehlerhafte Mengenangabe&err=1");
+  }
+}
+
 ?>

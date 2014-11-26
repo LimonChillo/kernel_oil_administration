@@ -69,7 +69,7 @@ function printBarrelsAsTableByStrain($strain){
   foreach ($allBarrels as $barrel)
   {
     echo "<tr class='barrelList' id='$barrel->ID'>";
-    echo "<td><input type='checkbox' id='$barrel->ID' name='barrel[]' value='$barrel->ID' ></td>";
+    echo "<td><input type='checkbox' class='$barrel->ID' name='barrel[]' value='$barrel->ID' ></td>";
     echo "<td>".$barrel->ID."</td>";
     echo "<td>".getStrainNameById($barrel->strainFK)."</td>";
     echo "<td>".$barrel->fillLevel."%</td>";
@@ -302,6 +302,34 @@ function checkLabelAmmount($bottleID,$amount,$strainFk)
     return true;
   else
     return false;
+}
+
+function unstockLabels ($bottleID,$strainFk,$amount)
+{
+    $stockAmountFront = getLabelByBottleIdAndStrainId($bottleID,$strainFk)->amount;
+    $stockAmountBack = getLabelByBottleIdAndStrainId($bottleID,0)->amount;
+
+    stockLabel($stockAmountFront - $amount, $strainFk, $bottleID);
+    stockLabel($stockAmountBack - $amount, 0, $bottleID);
+}
+
+function unstockBottles ($bottleID,$amount)
+{
+    $stockAmount = getBottleByID($bottleID)->amount;
+    stockBottle($bottleID, $stockAmount - $amount);
+}
+function insertOrUpdateProduct($strainFk,$bottleID,$amount)
+{
+    $actAmount = getProductByBottleIdAndStrainId($bottleID,$strainFk)->amount;
+    if($actAmount == null)
+    {
+      insertProduct($strainFk,$bottleID,$amount);
+    }
+    else
+    {
+      updateProductPositiv($strainFk,$bottleID,$amount);
+    }
+
 }
 
 ?>

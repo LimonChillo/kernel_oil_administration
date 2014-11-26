@@ -14,7 +14,7 @@ $(function()
 
 
     $('tr.barrelList').on('click', function(e){
-    	var id = $(e.target).parent().attr("id");
-    	$('input#' + id).prop('checked');
+    	console.log($(e.target).parent().attr("id"));
+    	$(e.target).parent().children(":first").children(":first").prop('checked');
     })
 });

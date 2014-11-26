@@ -7,10 +7,12 @@ include "head.php";
   <?php printMessage(); ?>
   
   <form name="addBarrelsToPressing" method="POST" action="addPressing.php">
-  <?php if (isAdmin($_SESSION['user']) && isset($_GET['get'])) : ?>
-	<a href="addBarrel.php" class="btn btn-default">Fässer hinzufügen</a>
+  <?php if (isAdmin($_SESSION['user'])) : ?>
+  <a href="addBarrel.php" class="btn btn-default">Fässer hinzufügen</a>
+  <?php if (isset($_GET['get'])) : ?>
   <button type="submit" name="submit" class="btn btn-default">gewählte Fässer pressen</button>
-  <?php endif; ?>
+  <?php endif;
+        endif; ?>
 
   </p>
 	<table class="table table-hover">

@@ -29,7 +29,7 @@ include "head.php";
 		?>
 		<div class="form-group">
 			<div class="col-sm-4">
-				<button type="submit" class="btn btn-default">Hinzufügen</button>
+				<button type="submit" name="insertPressing" class="btn btn-default">Hinzufügen</button>
 			</div>
 		</div>
 	</form>

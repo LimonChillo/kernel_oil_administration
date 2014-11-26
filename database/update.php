@@ -4,7 +4,7 @@ function updatePressingOfBarrel($barrels, $pressing) {
   $dbh=connectToDB();
   foreach ($barrels as $barrel){
      $sth = $dbh->prepare("UPDATE barrel SET pressingFK = ? WHERE ID = ?");
-     $sth->execute(array($pressing, $barrel->ID));
+     $sth->execute(array($pressing, $barrel));
   }
 }
 
@@ -73,6 +73,11 @@ function updateUser($id, $username, $password, $email, $admin) {
 function updateProduct($strain, $bottle, $amount) {
   $dbh = connectToDB();
   $sth = $dbh->prepare( "UPDATE product SET amount = amount - ? WHERE strainFK = ? AND bottleFK = ?");
+  $sth->execute(array($amount, $strain, $bottle));
+}
+function updateProductPositiv($strain, $bottle, $amount) {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare( "UPDATE product SET amount = amount + ? WHERE strainFK = ? AND bottleFK = ?");
   $sth->execute(array($amount, $strain, $bottle));
 }
 
