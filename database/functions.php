@@ -98,7 +98,15 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
   $rowcount = 0;
   if($rows == 0)
     $rowcount = -99999;
-  if($tab == "labels" || $tab == "allLabels")
+  if($tab == "labels")
+  {
+    $datarows = getJoinedLabels($orderBy, true);
+    $columns = array();
+    foreach ($showCol as $col) {
+      array_push($columns, (object) array('Field'=>$col));
+    }
+  }
+  else if($tab == "allLabels")
   {
     $datarows = getJoinedLabels($orderBy);
     $columns = array();

@@ -68,11 +68,13 @@ function getJoinedProducts($orderBy)
   return $sth->fetchAll();
 }
 
-function getJoinedLabels($orderBy)
+function getJoinedLabels($orderBy, $lowAmount = false)
 {
     $query = "SELECT l.ID AS ID, s.name AS strain, b.name AS bottle, l.amount AS amount
       FROM label l LEFT OUTER JOIN strain s ON l.strainFK = s.ID LEFT OUTER JOIN bottle b ON l.bottleFK = b.ID";
 
+    if($lowAmount)
+      $query .= " WHERE l.amount < 100";
     switch ($orderBy) {
       case 'sorte':
         $query .= " ORDER BY s.name";
