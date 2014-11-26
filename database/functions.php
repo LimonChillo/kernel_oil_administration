@@ -176,6 +176,14 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
       array_push($columns, (object) array('Field'=>$col));
     }
   }
+  else if($tab == "pressings")
+  {
+    $datarows = getJoinedPressings($orderBy, false);
+    $columns = array();
+    foreach ($showCol as $col) {
+      array_push($columns, (object) array('Field'=>$col));
+    }
+  }
   else if($tab == "lastBarrels")
   {
     $datarows = getJoinedBarrels($orderBy);
