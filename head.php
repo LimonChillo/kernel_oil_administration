@@ -36,6 +36,7 @@
             <?php if(isset($_SESSION['user'])): ?>
               <li><a href="getBarrels.php">Fässer</a></li>
               <li><a href="getPressings.php ">Pressung</a></li>
+              <li><a href="getBottlings.php ">Abfüllungen</a></li>
               <li><a href="getProducts.php">Produkte</a></li>
               <li><a href="getStrains.php">Sorten</a></li>
               <?php if(isAdmin($_SESSION['user'])): ?>
