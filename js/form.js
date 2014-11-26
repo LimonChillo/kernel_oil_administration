@@ -15,6 +15,19 @@ $(function()
 
     $('tr.barrelList').on('click', function(e){
     	console.log($(e.target).parent().attr("id"));
-    	$(e.target).parent().children(":first").children(":first").prop('checked');
+  		var id = $(e.target).parent().attr("id")
+  		document.getElementByClassName(id).checked = true;  
     })
+
+    $('input[name="barrel[]"]').on('click', function(e){
+	    console.log("swagetti");
+	    if ($('input[name="barrel[]"]:checked').length > 0)
+	    {
+	    	$('button[name="submit"]').removeAttr("disabled");  
+	    }
+	    else
+	    {
+	    	$('button[name="submit"]').attr("disabled", "disabled");
+	    }
+	});    
 });

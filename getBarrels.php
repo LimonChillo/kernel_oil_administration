@@ -10,7 +10,7 @@ include "head.php";
   <?php if (isAdmin($_SESSION['user'])) : ?>
   <a href="addBarrel.php" class="btn btn-default">Fässer hinzufügen</a>
   <?php if (isset($_GET['get'])) : ?>
-  <button type="submit" name="submit" class="btn btn-default">gewählte Fässer pressen</button>
+  <button type="submit" name="submit" class="btn btn-default" disabled>gewählte Fässer pressen</button>
   <?php endif;
         endif; ?>
 
