@@ -2,10 +2,10 @@
 $level = 2;
 include "head.php";
 
-  $bottle = getBottleByID($_GET['id']);
+  $label = getLabelByID($_GET['id']);
 ?>
 <div class="container">
-  <h1>Flaschen einlagern</h1>
+  <h1>Etiketten einlagern</h1>
   <?php printMessage(); ?>
 
   <form class="form-horizontal" role="form" method="POST" action="result.php">
@@ -16,7 +16,7 @@ include "head.php";
     </div>
     <div class="form-group">
       <div class="col-sm-4">
-        <button type="submit" name="stockBottle" value="<?php echo $bottle->ID; ?>" class="btn btn-default"> Einlagern </button>
+        <button type="submit" name="stockLabel" value="<?php echo $label->ID; ?>" class="btn btn-default"> Einlagern </button>
       </div>
     </div>
   </form>

@@ -15,6 +15,46 @@ function getAnyTable($table, $orderBy)
   return $sth->fetchAll();
 }
 
+function getLabelByID($id)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM label WHERE ID = ?");
+  $sth->execute(array($id));
+  $label = $sth->fetchObject();
+  if($label == null)
+    return null;
+  return $label;
+}
+
+function getJoinedBarrels($orderBy)
+{
+  $query = "SELECT b.ID AS ID, s.name AS sorte, b.date AS date
+      FROM barrel b INNER JOIN strain s WHERE b.strainFK = s.ID AND b.pressingFK IS NULL";
+
+    // switch ($orderBy) {
+    //   case 'sorte':
+    //     $query .= " ORDER BY s.name";
+    //     break;
+
+    //   case 'bottle':
+    //     $query .= " ORDER BY b.name";
+    //     break;
+
+    //   case 'amount ASC':
+    //     $query .= " ORDER BY l.amount ASC";
+    //     break;
+    //   default:
+    //     # code...
+    //     break;
+
+  // }
+
+  $dbh = connectToDB();
+  $sth = $dbh->prepare($query);
+  $sth->execute();
+
+  return $sth->fetchAll();
+}
 
 function getJoinedLabels($orderBy)
 {
@@ -30,6 +70,9 @@ function getJoinedLabels($orderBy)
         $query .= " ORDER BY b.name";
         break;
 
+      case 'amount ASC':
+        $query .= " ORDER BY l.amount ASC";
+        break;
       default:
         # code...
         break;
@@ -55,6 +98,14 @@ function getColumnNames($table)
 function getAllStrains () {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM strain WHERE ID != 0");
+  $sth->execute();
+
+  return $sth->fetchAll();
+}
+
+function getReallyAllStrains () {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM strain");
   $sth->execute();
 
   return $sth->fetchAll();
@@ -126,6 +177,8 @@ function getBottleByID($id)
     return null;
   return $bottle;
 }
+
+
 
 function getBottlesOrderedByMlDESC()
 {
@@ -273,9 +326,9 @@ function getAmountOfBottleTypes()
 function getShipmentIDByCustomerByDate($customer, $date)
 {
   $dbh = connectToDB();
-  $sth = $dbh->prepare("SELECT sh.ID as ID 
+  $sth = $dbh->prepare("SELECT sh.ID as ID
   FROM shipment sh
-  WHERE sh.customerFK = ? AND sh.date = ? 
+  WHERE sh.customerFK = ? AND sh.date = ?
   LIMIT 1");
   $sth->execute(array( $customer, $date ));
   return $sth->fetch();
@@ -284,7 +337,7 @@ function getShipmentIDByCustomerByDate($customer, $date)
 function getProductByStrainByBottle($strain, $bottle)
 {
   $dbh = connectToDB();
-  $sth = $dbh->prepare("SELECT p.amount as amount, p.ID as ID 
+  $sth = $dbh->prepare("SELECT p.amount as amount, p.ID as ID
   FROM product p
   WHERE p.strainFK = ? AND p.bottleFK = ?");
   $sth->execute(array( $strain, $bottle ));

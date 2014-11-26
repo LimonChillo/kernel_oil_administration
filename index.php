@@ -18,11 +18,12 @@ include "head.php";
 	<h3>Letzte Ereignisse</h3>
 	<div class="row">
 		<div class="col-md-4">
-			<h3>Fässer</h3>
-
+			<a href="addBarrel.php" ><h3>Fässer</h3></a>
+			<p>noch nicht gepresst</p>
+			<?php printDatarows("lastBarrels", false, "date", array("ID", "strain", "date"), 5) ?>
 		</div>
 		<div class="col-md-4">
-			<h3>Pressungen</h3>
+			<a href="getPressings.php"> <h3>Pressungen</h3></a>
 		</div>
 		<div class="col-md-4">
 			<h3>Produkte</h3>
@@ -30,14 +31,16 @@ include "head.php";
 	</div>
 	<div class="row">
 		<div class="col-md-4">
-			<h3>Bestellungen</h3>
+			<a href="addDelivery.php" ><h3>Bestellungen</h3></a>
+			<?php printDatarows("shipment", false, "date", array()) ?>
 		</div>
 		<div class="col-md-4">
-			<h3>Flaschen</h3>
-			<?php printDatarows("bottle", true, "ml", array("name", "amount")) ?>
+			<a href="addBottle.php" ><h3>Flaschen</h3></a>
+			<?php printDatarows("bottle", true, "ml", array("name", "amount"), 0, true) ?>
 		</div>
 		<div class="col-md-4">
 			<h3>Etiketten</h3>
+			<?php printDatarows("labels", true, "amount ASC", array("name", "bottle", "amount")) ?>
 		</div>
 	</div>
 	</div>

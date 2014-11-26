@@ -58,7 +58,7 @@ if(isset($_POST['insertBottle']))
   }
 
   insertBottle($ml);
-  header("Location:getBottles.php?msg=Flasche hinzugefügt$err=0");
+  header("Location:getBottles.php?msg=Flasche hinzugefügt&err=0");
 }
 
 if(isset($_POST['updateBottle']))
@@ -104,6 +104,22 @@ if(isset($_POST['stockBottle']))
   }
 }
 
+if(isset($_POST['stockLabel']))
+{
+  $label = getLabelByID($_POST['stockLabel']);
+  $amount = $label->amount + $_POST['amount'];
+  if(sizeOf($label) != 0)
+    {
+
+      stockLabelByID($label->ID, $amount);
+      header("Location:getLabels.php?msg=Etikette eingelagert&err=0");
+    }
+  else
+  {
+    header("Location:getBottles.php?msg=Etikette existiert nicht&err=1");
+  }
+}
+
 if(isset($_POST['insertPressing']))
 {
   $date = strip_tags($_POST['date']);
@@ -130,9 +146,9 @@ if(isset($_POST['insertBarrel']))
 
 if(isset($_POST['insertBottling']))
 {
-  //ToDo  
-  //Flaschen & Etiketten überprüfen 
-  //Update isBotteld in Pressing 
+  //ToDo
+  //Flaschen & Etiketten überprüfen
+  //Update isBotteld in Pressing
   //Produkte hinzufügen
 
   $date = strip_tags($_POST['date']);
@@ -153,9 +169,9 @@ if(isset($_POST['insertBottling']))
     insertBottling($pressing, strip_tags($_POST[$i.'_bottleId']), strip_tags($_POST[$i.'_amount']), $date,  $strainFK);
   }
 
-  bottlePressing( $pressing,true); 
+  bottlePressing( $pressing,true);
 
-  
+
   header("Location:getPressings.php?msg=Abfüllung erfolgreich hinzugefügt&err=0");
 }
 
@@ -337,7 +353,7 @@ if (isset($_POST['insertDelivery']))
   {
     if ($i == 0)
       insertShipment($customer, $date);
-    
+
 
     if($amounts[$i] <=  (getProductByStrainByBottle($strains[$i], $bottles[$i]) -> amount))
     {

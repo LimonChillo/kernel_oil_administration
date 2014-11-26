@@ -22,6 +22,13 @@ function stockLabel($amount, $strain, $bottle)
   $sth->execute(array($amount, $strain, $bottle));
 }
 
+function stockLabelByID($ID, $amount)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("UPDATE label SET amount = ? WHERE ID = ?");
+  $sth->execute(array($amount, $ID));
+}
+
 function bottlePressing($pressing, $bool)
 {
   $dbh = connectToDB();

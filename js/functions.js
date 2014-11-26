@@ -7,7 +7,8 @@
       data: "text=" + this.innerHTML,
       success: function(html) {
           if (html != null) {
-              self.html(html);
+              if(html != " belastung")
+                self.html(html);
           }
       }
     });

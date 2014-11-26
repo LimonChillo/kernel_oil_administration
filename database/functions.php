@@ -58,7 +58,7 @@ function printAllBarrelsAsTable(){
     echo "<tr>";
     echo "<td><input type='checkbox'></td>";
     echo "<td>".$barrel->ID."</td>";
-    echo "<td>".getStrainNameById($barrel->strainFK)->name."</td>";
+    echo "<td>".getStrainNameById($barrel->strainFK)."</td>";
     echo "<td>".$barrel->fillLevel."</td>";
     echo "<td>".$barrel->date."</td>";
     echo "</tr>";
@@ -91,15 +91,33 @@ function printMessage()
   }
 }
 
-function printDatarows($tab, $stockable, $orderBy, $showCol)
+function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, $editable=false)
 {
-  if($tab == "labels")
+
+  $showData = array();
+  $rowcount = 0;
+  if($rows == 0)
+    $rowcount = -99999;
+  if($tab == "labels" || $tab == "allLabels")
   {
     $datarows = getJoinedLabels($orderBy);
-    $columns = array((object) array('Field'=>'ID'),
-                      (object) array('Field'=> 'Sorte'),
-                        (object) array('Field'=> 'Flasche'),
-                          (object) array('Field'=> 'Menge'));
+    $columns = array();
+    foreach ($showCol as $col) {
+      array_push($columns, (object) array('Field'=>$col));
+    }
+    // $columns = array((object) array('Field'=>'ID'),
+    //                   (object) array('Field'=> 'Sorte'),
+    //                     (object) array('Field'=> 'Flasche'),
+    //                       (object) array('Field'=> 'Menge'));
+    // // $showData = array(array('Field'=>'ID'));
+  }
+  else if($tab == "lastBarrels")
+  {
+    $datarows = getJoinedBarrels($orderBy);
+    $columns = array();
+    foreach ($showCol as $col) {
+      array_push($columns, (object) array('Field'=>$col));
+    }
   }
   else
   {
@@ -113,26 +131,46 @@ function printDatarows($tab, $stockable, $orderBy, $showCol)
 
   $adminColumn = 999;
   $counter = 0;
-  $showData = array();
+  if($tab == "labels")
+  {
+    $counter = 1;
+    $tab = "label";
+  }
+  if($tab == "lastBarrels")
+  {
+    // $counter = 1;
+    $tab = "barrel";
+  }
+  if($tab == "allLabels")
+  {
+    // $counter = 1;
+    $tab = "label";
+  }
   foreach ($columns as $headline) {
     if($headline->Field == "admin")
       $adminColumn = $counter;
-    if(in_array($headline->Field, $showCol) || $showCol == null)
+    if(in_array($headline->Field, $showCol) || ($showCol == null && $tab != "labels"))
     {
-      echo "<th> ".ucfirst($headline->Field)."</th>";
+      if($headline->Field != "strain")
+        echo "<th> ".ucfirst($headline->Field)."</th>";
+      else
+        echo "<th>Sorte</th>";
       array_push($showData, $counter);
 
     }
     $counter++;
   }
   if (isAdmin($_SESSION['user']))
-    echo "<th>Optionen</th>";
+    echo "<th></th>";
 
   foreach ($datarows as $datarow) {
     echo "</tr>";
     echo "<tr>";
     $counter = 0;
+    if($rowcount >= $rows)
+        break;
     foreach ($datarow as $data){
+
       if(in_array($counter, $showData))
       {
         if($counter == $adminColumn)
@@ -151,7 +189,7 @@ function printDatarows($tab, $stockable, $orderBy, $showCol)
 
     $options ="";
 
-    if($tab != "labels" && isAdmin($_SESSION['user']))
+    if($editable == true && isAdmin($_SESSION['user']))
     {
       $options = "<a href='add$tab.php?id=$datarow->ID'><img class='small' src='images/edit.png' alt='bearbeiten'> </a>";
     }
@@ -168,6 +206,7 @@ function printDatarows($tab, $stockable, $orderBy, $showCol)
     echo "<td> ".ucfirst($options)."</td>";
     echo "</tr>";
 
+    $rowcount++;
   }
   echo "</table>";
 }

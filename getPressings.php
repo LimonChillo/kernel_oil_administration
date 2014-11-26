@@ -5,7 +5,7 @@ include "head.php";
 <div class="container">
 	<h1>noch nicht abgefüllte Pressungen</h1>
   <?php printMessage(); ?>
-  <p><a href="addPressing.php" class="btn btn-default">Pressung hinzufügen</a></p>
+  <p><a href="getBarrels.php" class="btn btn-default">Pressung hinzufügen</a></p>
 	<table class="table table-hover">
   		<tr>
   			<th>#</th>
