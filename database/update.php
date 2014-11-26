@@ -4,7 +4,7 @@ function updatePressingOfBarrel($barrels, $pressing) {
   $dbh=connectToDB();
   foreach ($barrels as $barrel){
      $sth = $dbh->prepare("UPDATE barrel SET pressingFK = ? WHERE ID = ?");
-     $sth->execute(array($pressing, $barrel->ID));
+     $sth->execute(array($pressing, $barrel));
   }
 }
 

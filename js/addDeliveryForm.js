@@ -5,7 +5,7 @@ function add(selector, key) {
           data: "key=" + key,
           success: function(html) {
               if (html != null) {
-                  selector.html(html);
+                  selector.last().html(html);
               }
           }
         });
