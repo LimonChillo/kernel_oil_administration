@@ -127,6 +127,23 @@ function printAllPressingsAsTable(){
 
 }
 
+function printAllBottlingsTable()
+{
+  $allBottlings = getAllBottlings();
+  foreach ($allBottlings as $bottling)
+  {
+
+    echo "<tr>";
+    echo "<td>".$bottling->ID."</td>";
+    echo "<td>".getPressingById($bottling->pressingFK)->ID."</td>";
+    echo "<td>".$bottling->date."</td>";
+    echo "<td>".getStrainById($bottling->strainFK)->name."</td>";
+    echo "<td>".getBottleById($bottling->bottleFK)->name."</td>";
+    echo "<td>".$bottling->amount."</td>";
+    echo "</tr>";
+  }
+}
+
 function printMessage()
 {
   if(isset($_GET['msg']))

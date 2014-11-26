@@ -45,7 +45,7 @@ include "head.php";
         <?php if(isset($user)) echo 'value="'.$user->email.'"'; ?> required>
       </div>
     </div>
-    <div class="checkbox">
+    <div class="form-group">
       <div class="col-sm-4">
         <label>
         <input type="checkbox" class="form-control" value="1" name="admin"
