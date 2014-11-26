@@ -14,22 +14,24 @@ include "head.php";
 	<a href="getBottles.php"  class="btn btn-default">Leerflaschen</a>
 	<a href="getLabels.php"  class="btn btn-default">Etiketten</a>
 	</p>
-	<h1>Dashboard</h1>
 	<div class="row">
 		<div class="col-md-4">
-			<a href="addBarrel.php" ><h3>Fässer</h3></a>
+			<h3>Fässer</h3>
+			<a href="addBarrel.php"><strong class="float"><img class='small' src='images/add.png' alt='bearbeiten'> </strong></a>
 			<div class="dashboard">
 			<p>noch nicht gepresst</p>
 			<?php printDatarows("lastBarrels", false, "date", array("ID", "strain", "date"), 5) ?>
 			</div>
 			</div>
 		<div class="col-md-4">
-			<a href="getPressings.php"> <h3>Pressungen</h3></a>
+			<h3>Pressungen</h3>
+			<a href="getPressings.php"><strong class="float"><img class='small' src='images/show.png' alt='bearbeiten'> </strong></a>
 			<div class="dashboard">
 			</div>
 		</div>
 		<div class="col-md-4">
 			<h3>Produkte</h3>
+			<a href="getProducts.php"><strong class="float"><img class='small' src='images/show.png' alt='bearbeiten'> </strong></a>
 			<div class="dashboard">
 			<?php printDatarows("product", false, "amount", array("strain", "bottle", "amount")); ?>
 			</div>
@@ -37,19 +39,23 @@ include "head.php";
 	</div>
 	<div class="row">
 		<div class="col-md-4">
-			<a href="addDelivery.php" ><h3>Lieferungen</h3></a>
+			<h3>Lieferungen</h3>
+			<a href="addDelivery.php"><strong class="float"><img class='small' src='images/add.png' alt='bearbeiten'> </strong></a>
+			<a href="getDeliveries.php"><strong class="float"><img class='small' src='images/show.png' alt='bearbeiten'> </strong></a>
 			<div class="dashboard">
 			<?php printDatarows("shipment", false, "date", array()) ?>
 			</div>
 		</div>
 		<div class="col-md-4">
-			<a href="addBottle.php" ><h3>Flaschen</h3></a>
+			<h3>Flaschen</h3>
+			<a href="addBottle.php"><strong class="float"><img class='small' src='images/add.png' alt='bearbeiten'> </strong></a>
 			<div class="dashboard">
 			<?php printDatarows("bottle", true, "ml", array("name", "amount"), 0, true) ?>
 			</div>
 		</div>
 		<div class="col-md-4">
 			<h3>Etiketten</h3>
+			<a href="getLabels.php"><strong class="float"><img class='small' src='images/show.png' alt='bearbeiten'> </strong></a>
 			<p>Weniger als 100 Stück lagernd</p>
 			<div class="dashboard">
 			<?php printDatarows("labels", true, "amount ASC", array("name", "bottle", "amount")) ?>
