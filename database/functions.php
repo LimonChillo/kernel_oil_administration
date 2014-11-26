@@ -105,15 +105,18 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
     foreach ($showCol as $col) {
       array_push($columns, (object) array('Field'=>$col));
     }
-    // $columns = array((object) array('Field'=>'ID'),
-    //                   (object) array('Field'=> 'Sorte'),
-    //                     (object) array('Field'=> 'Flasche'),
-    //                       (object) array('Field'=> 'Menge'));
-    // // $showData = array(array('Field'=>'ID'));
   }
   else if($tab == "lastBarrels")
   {
     $datarows = getJoinedBarrels($orderBy);
+    $columns = array();
+    foreach ($showCol as $col) {
+      array_push($columns, (object) array('Field'=>$col));
+    }
+  }
+  else if($tab == "products")
+  {
+    $datarows = getJoinedProducts($orderBy);
     $columns = array();
     foreach ($showCol as $col) {
       array_push($columns, (object) array('Field'=>$col));
@@ -145,6 +148,10 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
   {
     // $counter = 1;
     $tab = "label";
+  }
+  if($tab == "products")
+  {
+    $tab = "product";
   }
   foreach ($columns as $headline) {
     if($headline->Field == "admin")
@@ -193,7 +200,7 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
     {
       $options = "<a href='add$tab.php?id=$datarow->ID'><img class='small' src='images/edit.png' alt='bearbeiten'> </a>";
     }
-    
+
     if($tab == "customer" && isAdmin($_SESSION['user']))
     {
       $options .= "<a href='getDeliveries.php?get=$datarow->ID'><img class='small' src='images/delivery.png' alt='liefern'> </a>";
