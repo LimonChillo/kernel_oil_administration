@@ -155,9 +155,15 @@ function printDatarows($tab, $stockable, $orderBy, $showCol)
     {
       $options = "<a href='add$tab.php?id=$datarow->ID'><img class='small' src='images/edit.png' alt='bearbeiten'> </a>";
     }
+    
+    if($tab == "customer" && isAdmin($_SESSION['user']))
+    {
+      $options .= "<a href='getDeliveries.php?get=$datarow->ID'><img class='small' src='images/delivery.png' alt='liefern'> </a>";
+    }
+
     if($stockable == true && isAdmin($_SESSION['user']))
     {
-      $options .= "   <a href='stock$tab.php?id=$datarow->ID'><img class='small' src='images/stock.png' alt='einlagern'></a>";
+      $options .= "<a href='stock$tab.php?id=$datarow->ID'><img class='small' src='images/stock.png' alt='einlagern'></a>";
     }
     echo "<td> ".ucfirst($options)."</td>";
     echo "</tr>";

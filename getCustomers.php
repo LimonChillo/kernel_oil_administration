@@ -11,6 +11,7 @@ include "head.php";
 
   </div>
 </div>
+
 <script>(function() { translate() })() </script>
 
 <?php include "footer.php";?>
