@@ -233,9 +233,17 @@ function getBarrelsByStrain($strain){
   return $sth->fetchAll();
 }
 
-function getAllPressings() {
+function getUnpressedPressings() {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT * FROM pressing WHERE bottled != 1");
+  $sth->execute();
+
+  return $sth->fetchAll();
+}
+
+function getAllPressings() {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM pressing");
   $sth->execute();
 
   return $sth->fetchAll();
