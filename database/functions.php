@@ -232,7 +232,16 @@ function mystrtolower ($string){
 function checkBottleAmmount($bottleID,$amount)
 {
   $stockAmount = getBottleByID($bottleID)->amount;
-  if($stockAmount > $amount)
+  if($stockAmount >= $amount)
+    return true;
+  else
+    return false;
+} 
+
+function checkLabelAmmount($bottleID,$amount,$strainFk)
+{
+  $stockAmount = getLabelByBottleIdAndStrainId($bottleID,$strainFk)->amount;
+  if($stockAmount >= $amount)
     return true;
   else
     return false;
