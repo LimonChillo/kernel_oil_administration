@@ -20,7 +20,7 @@ include "head.php";
 		<div class="col-md-4">
 			<a href="addBarrel.php" ><h3>Fässer</h3></a>
 			<p>noch nicht gepresst</p>
-			<?php printDatarows("lastBarrels", false, "date", array("strain", "date"), 5) ?>
+			<?php printDatarows("lastBarrels", false, "date", array("ID", "strain", "date"), 5) ?>
 		</div>
 		<div class="col-md-4">
 			<a href="getPressings.php"> <h3>Pressungen</h3></a>

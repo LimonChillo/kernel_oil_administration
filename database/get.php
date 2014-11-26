@@ -15,6 +15,17 @@ function getAnyTable($table, $orderBy)
   return $sth->fetchAll();
 }
 
+function getLabelByID($id)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM label WHERE ID = ?");
+  $sth->execute(array($id));
+  $label = $sth->fetchObject();
+  if($label == null)
+    return null;
+  return $label;
+}
+
 function getJoinedBarrels($orderBy)
 {
   $query = "SELECT b.ID AS ID, s.name AS sorte, b.date AS date
@@ -92,6 +103,14 @@ function getAllStrains () {
   return $sth->fetchAll();
 }
 
+function getReallyAllStrains () {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM strain");
+  $sth->execute();
+
+  return $sth->fetchAll();
+}
+
 function getStrainByName($name)
 {
   $dbh = connectToDB();
@@ -158,6 +177,8 @@ function getBottleByID($id)
     return null;
   return $bottle;
 }
+
+
 
 function getBottlesOrderedByMlDESC()
 {
