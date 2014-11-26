@@ -26,6 +26,18 @@ function getLabelByID($id)
   return $label;
 }
 
+function getLabelByBottleIdAndStrainId($bottleID,$strainID)
+{
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT * FROM label WHERE bottleFK = ? AND strainFK = ?");
+  $sth->execute(array($bottleID,$strainID));
+  $label = $sth->fetchObject();
+  if($label == null)
+    return null;
+  return $label;
+}
+
+
 function getJoinedBarrels($orderBy)
 {
   $query = "SELECT b.ID AS ID, s.name AS sorte, b.date AS date
@@ -215,7 +227,7 @@ function getAllBarrels(){
 function getBarrelsByStrain($strain){
 
   $dbh = connectToDB();
-  $sth = $dbh->prepare("SELECT * FROM barrel WHERE strainFK = ?");
+  $sth = $dbh->prepare("SELECT * FROM barrel WHERE strainFK = ? AND pressingFK IS NULL");
   $sth->execute(array($strain));
 
   return $sth->fetchAll();

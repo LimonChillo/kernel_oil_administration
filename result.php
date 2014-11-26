@@ -157,9 +157,31 @@ if(isset($_POST['insertBottling']))
   $count = strip_tags($_POST['count']);
 
   //check for enough bottels and labels
+
+  $errMsg = "";
+
   for($i = 0; $i < $count; $i++)
   {
-
+    if(!checkBottleAmmount(strip_tags($_POST[$i.'_bottleId']),strip_tags($_POST[$i.'_amount'])))
+    {
+        $name = getBottleByID(strip_tags($_POST[$i.'_bottleId']))->name;
+        $errMsg .= "Zu wenig leere Flaschen (".$name.") verfügbar.<br>";       
+    }
+    if(!checkLabelAmmount(strip_tags($_POST[$i.'_bottleId']),strip_tags($_POST[$i.'_amount']),$strainFK))
+    {
+        $name = getStrainByID($strainFK)->name." ".getBottleByID(strip_tags($_POST[$i.'_bottleId']))->name;
+        $errMsg .= "Zu wenig Etiketten (".$name.") verfügbar.<br>";       
+    }
+    if(!checkLabelAmmount(strip_tags($_POST[$i.'_bottleId']),strip_tags($_POST[$i.'_amount']),0))
+    {
+        $name = getBottleByID(strip_tags($_POST[$i.'_bottleId']))->name;
+        $errMsg .= "Zu wenig Rücketiketten (".$name.") verfügbar.<br>";        
+    }
+  }
+  if($errMsg != "")
+  {
+    header("Location:getPressings.php?msg=".$errMsg."&err=1");
+    exit;
   }
 
   //insert dateset for each bottle type
