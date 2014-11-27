@@ -17,9 +17,9 @@ include "head.php";
 			<h3>Fässer</h3>
 			<a href="addBarrel.php"><strong class="float">
 				<img class='small' src='images/add.png' alt='hinzufügen'  data-toggle="tooltip" data-placement="top" title="Fässer hinzufügen" > </strong></a>
-			<div class="dashboard">
 			<p>noch nicht gepresst</p>
-			<?php printDatarows("lastBarrels", false, "date", array("ID", "strain", "date"), 5) ?>
+			<div class="dashboard">
+			<?php printDatarows("lastBarrels", false, "date", array("ID", "strain", "date")) ?>
 			</div>
 			</div>
 		<div class="col-md-4">

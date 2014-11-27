@@ -19,14 +19,7 @@ include "head.php";
         }
   ?>
   <br><br>
-	<table class="table table-hover">
-  		<tr>
-  			<th>ID</th>
-  			<th>Sorte</th>
-  			<th>Datum</th>
-        <th>Menge</th>
-  			<th>Optionen</th>
-  		</tr>
+
   		<?php
 
         if(!isset($_GET['show']))
@@ -35,6 +28,14 @@ include "head.php";
         }
         else
         {
+          ?> <table class="table table-hover">
+            <tr>
+              <th>ID</th>
+              <th>Sorte</th>
+              <th>Datum</th>
+              <th>Menge</th>
+              <th>Optionen</th>
+            </tr> <?php
           printAllPressingsAsTable();
         }
       ?>
