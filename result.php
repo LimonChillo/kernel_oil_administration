@@ -359,12 +359,12 @@ if (isset($_POST['insertDelivery']))
 
   for($i = 0; $i < sizeOf($strains); $i++)
   {
-    if ($i == 0)
-      insertShipment($customer, $date);
-
-
+    
     if($amounts[$i] <=  (getProductByStrainByBottle($strains[$i], $bottles[$i]) -> amount))
     {
+      if ($i == 0)
+        insertShipment($customer, $date);
+
       insertShipmentItem(getProductByStrainByBottle($strains[$i], $bottles[$i]) -> ID, getShipmentIDByCustomerByDate($customer, $date) -> ID, $amounts[$i]);
       updateProduct($strains[$i], $bottles[$i], $amounts[$i]);
     }
