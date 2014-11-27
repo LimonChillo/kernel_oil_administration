@@ -40,7 +40,7 @@ if(isset($_GET['get'])):
   	
 	if ($deliveryDays[0] == 0)
 	{
-		echo "<h3> Es sind noch keine Lieferungen erfolgt</h3>";
+		echo "<p> Es sind noch keine Lieferungen erfolgt</p>";
 	}
 
   	foreach ($deliveryDays as $day) :?>
