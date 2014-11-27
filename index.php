@@ -5,13 +5,6 @@ include "head.php";
 <div class="container">
 	<h1>Traubenkernölverwaltung</h1>
 	<?php printMessage(); ?>
-	<p class="lead">
-	<a href="getPressings.php" class="btn btn-default">Pressung abfüllen</a>
-	<a href="addDelivery.php" class="btn btn-default">Bestellung hinzufügen</a>
-	<a href="addCustomer.php" class="btn btn-default">Kund*in hinzufügen</a>
-	<a href="getBottles.php"  class="btn btn-default">Leerflaschen</a>
-	<a href="getLabels.php"  class="btn btn-default">Etiketten</a>
-	</p>
 	<div class="row">
 		<div class="col-md-4 dash">
 			<h3>Fässer</h3>

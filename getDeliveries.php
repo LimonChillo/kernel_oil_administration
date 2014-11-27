@@ -13,6 +13,7 @@ $bottles = getAllBottles();
 <div class="container">
   <h1>Lieferungen</h1>
   <?php printMessage(); ?>
+  <br><a href="addDelivery.php" class="btn btn-default">Bestellung hinzufügen</a><br><br>
   	<form method='get' id="customerForm" action='getDeliveries.php'>
   		<select name='get' id='customerFormSelect'>
   			<option disabled selected>Bitte einen Kunden wählen!</option>
