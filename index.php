@@ -13,7 +13,7 @@ include "head.php";
 	<a href="getLabels.php"  class="btn btn-default">Etiketten</a>
 	</p>
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-4 dash">
 			<h3>Fässer</h3>
 			<a href="addBarrel.php"><strong class="float">
 				<img class='small' src='images/add.png' alt='hinzufügen'  data-toggle="tooltip" data-placement="top" title="Fässer hinzufügen" > </strong></a>
@@ -22,7 +22,7 @@ include "head.php";
 			<?php printDatarows("lastBarrels", false, "date", array("ID", "strain", "date")) ?>
 			</div>
 			</div>
-		<div class="col-md-4">
+		<div class="col-md-4 dash">
 			<h3>Pressungen</h3>
 			<a href="getBarrels.php"><strong class="float">
 				 		<img class='small' data-toggle="tooltip" data-placement="top" title="Pressung hinzufügen" src='images/add.png' alt='hinzufügen'> </strong></a>
@@ -35,7 +35,7 @@ include "head.php";
 				<?php printUnpressedPressingsAsTable("small"); ?>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-4 dash">
 			<h3>Produkte</h3>
 			<a href="getProducts.php"><strong class="float">
 					<img class='small' src='images/show.png' alt='anzeigen'  data-toggle="tooltip" data-placement="top" title="Alle Produkte ansehen" > </strong></a>
@@ -46,7 +46,7 @@ include "head.php";
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-4 dash">
 			<h3>Lieferungen</h3>
 			<a href="addDelivery.php"><strong class="float">
 				<img class='small' src='images/add.png' alt='hinzufügen' data-toggle="tooltip" data-placement="top" title="Lieferungen hinzufügen" > </strong></a>
@@ -57,7 +57,7 @@ include "head.php";
 			<?php printDatarows("lastDeliveries", false, "date", array("ID", "customer", "date")) ?>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-4 dash">
 			<h3>Flaschen</h3>
 			<a href="addBottle.php"><strong class="float">
 				<img class='small' src='images/add.png' alt='hinzufügen' data-toggle="tooltip" data-placement="top" title="Flaschen hinzufügen" > </strong></a>
@@ -68,7 +68,7 @@ include "head.php";
 			<?php printDatarows("bottle", true, "ml", array("name", "amount"), 0, true) ?>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-4 dash">
 			<h3>Etiketten</h3>
 			<a href="getLabels.php"><strong class="float">
 				<img class='small' src='images/show.png' alt='anzeigen' data-toggle="tooltip" data-placement="top" title="Alle Etiketten anzeigen" > </strong></a>
