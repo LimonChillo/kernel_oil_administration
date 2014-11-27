@@ -32,7 +32,7 @@ function updateDisplay()
 	var sum = 0;
 
 	for(var i = 0; i < values.length; i++)
-	{	
+	{
 		sum += parseInt(values.eq(i).val()) * parseInt(ml.eq(i).val())
 	}
 
@@ -54,7 +54,7 @@ function updateDisplay()
 	else
 		$('button').prop( "disabled", false );
 
-}	
+}
 </script>
 
 
@@ -97,18 +97,29 @@ function updateDisplay()
 		</div>
 
 		<input type="hidden"  name="count" value="<?php echo getAmountOfBottleTypes(); ?>">
+		<div class="form-group">
+			<div class="col-sm-1 short">
+				<label  class="col-sm-2 control-label">Flaschentyp</label><br>
+			</div>
+			<div class=" col-sm-1">
+				<label  class="col-sm-2 control-label">Anzahl</label><br>
+			</div>
+			<div class=" col-sm-1">
+				<label  class="col-sm-2 control-label">Menge</label><br>
+			</div>
 
+		</div>
 		<?php $amountPerBottleType =  $pressing->amount*1000 / getAmountOfBottleTypes()?>
 		<?php $form_id = 0; foreach ($allBottels as $bottle): ?>
 		<div class="form-group">
-			<div class="col-sm-offset-0 col-sm-2">
+			<div class="col-sm-1 short">
 				<input type="text" class="form-control" value='<?php echo $bottle->ml . " ml"; ?>' name="ml" readonly>
 			</div>
 			<div class=" col-sm-1">
-				<input type="text" onKeyUp="changeAmount()" id="<?php echo $form_id; ?>" name="<?php echo $form_id; ?>_amount" class="form-control count" value='<?php echo $amountPerBottleType/$bottle->ml; ?>' >
+				<input type="text" onKeyUp="changeAmount()" id="<?php echo $form_id; ?>" name="<?php echo $form_id; ?>_amount" class="form-control count long" value='<?php echo $amountPerBottleType/$bottle->ml; ?>' >
 			</div>
 			<div class=" col-sm-1">
-				<input type="text" class="form-control" name="<?php echo $form_id; ?>_display"  value="<?php echo ($amountPerBottleType / 1000 ).' l'; ?>" readonly>
+				<input type="text" class="form-control long" name="<?php echo $form_id; ?>_display"  value="<?php echo ($amountPerBottleType / 1000 ).' l'; ?>" readonly>
 			</div>
 				<input type="hidden"  name="<?php echo $form_id ?>_bottleId" value="<?php echo  $bottle->ID; ?>">
 		</div>

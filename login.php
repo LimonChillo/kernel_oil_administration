@@ -11,7 +11,8 @@ if (isset($_GET['logout'])) :
         '/'           // Wirkungsbereich des Cookies: der ganze Server
        );
     }
-    session_destroy();
+    if(isset($_SESSION['user']))
+      session_destroy();
     header("Location: login.php");
 endif;
 

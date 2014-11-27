@@ -13,7 +13,10 @@ $bottles = getAllBottles();
 <div class="container">
   <h1>Lieferungen</h1>
   <?php printMessage(); ?>
-  <br><a href="addDelivery.php" class="btn btn-default">Bestellung hinzufügen</a><br><br>
+  <br>
+  <?php if (isAdmin($_SESSION['user'])) : ?>
+    <a href="addDelivery.php" class="btn btn-default">Bestellung hinzufügen</a><br><br>
+  <?php endif; ?>
   	<form method='get' id="customerForm" action='getDeliveries.php'>
   		<select name='get' id='customerFormSelect'>
   			<option disabled selected>Bitte einen Kunden wählen!</option>
@@ -55,8 +58,10 @@ if(isset($_GET['get'])):
 
 			while ($currentStrain < sizeOf($strains)):
 		?>
-						<div class="col-md-4">
-							<?php echo $strains[$currentStrain] -> name; ?>
+						<div class="col-md-4 rows">
+              <h4>
+							 <?php echo $strains[$currentStrain] -> name; ?>
+              </h4>
 							<div class="row">
 								<?php
 									$bottleCount = sizeOf($bottles);
@@ -66,10 +71,10 @@ if(isset($_GET['get'])):
 
 									if (getDeliveredProductsByCustomerByStrainByBottleByDate($customerID, $strains[$currentStrain] -> ID, $bottles[$currentBottle] -> ID, $day -> date) -> amount > 0):
 									?>
-										<div class="col-md-4">
+										<div class="shipmentItem">
 											<?php
 												echo $bottles[$currentBottle] -> name . " - ";
-												echo getDeliveredProductsByCustomerByStrainByBottleByDate($customerID, $strains[$currentStrain] -> ID, $bottles[$currentBottle] -> ID, $day -> date) -> amount;
+												echo getDeliveredProductsByCustomerByStrainByBottleByDate($customerID, $strains[$currentStrain] -> ID, $bottles[$currentBottle] -> ID, $day -> date) -> amount." Stück";
 											?>
 										</div>
 									<?php

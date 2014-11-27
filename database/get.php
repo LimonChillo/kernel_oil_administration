@@ -395,7 +395,7 @@ function getAmountOfBottleTypes()
 {
   $dbh = connectToDB();
   $sth = $dbh->prepare("SELECT count(*) as count FROM bottle");
-  $sth->execute(array( $id ));
+  $sth->execute(array());
 
   return $sth->fetchObject()->count;
 }

@@ -169,7 +169,7 @@ function printMessage()
       $signal = "alert-danger";
     else
       $signal = "alert-success";
-      echo "<div class='alert $signal' role='alert'>$msg!</div>";
+      echo "<div class='alert $signal' role='alert'>$msg</div>";
   }
 }
 
