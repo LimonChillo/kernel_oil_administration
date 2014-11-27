@@ -18,9 +18,10 @@ include "head.php";
 		</div>
 		<div class="form-group">
 			<div class="col-sm-4">
+				<span>Füllstand</span>
 				<input type="range" min="10" max="100" value="100" step="5"
 				 name="literPerBarrel" onchange="showValue(this.value)" onmousemove="showValue(this.value)">
-				<span id="range">10%</span>
+				<span id="range">100%</span>
 			</div>
 		</div>
 		<div class="form-group">

@@ -7,6 +7,8 @@
       $json = json_decode($result, true);
       echo $json["text"][0];
     }catch (Exeption $e)
-    {}
+    {
+      echo $text;
+    }
     }
 ?>

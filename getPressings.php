@@ -29,7 +29,7 @@ include "head.php";
   		</tr>
   		<?php
 
-        if(isset($_GET['show']))
+        if(!isset($_GET['show']))
         {
           printUnpressedPressingsAsTable();
         }
