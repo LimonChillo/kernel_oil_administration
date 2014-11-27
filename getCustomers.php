@@ -1,5 +1,5 @@
 <?php
-$level = 2;
+$level = 1;
 include "head.php";
 ?>
 <div class="container">
