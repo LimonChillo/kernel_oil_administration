@@ -92,18 +92,33 @@ function printAllBarrelsAsTable(){
   }
 }
 
-function printUnpressedPressingsAsTable(){
+function printUnpressedPressingsAsTable($show = "all"){
   $allPressings = getJoinedPressings(false);
+  echo '<table class="table table-hover">
+        <tr>
+          <th>ID</th>
+          <th>Sorte</th>
+          <th>Datum</th>
+          ';
+           if($show == "all")
+            echo "<th>Menge</th>
+                  <th>Optionen</th>
+        </tr>";
   foreach ($allPressings as $pressing)
   {
     echo "<tr>";
     echo "<td>".$pressing[0]."</td>";
     echo "<td>".$pressing[1]."</td>";
     echo "<td>".$pressing[2]."</td>";
-    echo "<td>".$pressing[3]."</td>";
-    echo "<td><a href='addBotteling.php?id=".$pressing[0]."'>abfüllen</a></td>";
+    if($show == "all")
+    {
+      echo "<td>".$pressing[3]."</td>";
+      echo "<td><a href='addBotteling.php?id=".$pressing[0]."'>abfüllen</a></td>";
+    }
     echo "</tr>";
   }
+
+  echo "</table>";
 }
 
 function printAllPressingsAsTable(){
@@ -204,6 +219,14 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
       array_push($columns, (object) array('Field'=>$col));
     }
   }
+  else if($tab == "lastDeliveries")
+  {
+    $datarows = getLastDeliveries();
+    $columns = array();
+    foreach ($showCol as $col) {
+      array_push($columns, (object) array('Field'=>$col));
+    }
+  }
   else
   {
     $datarows = getAnyTable($tab, $orderBy);
@@ -223,7 +246,7 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
   }
   if($tab == "lastBarrels")
   {
-    // $counter = 1;
+    $counter = 1;
     $tab = "barrel";
   }
   if($tab == "allLabels")
@@ -286,17 +309,22 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
 
     if($editable == true && isAdmin($_SESSION['user']))
     {
-      $options = "<a href='add$tab.php?id=$datarow->ID'><img class='small' src='images/edit.png' alt='bearbeiten'> </a>";
+      $options = "<a href='add$tab.php?id=$datarow->ID'><img class='small' src='images/edit.png' alt='bearbeiten'  data-toggle='tooltip' data-placement='top' title='Bearbeiten'> </a>";
     }
 
     if($tab == "customer" && isAdmin($_SESSION['user']))
     {
-      $options .= "<a href='getDeliveries.php?get=$datarow->ID'><img class='small' src='images/delivery.png' alt='liefern'> </a>";
+      $options .= "<a href='getDeliveries.php?get=$datarow->ID'><img class='small' src='images/delivery.png' alt='liefern'  data-toggle='tooltip' data-placement='top' title='Alle Lieferungen anzeigen'> </a>";
+    }
+
+    if($tab == "barrel" && isAdmin($_SESSION['user']))
+    {
+      $options .= "<a href='getBarrels.php?get=$datarow->strainID'><img class='small' src='images/press.png' alt='liefern'  data-toggle='tooltip' data-placement='top' title='Fässer dieser Sorte pressen'> </a>";
     }
 
     if($stockable == true && isAdmin($_SESSION['user']))
     {
-      $options .= "<a href='stock$tab.php?id=$datarow->ID'><img class='small' src='images/stock.png' alt='einlagern'></a>";
+      $options .= "<a href='stock$tab.php?id=$datarow->ID'><img class='small' src='images/stock.png' alt='einlagern'  data-toggle='tooltip' data-placement='top' title='Einlagern'></a>";
     }
     echo "<td> ".ucfirst($options)."</td>";
     echo "</tr>";

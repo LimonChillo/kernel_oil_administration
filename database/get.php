@@ -40,7 +40,7 @@ function getLabelByBottleIdAndStrainId($bottleID,$strainID)
 
 function getJoinedBarrels($orderBy)
 {
-  $query = "SELECT b.ID AS ID, s.name AS sorte, b.date AS date
+  $query = "SELECT s.ID AS strainID, b.ID AS ID, s.name AS sorte, b.date AS date
       FROM barrel b INNER JOIN strain s WHERE b.strainFK = s.ID AND b.pressingFK IS NULL";
 
   $dbh = connectToDB();
@@ -344,6 +344,18 @@ function getStrainIdByPressingId($id){
   $sth = $dbh->prepare("SELECT strainFK FROM barrel WHERE pressingFK = ? LIMIT 1");
   $sth->execute(array( $id ));
   return $sth->fetchObject()->strainFK;
+}
+
+function getLastDeliveries() {
+  $dbh = connectToDB();
+  $sth = $dbh->prepare("SELECT sh.ID, c.lastname as customer, sh.date as date
+  FROM shipment sh INNER JOIN customer c
+  ON sh.customerFK = c.ID
+  ORDER BY sh.date DESC
+  LIMIT 10;");
+  $sth->execute(array());
+
+  return $sth->fetchAll();
 }
 
 function getDatesWhenCustomerGotDeliveries($customer_id) {
