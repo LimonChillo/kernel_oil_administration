@@ -35,13 +35,13 @@ body {
 
 .container{
   padding-top: 30px;
-	max-width: 1000px;
+	max-width: 1050px;
 
 }
 .col-md-4
 {
 	background: #fff;
-  max-width: 310px;
+  max-width: 330px;
   border: 1px solid #DDD;
   box-shadow: 1px 2px 4px rgba(0, 0, 0, .2);
   margin: 5px;
@@ -62,6 +62,10 @@ body {
   margin-top: 13px;
   margin-left: 10px;
   width:10px;
+}
+.float
+{
+  float:left;
 }
 
 .col-md-4 strong.float img

@@ -46,12 +46,13 @@ include "head.php";
       </div>
     </div>
     <div class="form-group">
-      <div class="col-sm-4">
-        <label>
-        <input type="checkbox" class="form-control" value="1" name="admin"
+      <div class="col-sm-4 float">
+        <label class="float">
+          <p class="float">Administrator?</p>
+        <input type="checkbox" class="form-control float" value="1" name="admin"
         <?php if(isset($user) && $user->admin == true): echo 'checked';
               if (isset($user) && $user->ID == $_SESSION['user']) echo ' disabled'; endif; ?> >
-        Administrator?</label>
+        </label>
       </div>
     </div>
     <div class="form-group">
