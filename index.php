@@ -15,8 +15,10 @@ include "head.php";
 	<div class="row">
 		<div class="col-md-4 dash">
 			<h3>Fässer</h3>
+			<?php if (isAdmin($_SESSION['user'])) : ?>
 			<a href="addBarrel.php"><strong class="float">
 				<img class='small' src='images/add.png' alt='hinzufügen'  data-toggle="tooltip" data-placement="top" title="Fässer hinzufügen" > </strong></a>
+			<?php endif; ?>
 			<p>noch nicht gepresst</p>
 			<div class="dashboard">
 			<?php printDatarows("lastBarrels", false, "date", array("ID", "strain", "date")) ?>
@@ -24,12 +26,17 @@ include "head.php";
 			</div>
 		<div class="col-md-4 dash">
 			<h3>Pressungen</h3>
+			<?php if (isAdmin($_SESSION['user'])) : ?>
 			<a href="getBarrels.php"><strong class="float">
 				 		<img class='small' data-toggle="tooltip" data-placement="top" title="Pressung hinzufügen" src='images/add.png' alt='hinzufügen'> </strong></a>
+				 	<?php endif; ?>
 			<a href="getPressings.php?show=all"><strong class="float">
 						<img class='small' src='images/show.png' alt='anzeigen'  data-toggle="tooltip" data-placement="top" title="Alle Pressungen ansehen" > </strong></a>
+				<?php if (isAdmin($_SESSION['user'])) : ?>
 			<a href="getPressings.php"><strong class="float">
+
 						<img class='small' src='images/bottle.png' alt='abfüllen'  data-toggle="tooltip" data-placement="top" title="Pressung abfüllen" > </strong></a>
+					<?php endif; ?>
 			<p>noch nicht abgefüllt</a>
 			<div class="dashboard">
 				<?php printUnpressedPressingsAsTable("small"); ?>
@@ -48,8 +55,10 @@ include "head.php";
 	<div class="row">
 		<div class="col-md-4 dash">
 			<h3>Lieferungen</h3>
+			<?php if (isAdmin($_SESSION['user'])) : ?>
 			<a href="addDelivery.php"><strong class="float">
 				<img class='small' src='images/add.png' alt='hinzufügen' data-toggle="tooltip" data-placement="top" title="Lieferungen hinzufügen" > </strong></a>
+			<?php endif; ?>
 			<a href="getDeliveries.php"><strong class="float">
 				<img class='small' src='images/show.png' alt='anzeigen' data-toggle="tooltip" data-placement="top" title="Alle Lieferungen anzeigen" > </strong></a>
 			<p>die letzte 10</p>
@@ -59,8 +68,10 @@ include "head.php";
 		</div>
 		<div class="col-md-4 dash">
 			<h3>Flaschen</h3>
+			<?php if (isAdmin($_SESSION['user'])) : ?>
 			<a href="addBottle.php"><strong class="float">
 				<img class='small' src='images/add.png' alt='hinzufügen' data-toggle="tooltip" data-placement="top" title="Flaschen hinzufügen" > </strong></a>
+			<?php endif; ?>
 				<a href="getBottles.php"><strong class="float">
 				<img class='small' src='images/show.png' alt='hinzufügen' data-toggle="tooltip" data-placement="top" title="Alle Flaschen anzeigen" > </strong></a>
 			<p><br /></p>

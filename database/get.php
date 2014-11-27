@@ -87,8 +87,8 @@ function getJoinedProducts($orderBy)
       case 'amount ASC':
         $query .= " ORDER BY l.amount ASC";
         break;
+
       default:
-        # code...
         break;
 
   }

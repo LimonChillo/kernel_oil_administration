@@ -1,5 +1,5 @@
 <?php
-$level = 2;
+$level = 1;
 include "head.php";
 ?>
 
@@ -26,7 +26,7 @@ $bottles = getAllBottles();
   		</select>
   	</form>
 
-  	<?php 
+  	<?php
 
 if(isset($_GET['get'])):
 
@@ -37,7 +37,7 @@ if(isset($_GET['get'])):
 	<h3><?php  echo getCustomerByID($customerID) -> firstname . " " . getCustomerByID($customerID) -> lastname . " (" . getCustomerByID($customerID) -> company  . ")"; ?></h3>
 
 	<?php
-  	
+
 	if ($deliveryDays[0] == 0)
 	{
 		echo "<p> Es sind noch keine Lieferungen erfolgt</p>";
@@ -79,15 +79,15 @@ if(isset($_GET['get'])):
 							</div>
 						</div>
 		<?php  		$currentStrain++;
-					
+
 			endwhile;
-	endforeach; 
+	endforeach;
 endif;
 
 ?>
 </div>
 
-  
+
 <script>(function() { translate() })() </script>
 
 <?php include "footer.php";?>

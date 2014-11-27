@@ -22,7 +22,8 @@ include "head.php";
 <style type="text/css">
   body {
     background-image: url("images/login.jpg");
-    background-position: 45% 35%;
+    background-position: 65% 35%;
+    background-size: 100%;
   }
 </style>
 <div class="container">

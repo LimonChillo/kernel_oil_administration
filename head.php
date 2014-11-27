@@ -40,9 +40,9 @@
               <li><a href="getBottlings.php ">Abfüllungen</a></li>
               <li><a href="getProducts.php">Produkte</a></li>
               <li><a href="getStrains.php">Sorten</a></li>
-              <?php if(isAdmin($_SESSION['user'])): ?>
               <li><a href="getCustomers.php">Kunden</a></li>
               <li><a href="getDeliveries.php">Lieferungen</a></li>
+              <?php if(isAdmin($_SESSION['user'])): ?>
               <li><a href="getUsers.php">Benutzer</a></li>
               <?php endif; ?>
               <li><a href="login.php?logout=1">Logout</a></li>
