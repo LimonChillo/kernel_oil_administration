@@ -5,12 +5,11 @@ include "update.php";
 include "delete.php";
 $dbh = connectToDB();
 
-
 if (!ini_get('display_errors')) {
-    ini_set('display_errors', '1');
+    ini_set('display_errors', '0');
+    ini_set('display_warnings', '0');
+
 }
-
-
 
 function connectToDB()
 {
