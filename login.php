@@ -32,7 +32,7 @@ include "head.php";
   <form class="form-horizontal" role="form" method="POST" action="result.php">
 
     <div class="form-group">
-      <div class="col-sm-4"
+      <div class="col-sm-4">
         <input type="text" class="form-control" name="username" placeholder="Username"
         <?php if(isset($_GET['user'])) echo "value='".$_GET['user']."'"; else echo "autofocus" ?> required>
       </div>

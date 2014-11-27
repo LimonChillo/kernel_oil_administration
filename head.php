@@ -18,6 +18,7 @@
 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
