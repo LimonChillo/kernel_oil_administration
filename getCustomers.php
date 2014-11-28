@@ -9,7 +9,7 @@ include "head.php";
     <a href="addCustomer.php" class="btn btn-default">Kund*in hinzufügen</a>
   <?php endif; ?>
   </p>
-  <?php printDatarows("customer", false, "ID", array()); ?>
+  <?php printDatarows("customer", false, "ID", array(), 0, true); ?>
 
   </div>
 </div>

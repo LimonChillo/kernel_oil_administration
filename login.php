@@ -23,9 +23,11 @@ include "head.php";
 <style type="text/css">
   body {
     background-image: url("images/login.jpg");
-    background-position: 65% 35%;
-    background-size: 100%;
+    background-position: 65% -30%;
+    background-size: 120%;
+    color:#000;
   }
+
 </style>
 <div class="container">
   <h1>Login</h1>
