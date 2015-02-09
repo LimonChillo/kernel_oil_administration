@@ -17,11 +17,15 @@ body {
 }
 .navbar-brand
 {
-  background: url('../images/logo.png') bottom no-repeat;
-  background-size: 100%;
-  margin-top: -8px;
-  margin-bottom: 8px;
-  width:170px;
+  background: url('../images/grapes.png') bottom no-repeat;
+  background-size: 50%;
+  margin-bottom: 5px;
+  width:100px;
+  -webkit-filter: invert(100%);
+}
+.navbar-brand
+{
+  color: #fff;
 }
 .navbar-inverse .navbar-nav>li>a
 {
