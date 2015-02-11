@@ -146,3 +146,36 @@ body.login {
   height: 200px;
   overflow-x: hidden;
 }
+
+footer {
+  font-size: 13px;
+}
+
+footer p {
+  margin-top: 10px;
+  margin-right: -10px;
+
+}
+
+footer * {
+  float: left;
+}
+
+#crafters {
+  padding: 10px 10px 25px 10px;
+  padding-top: 10px;
+  padding-bottom: 25px;
+  width: 220px;
+}
+
+#crafters a:link, a:visited {
+  color: #000;
+}
+
+body.login #crafters a:hover {
+  color: #fff;
+}
+
+#crafters a:hover {
+  color: #9A8985;
+}
