@@ -41,7 +41,8 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php"></a>
+          <a class="navbar-brand" href="index.php"><h1>Kernel Oil Administration</h1></a>
+
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">

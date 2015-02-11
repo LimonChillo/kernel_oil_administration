@@ -26,18 +26,32 @@ body.login {
   max-height: 20px;
 }
 
-.navbar-brand
+a.navbar-brand
 {
-  background: url('../images/logo.png') bottom no-repeat;
-  background-size: 100%;
-  margin-top: -8px;
-  margin-bottom: 8px;
-  width: 170px;
+  background: url('../images/grapes.png') center left no-repeat;
+  background-size: 30px;
+  margin-bottom: 5px;
+  width: auto;
+  -webkit-filter: invert(100%);
+}
+.navbar-brand h1
+{
+  margin-top: -5px;
+  margin-left: 15px;
+  font-size: 30px;
+  color: #000;
+}
+
+.navbar-brand:hover h1
+{
+  color: #A3B2B5;
 }
 
 .navbar-inverse .navbar-nav>li>a
 {
   color: #fff;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .navbar-inverse .navbar-nav>li>a:hover
@@ -45,10 +59,21 @@ body.login {
   color: #5C4D4A;
 }
 
-.container{
-  padding-top: 30px;
-	max-width: 1050px;
+.navbar .container
+{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 
+.container
+{
+  padding-top: 60px;
+	max-width: 1050px;
+}
+
+.container.footer
+{
+  padding-top: 10px;
 }
 
 .col-md-4

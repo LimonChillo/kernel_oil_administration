@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container footer">
   <footer>
     <p>Handcrafted by:&nbsp;</p>
     <div id='crafters'>
