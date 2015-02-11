@@ -1,6 +1,16 @@
 body {
   padding-top: 80px;
 }
+
+body.login {
+  background: url("../images/login.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: #000;
+}
+
 .main-content {
   text-align: left;
 }
@@ -15,14 +25,16 @@ body {
   max-width: 20px;
   max-height: 20px;
 }
+
 .navbar-brand
 {
   background: url('../images/logo.png') bottom no-repeat;
   background-size: 100%;
   margin-top: -8px;
   margin-bottom: 8px;
-  width:170px;
+  width: 170px;
 }
+
 .navbar-inverse .navbar-nav>li>a
 {
   color: #fff;
@@ -38,6 +50,7 @@ body {
 	max-width: 1050px;
 
 }
+
 .col-md-4
 {
 	background: #fff;
@@ -45,6 +58,7 @@ body {
   border: 1px solid #DDD;
   box-shadow: 1px 2px 4px rgba(0, 0, 0, .2);
 }
+
 .rows
 {
   margin-bottom: 10px;
@@ -66,51 +80,56 @@ body {
   padding: 5px;
   height: 290px;
 }
+
 .long
 {
-  width:80px;
+  width: 80px;
 }
 
 .long
 {
   margin-left: 10px;
 }
+
 .short
 {
-  width:110px;
+  width: 110px;
 }
 
 .short input
 {
   margin-left: 15px;
 }
+
 .col-md-4 h3
 {
   margin-top: 10px;
   margin-bottom: 5px;
-  float:left;
+  float: left;
 }
+
 .col-md-4 strong.float
 {
-  float:left;
+  float: left;
   margin-top: 13px;
   margin-left: 10px;
-  width:10px;
+  width: 10px;
 }
+
 .float
 {
-  float:left;
+  float: left;
 }
 
 .col-md-4 strong.float img
 {
-  width:15px;
-}
-.col-md-4 .dashboard, .col-md-4 p
-{
-  clear:both;
+  width: 15px;
 }
 
+.col-md-4 .dashboard, .col-md-4 p
+{
+  clear: both;
+}
 
 .strainList
 {
@@ -124,6 +143,6 @@ body {
 
 .dashboard
 {
-  height:200px;
-  overflow-x:hidden;
+  height: 200px;
+  overflow-x: hidden;
 }

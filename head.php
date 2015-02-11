@@ -2,12 +2,16 @@
   if (!ini_get('display_errors')) {
     ini_set('display_errors', '0');
     ini_set('display_warnings', '0');
-
-}
-
+  }
 
   include_once "database/functions.php";
   restrict($level);
+
+  $bodyClass = '';
+
+  if($page != null)
+    $bodyClass = 'class="'.$page.'"';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,7 +31,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="shortcut icon" type="image/png" href="favicon.png"/>
   </head>
-  <body>
+  <body <?php echo($bodyClass); ?>>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
