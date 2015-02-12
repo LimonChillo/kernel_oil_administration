@@ -66,8 +66,17 @@ function updateStrain($id, $name) {
 
 function updateUser($id, $username, $password, $email, $admin) {
   $dbh = connectToDB();
-  $sth = $dbh->prepare( "UPDATE user SET username = ?, password = ?, email = ?, admin = ? WHERE ID = ? ");
-  $sth->execute(array($username, $password, $email, $admin, $id));
+  if($password == null)
+  {
+    $sth = $dbh->prepare( "UPDATE user SET username = ?, email = ?, admin = ? WHERE ID = ? ");
+    $sth->execute(array($username, $email, $admin, $id));
+  }
+  else
+  {
+    $sth = $dbh->prepare( "UPDATE user SET username = ?, password = ?, email = ?, admin = ? WHERE ID = ? ");
+    $sth->execute(array($username, $password, $email, $admin, $id));
+  }
+
 }
 
 function updateProduct($strain, $bottle, $amount) {

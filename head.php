@@ -1,8 +1,6 @@
 <?php
-  if (!ini_get('display_errors')) {
-    ini_set('display_errors', '0');
-    ini_set('display_warnings', '0');
-  }
+  ini_set('display_errors', '0');
+  ini_set('display_warnings', '0');
 
   include_once "database/functions.php";
   restrict($level);
@@ -18,7 +16,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>KernOil</title>
+    <title>Traubenkernölverwaltung</title>
 
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -29,7 +27,7 @@
 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+    <link rel="shortcut icon" type="image/png" href="images/grapes_hover.png"/>
   </head>
   <body <?php echo($bodyClass); ?>>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -41,7 +39,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php"><h1>Kernel Oil Administration</h1></a>
+          <a class="navbar-brand" href="index.php"><h1>Traubenkernölverwaltung</h1></a>
 
         </div>
         <div id="navbar" class="collapse navbar-collapse">

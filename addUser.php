@@ -29,12 +29,10 @@ include "head.php";
     </div>
     <div class="form-group">
       <div class="col-sm-4">
-        <input type="text" class="form-control" name="password" placeholder="Passwort"
+        <input type="password" class="form-control" name="password" placeholder="Passwort"
         <?php
-              if(isset($user))
-                echo 'value="'.$user->password.'"';
-              else
-                echo 'required';
+              if(!isset($user))
+                echo ' required';
         ?> >
 
       </div>

@@ -29,14 +29,12 @@ include "head.php";
 
     <div class="form-group">
       <div class="col-sm-4">
-        <input type="text" class="form-control" name="username" placeholder="Username"
-        <?php if(isset($_GET['user'])) echo "value='".$_GET['user']."'"; else echo "autofocus" ?> required>
+        <input type="text" class="form-control" name="username" placeholder="Username" autofocus required>
       </div>
     </div>
     <div class="form-group">
       <div class="col-sm-4">
-        <input type="password" class="form-control" name="password" id="password" placeholder="Passwort"
-        <?php if(isset($_GET['user'])) echo "autofocus"; ?> required>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Passwort" required>
       </div>
     </div>
     <div class="form-group">

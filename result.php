@@ -151,17 +151,17 @@ if(isset($_POST['insertBottling']))
     if(!checkBottleAmmount(strip_tags($_POST[$i.'_bottleId']),strip_tags($_POST[$i.'_amount'])))
     {
         $name = getBottleByID(strip_tags($_POST[$i.'_bottleId']))->name;
-        $errMsg .= "Zu wenig leere Flaschen (".$name.") verfügbar.<br>";       
+        $errMsg .= "Zu wenig leere Flaschen (".$name.") verfügbar.<br>";
     }
     if(!checkLabelAmmount(strip_tags($_POST[$i.'_bottleId']),strip_tags($_POST[$i.'_amount']),$strainFK))
     {
         $name = getStrainByID($strainFK)->name." ".getBottleByID(strip_tags($_POST[$i.'_bottleId']))->name;
-        $errMsg .= "Zu wenig Etiketten (".$name.") verfügbar.<br>";       
+        $errMsg .= "Zu wenig Etiketten (".$name.") verfügbar.<br>";
     }
     if(!checkLabelAmmount(strip_tags($_POST[$i.'_bottleId']),strip_tags($_POST[$i.'_amount']),0))
     {
         $name = getBottleByID(strip_tags($_POST[$i.'_bottleId']))->name;
-        $errMsg .= "Zu wenig Rücketiketten (".$name.") verfügbar.<br>";        
+        $errMsg .= "Zu wenig Rücketiketten (".$name.") verfügbar.<br>";
     }
   }
   if($errMsg != "")
@@ -177,7 +177,7 @@ if(isset($_POST['insertBottling']))
   {
     insertOrUpdateProduct($strainFK,strip_tags($_POST[$i.'_bottleId']),strip_tags($_POST[$i.'_amount']));
     insertBottling($pressing, strip_tags($_POST[$i.'_bottleId']), strip_tags($_POST[$i.'_amount']), $date,  $strainFK);
-    
+
     unstockLabels(strip_tags($_POST[$i.'_bottleId']),$strainFK,strip_tags($_POST[$i.'_amount']));
     unstockBottles(strip_tags($_POST[$i.'_bottleId']),strip_tags($_POST[$i.'_amount']));
   }
@@ -259,7 +259,8 @@ if(isset($_POST['insertUser']))
   }
   else
   {
-    insertUser($username, $password, $email, $admin);
+    $hashedPw = hashPasswordSecure($password);
+    insertUser($username, $hashedPw, $email, $admin);
     header("Location:getUsers.php?msg=Benutzer hinzugefügt&err=0");
   }
 }
@@ -269,13 +270,23 @@ if(isset($_POST['updateUser']))
   $username = mystrtolower(strip_tags($_POST['username']));
   $password = strip_tags($_POST['password']);
   $email = strip_tags($_POST['email']);
-  $admin = strip_tags($_POST['admin']);
+  $admin = (!isset($_POST['admin'])) ? "0" : "1" ;
+
   if(isset($_POST['admin']))
         $admin = true;
   $user = getUserByID($_POST['updateUser']);
   if(sizeOf($user) != 0)
     {
-      updateUser($_POST['updateUser'], $username, $password, $email, $admin);
+      if($password === "")
+        {
+          updateUser($_POST['updateUser'], $username, null, $email, $admin);
+        }
+      else
+        {
+          $hashedPw = hashPasswordSecure($password);
+          updateUser($_POST['updateUser'], $username, $hashedPw, $email, $admin);
+        }
+
       header("Location:getUsers.php?msg=Benutzer bearbeitet&err=0");
     }
   else
@@ -332,9 +343,7 @@ if (isset($_POST['login']))
   $username = strtolower(strip_tags($_POST['username']));
   $password = strip_tags($_POST['password']);
   $user = getUserByName($username);
-  if($user == false)
-    header("Location:login.php?msg=Benutzer existiert nicht&err=1");
-  else if($user->password == $password)
+  if($user == true && verifyPw($password, $user->password))
   {
     session_start();
     $_SESSION['username'] = $user->username;
@@ -343,13 +352,13 @@ if (isset($_POST['login']))
   }
   else
   {
-    header("Location:login.php?msg=Passwort falsch&err=1&user=".$username);
+    header("Location:login.php?msg=Benutzername oder Passwort falsch&err=1&user=".$username);
   }
 }
 
 if (isset($_POST['insertDelivery']))
 {
-  
+
   $customer = strtolower(strip_tags($_POST['customer']));
   $date = strtolower(strip_tags($_POST['date']));
 
@@ -359,7 +368,7 @@ if (isset($_POST['insertDelivery']))
 
   for($i = 0; $i < sizeOf($strains); $i++)
   {
-    
+
     if($amounts[$i] <=  (getProductByStrainByBottle($strains[$i], $bottles[$i]) -> amount))
     {
       if ($i == 0)
@@ -386,9 +395,9 @@ if (isset($_POST['insertPressing']))
   $date = strip_tags($_POST['date']);
   $amount = strip_tags($_POST['amount']);
   $barrels = $_POST['barrel'];
-  
+
   if (is_numeric($amount) && $amount > 0)
-  { 
+  {
     insertPressing($date, $amount, $barrels);
     header("Location:index.php?msg=Pressing eingetragen" . $barrels[0]->ID . "&err=0");
   }
