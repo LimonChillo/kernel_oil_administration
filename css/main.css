@@ -76,6 +76,11 @@ a.navbar-brand:hover
 	max-width: 1050px;
 }
 
+.container.single
+{
+  min-height: 40vh;
+}
+
 .container.footer
 {
   padding-top: 10px;

@@ -1,6 +1,6 @@
 <?php
-
 function updatePressingOfBarrel($barrels, $pressing) {
+  demoRedirect();
   $dbh=connectToDB();
   foreach ($barrels as $barrel){
      $sth = $dbh->prepare("UPDATE barrel SET pressingFK = ? WHERE ID = ?");
@@ -10,6 +10,7 @@ function updatePressingOfBarrel($barrels, $pressing) {
 
 function stockBottle($id, $amount)
 {
+  demoRedirect();
   $dbh = connectToDB();
   $sth = $dbh->prepare("UPDATE bottle SET amount = ? WHERE ID = ?");
   $sth->execute(array($amount, $id));

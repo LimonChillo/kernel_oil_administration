@@ -163,12 +163,15 @@ function printMessage()
 {
   if(isset($_GET['msg']))
   {
+    $link = '';
+    if($_GET['err'] == 2)
+      $link = '<a href="javascript:history.go(-2)">GO BACK</a>';
     $msg = $_GET['msg'];
-    if(isset($_GET['err']) && $_GET['err'] == 1)
+    if(isset($_GET['err']) && $_GET['err'] == 1 || $_GET['err'] == 2)
       $signal = "alert-danger";
     else
       $signal = "alert-success";
-      echo "<div class='alert $signal' role='alert'>$msg</div>";
+      echo "<div class='alert $signal' role='alert'>$msg ".$link."</div>";
   }
 }
 
@@ -422,5 +425,15 @@ function verifyPw($pw,$pwFromDB)
     return true;
   }
   return false;
+}
+function demoRedirect()
+{
+  session_start();
+  if(getUserByID($_SESSION['user'])->username == 'demo')
+  {
+    // header("Location: javascript:document.referrer;");
+    header('Location: ' . $_SERVER['HTTP_REFERER'].'?&msg=Restricted! We are sorry, but in this demo all actions are disabled.&err=2');
+    exit;
+  }
 }
 ?>
