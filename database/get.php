@@ -418,7 +418,7 @@ function getProductByStrainByBottle($strain, $bottle)
   FROM product p
   WHERE p.strainFK = ? AND p.bottleFK = ?");
   $sth->execute(array( $strain, $bottle ));
-  return $sth->fetch();
+  return $sth->fetchObject();
 }
 
 function getProductByBottleIdAndStrainId($bottleId, $strainId)

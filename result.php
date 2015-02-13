@@ -1,7 +1,30 @@
 <?php
 include "database/functions.php";
 
+if (isset($_POST['login']))
+{
 
+  $username = strtolower(strip_tags($_POST['username']));
+  $password = strip_tags($_POST['password']);
+  $user = getUserByName($username);
+  if($user == true && verifyPw($password, $user->password))
+  {
+    session_start();
+    $_SESSION['username'] = $user->username;
+    $_SESSION['user'] = $user->ID;
+    header("Location:index.php?msg=Willkommen ".$_SESSION['username']."&err=0");
+    exit;
+  }
+  else
+  {
+    header("Location:login.php?msg=Benutzername oder Passwort falsch&err=1&user=".$username);
+    exit;
+  }
+}
+else{
+  session_start();
+  demoRedirect($_SESSION['user']);
+}
 #########
 // STRAINS
 if(isset($_POST['insertStrain']))
@@ -11,6 +34,7 @@ if(isset($_POST['insertStrain']))
   if (getStrainByName($name) != null)
   {
     header("Location:addStrain.php?msg=Sorte existiert bereits&err=1");
+    exit;
   }
 
   insertStrain($name);
@@ -337,24 +361,7 @@ if(isset($_POST['bottlePresssing']))
   header("Location:bottlePressing.php?msg=Pressung abgefüllt&err=0");
 }
 
-if (isset($_POST['login']))
-{
 
-  $username = strtolower(strip_tags($_POST['username']));
-  $password = strip_tags($_POST['password']);
-  $user = getUserByName($username);
-  if($user == true && verifyPw($password, $user->password))
-  {
-    session_start();
-    $_SESSION['username'] = $user->username;
-    $_SESSION['user'] = $user->ID;
-    header("Location:index.php?msg=Willkommen ".$_SESSION['username']."&err=0");
-  }
-  else
-  {
-    header("Location:login.php?msg=Benutzername oder Passwort falsch&err=1&user=".$username);
-  }
-}
 
 if (isset($_POST['insertDelivery']))
 {

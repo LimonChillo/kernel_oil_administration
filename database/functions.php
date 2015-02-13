@@ -426,12 +426,10 @@ function verifyPw($pw,$pwFromDB)
   }
   return false;
 }
-function demoRedirect()
+function demoRedirect($user)
 {
-  session_start();
-  if(getUserByID($_SESSION['user'])->username == 'demo')
+  if(getUserByID($user) -> username == 'demo')
   {
-    // header("Location: javascript:document.referrer;");
     header('Location: ' . $_SERVER['HTTP_REFERER'].'?&msg=Restricted! We are sorry, but in this demo all actions are disabled.&err=2');
     exit;
   }
