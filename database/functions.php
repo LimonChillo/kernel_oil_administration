@@ -173,6 +173,16 @@ function printMessage()
       $signal = "alert-success";
       echo "<div class='alert $signal' role='alert'>$msg ".$link."</div>";
   }
+  else
+  {
+    session_start();
+    if($_SESSION['username'] == 'demo')
+    {
+      $msg = 'In this demo all actions are disabled.';
+      $signal = "alert-info";
+      echo "<div class='alert $signal' role='alert'>$msg</div>";
+    }
+  }
 }
 
 function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, $editable=false)
