@@ -8,7 +8,6 @@ $dbh = connectToDB();
 if (!ini_get('display_errors')) {
     ini_set('display_errors', '0');
     ini_set('display_warnings', '0');
-
 }
 
 function connectToDB()
@@ -52,7 +51,6 @@ function printAllBottleOptions() {
 }
 
 function printAllStrainsAsTable(){
-
   $allStrains = getAllStrains();
   foreach ($allStrains as $strain)
   {
@@ -139,7 +137,6 @@ function printAllPressingsAsTable(){
     echo "</tr>";
   }
 
-
 }
 
 function printAllBottlingsTable()
@@ -147,7 +144,6 @@ function printAllBottlingsTable()
   $allBottlings = getAllBottlings();
   foreach ($allBottlings as $bottling)
   {
-
     echo "<tr>";
     echo "<td>".$bottling->ID."</td>";
     echo "<td>".getPressingById($bottling->pressingFK)->ID."</td>";
@@ -264,7 +260,6 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
   }
   if($tab == "allLabels")
   {
-    // $counter = 1;
     $tab = "label";
   }
   if($tab == "product")
@@ -279,14 +274,13 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
   foreach ($columns as $headline) {
     if($headline->Field == "admin")
       $adminColumn = $counter;
-    if(in_array($headline->Field, $showCol) || ($showCol == null && $tab != "labels"))
+    if(in_array($headline->Field, $showCol) || ($showCol == null && $tab != "labels" && $headline -> Field != "password"))
     {
       if($headline->Field != "strain")
         echo "<th> ".ucfirst($headline->Field)."</th>";
       else
         echo "<th>Sorte</th>";
       array_push($showData, $counter);
-
     }
     $counter++;
   }
@@ -305,19 +299,15 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
       {
         if($counter == $adminColumn)
         {
-
           if($data == "1")
             $data = "Ja";
           else if($data == "0")
             $data = "Nein";
         }
-
         echo "<td> ".$data."</td>";
-
       }
       $counter++;
     }
-
     $options ="";
 
     if($editable == true && isAdmin($_SESSION['user']))
@@ -365,13 +355,12 @@ function restrict ($level) {
 function mystrtolower ($string){
   $bad = array("Ä", "Ö", "Ü");
   $good = array("_a", "_o", "_u");
-  $letters = str_replace($bad, $good, $string);
+  $letters = mb_strtolower(str_replace($bad, $good, $string));
 
-  $letters = mb_strtolower($letters);
   $bad = array("_a", "_o", "_u");
   $good = array("ä", "ö", "ü");
 
-  return str_replace($bad, $good,$letters);
+  return str_replace($bad, $good, $letters);
 }
 
 function checkBottleAmmount($bottleID,$amount)

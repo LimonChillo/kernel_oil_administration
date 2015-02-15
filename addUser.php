@@ -47,7 +47,7 @@ include "head.php";
       <div class="col-sm-4 float">
         <label class="float">
           <p class="float">Administrator?</p>
-        <input type="checkbox" class="form-control float" value="1" name="admin"
+        <input type="checkbox" class="form-control float" name="isAdmin"
         <?php if(isset($user) && $user->admin == true): echo 'checked';
               if (isset($user) && $user->ID == $_SESSION['user']) echo ' disabled'; endif; ?> >
         </label>

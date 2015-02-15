@@ -62,7 +62,6 @@ if(isset($_POST['deleteStrain']))
   if(sizeOf(getStrainByID($id)) != 0)
     {
       deleteStrainByID($id);
-      // deleteLabelByStrain()
       header("Location:getStrains.php?msg=Sorte gelöscht&err=0");
     }
   else
@@ -275,17 +274,18 @@ if(isset($_POST['insertUser']))
   $username = mystrtolower(strip_tags($_POST['username']));
   $password = strip_tags($_POST['password']);
   $email = strip_tags($_POST['email']);
-  $admin = ($_POST['admin'] == null) ? "0" : "1" ;
-
-  if (getUserByName($username) != 0)
+  $admin = (!isset($_POST['isAdmin'])) ? 0 : 1 ;
+  if (getUserByName($username) != null)
   {
     header("Location:addUser.php?msg=Benutzer existiert bereits&err=1");
+    exit;
   }
   else
   {
     $hashedPw = hashPasswordSecure($password);
     insertUser($username, $hashedPw, $email, $admin);
-    header("Location:getUsers.php?msg=Benutzer hinzugefügt&err=0");
+    header("Location:getUsers.php?msg=Benutzer hinzugefügt&err=0";
+    exit;
   }
 }
 
@@ -294,7 +294,7 @@ if(isset($_POST['updateUser']))
   $username = mystrtolower(strip_tags($_POST['username']));
   $password = strip_tags($_POST['password']);
   $email = strip_tags($_POST['email']);
-  $admin = (!isset($_POST['admin'])) ? "0" : "1" ;
+  $admin = (!isset($_POST['isAdmin'])) ? 0 : 1 ;
 
   if(isset($_POST['admin']))
         $admin = true;
