@@ -284,7 +284,7 @@ if(isset($_POST['insertUser']))
   {
     $hashedPw = hashPasswordSecure($password);
     insertUser($username, $hashedPw, $email, $admin);
-    header("Location:getUsers.php?msg=Benutzer hinzugefügt&err=0";
+    header("Location:getUsers.php?msg=Benutzer hinzugefügt&err=0");
     exit;
   }
 }
