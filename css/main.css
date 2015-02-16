@@ -214,3 +214,11 @@ body.login #crafters a:hover {
 #crafters a:hover {
   color: #9A8985;
 }
+
+.form-horizontal.login .form-group{
+  clear: both;
+}
+
+.form-horizontal.login .form-group .col-sm-4{
+  padding-right: 0px;
+}

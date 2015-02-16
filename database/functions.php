@@ -163,10 +163,14 @@ function printMessage()
     if($_GET['err'] == 2)
       $link = '<a href="javascript:history.go(-2)">GO BACK</a>';
     $msg = $_GET['msg'];
+
     if(isset($_GET['err']) && $_GET['err'] == 1 || $_GET['err'] == 2)
       $signal = "alert-danger";
     else
       $signal = "alert-success";
+    if(basename($_SERVER['PHP_SELF']) == 'login.php')
+      $signal .= " col-sm-4";
+
       echo "<div class='alert $signal' role='alert'>$msg ".$link."</div>";
   }
   else

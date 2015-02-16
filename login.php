@@ -25,7 +25,7 @@ include "head.php";
   <h1>Login</h1>
   <?php printMessage(); ?>
   </p>
-  <form class="form-horizontal" role="form" method="POST" action="result.php">
+  <form class="form-horizontal login" role="form" method="POST" action="result.php">
 
     <div class="form-group">
       <div class="col-sm-4">
@@ -42,6 +42,7 @@ include "head.php";
         <button type="submit" name="login" class="btn btn-default"> Login </button>
       </div>
     </div>
+    <div class='alert alert-info col-sm-4' role='alert'><strong>Demo Login</strong> <br><p> user: demo - pw: demo</p></div>
   </form>
 
   </div>
