@@ -316,6 +316,7 @@ function printDatarows($tab, $stockable, $orderBy, $showCol = array(), $rows=0, 
 
     if($editable == true && isAdmin($_SESSION['user']))
     {
+      $tab = ucwords($tab);
       $options = "<a href='add$tab.php?id=$datarow->ID'><img class='small' src='images/edit.png' alt='bearbeiten'  data-toggle='tooltip' data-placement='top' title='Bearbeiten'> </a>";
     }
 
