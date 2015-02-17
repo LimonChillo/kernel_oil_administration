@@ -39,6 +39,16 @@ include "head.php";
     </div>
     <div class="form-group">
       <div class="col-sm-4">
+        <input type="password" class="form-control" name="passwordVer" placeholder="Passwort wiederholen"
+        <?php
+              if(!isset($user))
+                echo ' required';
+        ?> >
+
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-4">
         <input type="email" class="form-control" name="email" placeholder="email"
         <?php if(isset($user)) echo 'value="'.$user->email.'"'; ?> required>
       </div>

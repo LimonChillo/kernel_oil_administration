@@ -170,7 +170,10 @@ function printMessage()
       $signal = "alert-success";
     if(basename($_SERVER['PHP_SELF']) == 'login.php')
       $signal .= " col-sm-4";
+    $pattern = '/[--]/';
+    $replace = '<br>';
 
+    $msg = preg_replace($pattern, $replace, $msg);
       echo "<div class='alert $signal' role='alert'>$msg ".$link."</div>";
   }
   else

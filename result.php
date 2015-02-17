@@ -273,18 +273,29 @@ if(isset($_POST['insertUser']))
 {
   $username = mystrtolower(strip_tags($_POST['username']));
   $password = strip_tags($_POST['password']);
+  $passwordVer = strip_tags($_POST['passwordVer']);
   $email = strip_tags($_POST['email']);
   $admin = (!isset($_POST['isAdmin'])) ? 0 : 1 ;
+  $err = '';
   if (getUserByName($username) != null)
   {
-    header("Location:addUser.php?msg=Benutzer existiert bereits&err=1");
-    exit;
+    $err = 'Benutzer existiert bereits';
   }
-  else
+  if ($password != $passwordVer) {
+    if ($err != '') {
+      $err .= ' -- ';
+    }
+    $err .= 'Angegebene Passwörter stimmen nicht überein';
+  }
+  if($err == '')
   {
     $hashedPw = hashPasswordSecure($password);
     insertUser($username, $hashedPw, $email, $admin);
     header("Location:getUsers.php?msg=Benutzer hinzugefügt&err=0");
+    exit;
+  }
+  else {
+    header("Location:addUser.php?msg=".$err."&err=1");
     exit;
   }
 }
@@ -293,29 +304,37 @@ if(isset($_POST['updateUser']))
 {
   $username = mystrtolower(strip_tags($_POST['username']));
   $password = strip_tags($_POST['password']);
+  $passwordVer = strip_tags($_POST['passwordVer']);
   $email = strip_tags($_POST['email']);
   $admin = (!isset($_POST['isAdmin'])) ? 0 : 1 ;
+  $err = '';
 
   if(isset($_POST['admin']))
         $admin = true;
   $user = getUserByID($_POST['updateUser']);
-  if(sizeOf($user) != 0)
-    {
-      if($password === "")
-        {
-          updateUser($_POST['updateUser'], $username, null, $email, $admin);
-        }
-      else
-        {
-          $hashedPw = hashPasswordSecure($password);
-          updateUser($_POST['updateUser'], $username, $hashedPw, $email, $admin);
-        }
-
-      header("Location:getUsers.php?msg=Benutzer bearbeitet&err=0");
-    }
-  else
+  if(sizeOf($user) == 0)
   {
     header("Location:getUsers.php?msg=Benutzer existiert nicht&err=1");
+    exit;
+  }
+  if ($password != $passwordVer) {
+    $err = 'Angegebene Passwörter stimmen nicht überein';
+
+    header("Location:addUser.php?id=".$_POST['updateUser']."&msg=".$err."&err=1");
+    exit;
+  }
+  else{
+    if($password === "")
+      {
+        updateUser($_POST['updateUser'], $username, null, $email, $admin);
+      }
+    else
+      {
+        $hashedPw = hashPasswordSecure($password);
+        updateUser($_POST['updateUser'], $username, $hashedPw, $email, $admin);
+      }
+
+    header("Location:getUsers.php?msg=Benutzer bearbeitet&err=0");
   }
 }
 
